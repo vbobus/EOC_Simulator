@@ -73,5 +73,5 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 
 #Unity package cache
-Library/PackageCache/
-Library/PackageCache/com.unity.burst/
+EOC_Simulator/Library/PackageCache/
+EOC_Simulator/Library/PackageCache/com.unity.burst/

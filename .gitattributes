@@ -1,69 +1,79 @@
+###############################################################################
 # text files
-*.meta text eol=lf
-ProjectSettings/*.asset text
+EOC_Simulator/**/*.meta text eol=lf
+EOC_Simulator/ProjectSettings/*.asset text
 
+###############################################################################
 # model files
-*.fbx filter=lfs diff=lfs merge=lfs -text
-*.FBX filter=lfs diff=lfs merge=lfs -text
-*.max filter=lfs diff=lfs merge=lfs -text
-*.MAX filter=lfs diff=lfs merge=lfs -text
-*.ma filter=lfs diff=lfs merge=lfs -text
-*.mb filter=lfs diff=lfs merge=lfs -text
-*.obj filter=lfs diff=lfs merge=lfs -text
-*.OBJ filter=lfs diff=lfs merge=lfs -text
-*.spm filter=lfs diff=lfs merge=lfs -text
+EOC_Simulator/**/*.fbx filter=lfs diff=lfs merge=lfs -text
+EOC_Simulator/**/*.FBX filter=lfs diff=lfs merge=lfs -text
+EOC_Simulator/**/*.max filter=lfs diff=lfs merge=lfs -text
+EOC_Simulator/**/*.MAX filter=lfs diff=lfs merge=lfs -text
+EOC_Simulator/**/*.ma  filter=lfs diff=lfs merge=lfs -text
+EOC_Simulator/**/*.mb  filter=lfs diff=lfs merge=lfs -text
+EOC_Simulator/**/*.obj filter=lfs diff=lfs merge=lfs -text
+EOC_Simulator/**/*.OBJ filter=lfs diff=lfs merge=lfs -text
+EOC_Simulator/**/*.spm filter=lfs diff=lfs merge=lfs -text
 
+###############################################################################
 # texture files
-*.bmp filter=lfs diff=lfs merge=lfs -text
-*.BMP filter=lfs diff=lfs merge=lfs -text
-*.psd filter=lfs diff=lfs merge=lfs -text
-*.PSD filter=lfs diff=lfs merge=lfs -text
-*.jpg filter=lfs diff=lfs merge=lfs -text
-*.JPG filter=lfs diff=lfs merge=lfs -text
-*.png filter=lfs diff=lfs merge=lfs -text
-*.PNG filter=lfs diff=lfs merge=lfs -text
-*.tga filter=lfs diff=lfs merge=lfs -text
-*.TGA filter=lfs diff=lfs merge=lfs -text
-*.tif filter=lfs diff=lfs merge=lfs -text
-*.TIF filter=lfs diff=lfs merge=lfs -text
-*.tiff filter=lfs diff=lfs merge=lfs -text
-*.ttf filter=lfs diff=lfs merge=lfs -text
-*.svg filter=lfs diff=lfs merge=lfs -text
-*.gif filter=lfs diff=lfs merge=lfs -text
-*.exr filter=lfs diff=lfs merge=lfs -text
-*.hdr filter=lfs diff=lfs merge=lfs -text
-*.renderTexture filter=lfs diff=lfs merge=lfs -text
+EOC_Simulator/**/*.bmp filter=lfs diff=lfs merge=lfs -text
+EOC_Simulator/**/*.BMP filter=lfs diff=lfs merge=lfs -text
+EOC_Simulator/**/*.psd filter=lfs diff=lfs merge=lfs -text
+EOC_Simulator/**/*.PSD filter=lfs diff=lfs merge=lfs -text
+EOC_Simulator/**/*.jpg filter=lfs diff=lfs merge=lfs -text
+EOC_Simulator/**/*.JPG filter=lfs diff=lfs merge=lfs -text
+EOC_Simulator/**/*.png filter=lfs diff=lfs merge=lfs -text
+EOC_Simulator/**/*.PNG filter=lfs diff=lfs merge=lfs -text
+EOC_Simulator/**/*.tga filter=lfs diff=lfs merge=lfs -text
+EOC_Simulator/**/*.TGA filter=lfs diff=lfs merge=lfs -text
+EOC_Simulator/**/*.tif filter=lfs diff=lfs merge=lfs -text
+EOC_Simulator/**/*.TIF filter=lfs diff=lfs merge=lfs -text
+EOC_Simulator/**/*.tiff filter=lfs diff=lfs merge=lfs -text
+EOC_Simulator/**/*.ttf filter=lfs diff=lfs merge=lfs -text
+EOC_Simulator/**/*.svg filter=lfs diff=lfs merge=lfs -text
+EOC_Simulator/**/*.gif filter=lfs diff=lfs merge=lfs -text
+EOC_Simulator/**/*.exr filter=lfs diff=lfs merge=lfs -text
+EOC_Simulator/**/*.hdr filter=lfs diff=lfs merge=lfs -text
+EOC_Simulator/**/*.renderTexture filter=lfs diff=lfs merge=lfs -text
 
+###############################################################################
 # dll files
-*.dll filter=lfs diff=lfs merge=lfs -text
-*.DLL filter=lfs diff=lfs merge=lfs -text
-*.so filter=lfs diff=lfs merge=lfs -text
-*.mdb filter=lfs diff=lfs merge=lfs -text
-*.pdb filter=lfs diff=lfs merge=lfs -text
+EOC_Simulator/**/*.dll filter=lfs diff=lfs merge=lfs -text
+EOC_Simulator/**/*.DLL filter=lfs diff=lfs merge=lfs -text
+EOC_Simulator/**/*.so  filter=lfs diff=lfs merge=lfs -text
+EOC_Simulator/**/*.mdb filter=lfs diff=lfs merge=lfs -text
+EOC_Simulator/**/*.pdb filter=lfs diff=lfs merge=lfs -text
 
+###############################################################################
 # font files
-*.ttc filter=lfs diff=lfs merge=lfs -text
-*.TTC filter=lfs diff=lfs merge=lfs -text
-*.ttf filter=lfs diff=lfs merge=lfs -text
-*.TTF filter=lfs diff=lfs merge=lfs -text
+EOC_Simulator/**/*.ttc filter=lfs diff=lfs merge=lfs -text
+EOC_Simulator/**/*.TTC filter=lfs diff=lfs merge=lfs -text
+EOC_Simulator/**/*.ttf filter=lfs diff=lfs merge=lfs -text
+EOC_Simulator/**/*.TTF filter=lfs diff=lfs merge=lfs -text
 
-# bundle files
-*.bundle filter=lfs diff=lfs merge=lfs -text
-*.zip filter=lfs diff=lfs merge=lfs -text
+###############################################################################
+# bundle/zip files
+EOC_Simulator/**/*.bundle filter=lfs diff=lfs merge=lfs -text
+EOC_Simulator/**/*.zip   filter=lfs diff=lfs merge=lfs -text
 
-# config files
-**/Assets/**/*.asset filter=lfs diff=lfs merge=lfs -text
+###############################################################################
+# config files inside Assets
+EOC_Simulator/**/Assets/**/*.asset filter=lfs diff=lfs merge=lfs -text
 
+###############################################################################
 # doc files
-*.pdf filter=lfs diff=lfs merge=lfs -text
-*.PDF filter=lfs diff=lfs merge=lfs -text
+EOC_Simulator/**/*.pdf filter=lfs diff=lfs merge=lfs -text
+EOC_Simulator/**/*.PDF filter=lfs diff=lfs merge=lfs -text
 
+###############################################################################
 # video files
-*.mov filter=lfs diff=lfs merge=lfs -text
-*.mp4 filter=lfs diff=lfs merge=lfs -text
-*.ogv filter=lfs diff=lfs merge=lfs -text
+EOC_Simulator/**/*.mov filter=lfs diff=lfs merge=lfs -text
+EOC_Simulator/**/*.mp4 filter=lfs diff=lfs merge=lfs -text
+EOC_Simulator/**/*.ogv filter=lfs diff=lfs merge=lfs -text
 
+###############################################################################
 # audio files
-*.mp3 filter=lfs diff=lfs merge=lfs -text
-*.wav filter=lfs diff=lfs merge=lfs -text
-*.ogg filter=lfs diff=lfs merge=lfs -text
+EOC_Simulator/**/*.mp3 filter=lfs diff=lfs merge=lfs -text
+EOC_Simulator/**/*.wav filter=lfs diff=lfs merge=lfs -text
+EOC_Simulator/**/*.ogg filter=lfs diff=lfs merge=lfs -text

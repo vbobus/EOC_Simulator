@@ -1,4 +1,4 @@
-using Ëvents;
+using Events;
 using UnityEngine;
 
 namespace Activity_System

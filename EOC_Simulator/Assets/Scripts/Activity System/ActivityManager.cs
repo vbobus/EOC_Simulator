@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Ëvents;
+using Events;
 using UnityEngine;
 
 namespace Activity_System

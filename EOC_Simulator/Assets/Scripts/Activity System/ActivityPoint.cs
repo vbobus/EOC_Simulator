@@ -1,4 +1,4 @@
-using Ëvents;
+using Events;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;

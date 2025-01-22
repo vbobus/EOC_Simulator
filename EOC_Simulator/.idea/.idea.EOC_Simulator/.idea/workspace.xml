@@ -5,13 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f142a816-47ef-4712-9e45-f6fa5e92cb78" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Resources/Activities/Test Activity/TestTimerActivityStep.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Resources/Activities/Test Activity/TestTimerActivityStep.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.EOC_Simulator/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.EOC_Simulator/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/InputSystem_Actions.inputactions" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/InputSystem_Actions.inputactions" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Activity System/Activity.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Activity System/Activity.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Activity System/Activity.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Activity System/Activity.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Settings/DefaultVolumeProfile.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Settings/DefaultVolumeProfile.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/InputSystem_Actions.inputactions" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/InputSystem_Actions.inputactions.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/GreyBox_Activity Test.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/GreyBox_Activity Test.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Activity System/ActivityManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Activity System/ActivityManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Activity System/ActivityPoint.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Activity System/ActivityPoint.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Activity System/ActivityStep.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Activity System/ActivityStep.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Ëvents.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Ëvents/GameEventManager.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Ëvents/GameEventManager.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/QualitySettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/QualitySettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,10 +83,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="26532">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" />
+      <option name="pid" value="26532" />
       <option name="projectPathOnTarget" />
       <option name="selectedOptions">
         <list />
@@ -107,6 +111,7 @@
       <workItem from="1737412443705" duration="5015000" />
       <workItem from="1737480696888" duration="737000" />
       <workItem from="1737481879658" duration="3040000" />
+      <workItem from="1737497150387" duration="1739000" />
     </task>
     <servers />
   </component>

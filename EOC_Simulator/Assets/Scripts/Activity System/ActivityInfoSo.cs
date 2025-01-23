@@ -16,7 +16,8 @@ namespace Activity_System
 
         [Header("Steps")]
         public GameObject[] activityStepPrefabs;
-
+        
+        
         // Sets id based on script objects name
         private void OnValidate()
         {

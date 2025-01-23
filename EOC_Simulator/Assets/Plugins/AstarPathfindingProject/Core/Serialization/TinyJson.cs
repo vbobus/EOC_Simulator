@@ -341,7 +341,9 @@ namespace Pathfinding.Serialization {
 				}
 
 #if UNITY_2020_1_OR_NEWER
+#pragma warning disable CS0618 // Type or member is obsolete
 				foreach (var helper in UnityEngine.Object.FindObjectsOfType<UnityReferenceHelper>(true))
+#pragma warning restore CS0618 // Type or member is obsolete
 #else
 				foreach (var helper in UnityEngine.Object.FindObjectsOfType<UnityReferenceHelper>())
 #endif

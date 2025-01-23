@@ -127,7 +127,9 @@ namespace Pathfinding.Serialization {
 			}
 
 			if (!string.IsNullOrEmpty(guid)) {
+#pragma warning disable CS0618 // Type or member is obsolete
 				UnityReferenceHelper[] helpers = UnityEngine.Object.FindObjectsOfType(typeof(UnityReferenceHelper)) as UnityReferenceHelper[];
+#pragma warning restore CS0618 // Type or member is obsolete
 
 				for (int i = 0; i < helpers.Length; i++) {
 					if (helpers[i].GetGUID() == guid) {

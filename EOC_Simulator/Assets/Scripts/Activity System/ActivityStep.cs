@@ -6,11 +6,12 @@ namespace Activity_System
     public abstract class ActivityStep : MonoBehaviour
     {
         private bool _isFinished = false;
-        private string _activityId;
+        private ActivityInfoSo _activityInfoSo;
         private int _stepIndex;
-        public void InitializeActivityStep(string id, int stepIndex, string activityStepState)
+
+        public void InitializeActivityStep(ActivityInfoSo id, int stepIndex, string activityStepState)
         {
-            this._activityId = id;
+            _activityInfoSo = id;
             this._stepIndex = stepIndex;
         }
         
@@ -19,14 +20,14 @@ namespace Activity_System
             if (!_isFinished)
             {
                 _isFinished = true;
-                GameEventsManager.Instance.ActivityEvents.AdvanceQuest(_activityId);
+                GameEventsManager.Instance.ActivityEvents.AdvanceQuest(_activityInfoSo);
                 Destroy(gameObject); 
             }
         }
 
         protected void ChangeState(string newState)
         {
-            GameEventsManager.Instance.ActivityEvents.ActivityStateStepChange(_activityId, _stepIndex, new ActivityStepState(newState));
+            GameEventsManager.Instance.ActivityEvents.ActivityStateStepChange(_activityInfoSo, _stepIndex, new ActivityStepState(newState));
         }
     }
 }

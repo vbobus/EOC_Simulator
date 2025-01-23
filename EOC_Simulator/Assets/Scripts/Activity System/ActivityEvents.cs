@@ -1,29 +1,30 @@
+using UnityEngine;
 using UnityEngine.Events;
 
 namespace Activity_System
 {
     public class ActivityEvents
     {
-        public UnityAction<string> OnStartActivity;
-        public UnityAction<string> OnAdvanceActivity {get; set;}
-        public UnityAction<string> OnFinishActivity {get; set;}
+        public UnityAction<ActivityInfoSo> OnStartActivity {get; set;}
+        public UnityAction<ActivityInfoSo> OnAdvanceActivity {get; set;}
+        public UnityAction<ActivityInfoSo> OnFinishActivity {get; set;}
         
         public UnityAction<Activity> OnActivityStateChange;
-        public UnityAction<string, int, ActivityStepState> OnActivityStepStateChange;
+        public UnityAction<ActivityInfoSo, int, ActivityStepState> OnActivityStepStateChange;
 
-        public void StartActivity(string questName)
+        public void StartActivity(ActivityInfoSo activityInfoSo)
         {
-            OnStartActivity?.Invoke(questName);
+            OnStartActivity?.Invoke(activityInfoSo);
         }
 
-        public void AdvanceQuest(string questName)
+        public void AdvanceQuest(ActivityInfoSo activityInfoSo)
         { 
-            OnAdvanceActivity?.Invoke(questName);
+            OnAdvanceActivity?.Invoke(activityInfoSo);
         }
     
-        public void FinishActivity(string questName)
+        public void FinishActivity(ActivityInfoSo activityInfoSo)
         {
-            OnFinishActivity?.Invoke(questName);
+            OnFinishActivity?.Invoke(activityInfoSo);
         }
 
         public void QuestStateChange(Activity activity)
@@ -31,9 +32,9 @@ namespace Activity_System
             OnActivityStateChange?.Invoke(activity);
         }
     
-        public void ActivityStateStepChange(string id, int stepIndex, ActivityStepState activityStepState)
+        public void ActivityStateStepChange(ActivityInfoSo activityInfoSo, int stepIndex, ActivityStepState activityStepState)
         {
-            OnActivityStepStateChange?.Invoke(id, stepIndex, activityStepState);
+            OnActivityStepStateChange?.Invoke(activityInfoSo, stepIndex, activityStepState);
         }
     }
 }

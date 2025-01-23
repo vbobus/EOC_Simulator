@@ -677,7 +677,9 @@ public class AstarPath : VersionedMonoBehaviour {
 	/// </summary>
 	public static void FindAstarPath () {
 		if (Application.isPlaying) return;
+#pragma warning disable CS0618 // Type or member is obsolete
 		if (active == null) active = GameObject.FindObjectOfType<AstarPath>();
+#pragma warning restore CS0618 // Type or member is obsolete
 		if (active != null && (active.data.graphs == null || active.data.graphs.Length == 0)) active.data.DeserializeGraphs();
 	}
 
@@ -1222,9 +1224,11 @@ public class AstarPath : VersionedMonoBehaviour {
 		// Very important to set this. Ensures the singleton pattern holds
 		active = this;
 
+#pragma warning disable CS0618 // Type or member is obsolete
 		if (FindObjectsOfType(typeof(AstarPath)).Length > 1) {
+#pragma warning restore CS0618 // Type or member is obsolete
 			Debug.LogError("You should NOT have more than one AstarPath component in the scene at any time.\n" +
-				"This can cause serious errors since the AstarPath component builds around a singleton pattern.");
+			               "This can cause serious errors since the AstarPath component builds around a singleton pattern.");
 		}
 
 		// Disable GUILayout to gain some performance, it is not used in the OnGUI call

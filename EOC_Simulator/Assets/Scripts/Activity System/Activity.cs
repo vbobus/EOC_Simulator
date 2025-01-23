@@ -55,7 +55,7 @@ namespace Activity_System
                 var questStep = Object.Instantiate<GameObject>(questStepPrefab, parentTransform)
                     .GetComponent<ActivityStep>();
                 
-                questStep.InitializeActivityStep(Info.ID, _currentActivityStepIndex, _questStepStates[_currentActivityStepIndex].State);
+                questStep.InitializeActivityStep(Info, _currentActivityStepIndex, _questStepStates[_currentActivityStepIndex].State);
             }
         }
 

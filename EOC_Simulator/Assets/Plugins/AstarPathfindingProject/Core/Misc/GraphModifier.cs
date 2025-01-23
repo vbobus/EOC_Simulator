@@ -39,7 +39,9 @@ namespace Pathfinding {
 		}
 
 		public static void FindAllModifiers () {
+#pragma warning disable CS0618 // Type or member is obsolete
 			var allModifiers = FindObjectsOfType(typeof(GraphModifier)) as GraphModifier[];
+#pragma warning restore CS0618 // Type or member is obsolete
 
 			for (int i = 0; i < allModifiers.Length; i++) {
 				if (allModifiers[i].enabled) allModifiers[i].OnEnable();

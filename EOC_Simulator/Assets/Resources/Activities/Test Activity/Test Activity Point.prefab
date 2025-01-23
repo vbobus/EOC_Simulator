@@ -125,3 +125,5 @@ MonoBehaviour:
   submitReference: {fileID: 1781555164194001046, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   startPoint: 1
   finishPoint: 1
+  activityIcon: {fileID: 0}
+  automaticFinnishActivity: 1

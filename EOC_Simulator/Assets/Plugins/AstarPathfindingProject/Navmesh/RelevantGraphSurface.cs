@@ -73,7 +73,9 @@ namespace Pathfinding {
 		}
 
 		public static void FindAllGraphSurfaces () {
+#pragma warning disable CS0618 // Type or member is obsolete
 			var srf = GameObject.FindObjectsOfType(typeof(RelevantGraphSurface)) as RelevantGraphSurface[];
+#pragma warning restore CS0618 // Type or member is obsolete
 
 			for (int i = 0; i < srf.Length; i++) {
 				srf[i].OnDisable();

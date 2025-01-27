@@ -17,12 +17,10 @@ namespace Activity_System
         
         protected void FinishActivityStep()
         {
-            if (!_isFinished)
-            {
-                _isFinished = true;
-                GameEventsManager.Instance.ActivityEvents.AdvanceQuest(_activityInfoSo);
-                Destroy(gameObject); 
-            }
+            if (_isFinished) return;
+            _isFinished = true;
+            GameEventsManager.Instance.ActivityEvents.AdvanceQuest(_activityInfoSo);
+            Destroy(gameObject);
         }
 
         protected void ChangeState(string newState)

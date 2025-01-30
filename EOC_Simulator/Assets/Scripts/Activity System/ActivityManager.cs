@@ -8,10 +8,17 @@ namespace Activity_System
     public class ActivityManager: MonoBehaviour
     {
         private Dictionary<string, Activity> _activityMap;
-        private int _currentPlayerLevel;
-
+        
+        public static ActivityManager Instance;
+        
         private void Awake()
         {
+            if (Instance == null) Instance = this;
+            else
+            {
+                Destroy(this.gameObject);
+                return;
+            }
             _activityMap = CreateActivityMap();
         }
 
@@ -86,7 +93,7 @@ namespace Activity_System
                 return;
             }
 
-            Debug.Log("Start Activity");
+            // Debug.Log("Start Activity");
             
             activity.InstantiateCurrentActivityStep(this.transform);
             ChangeActivityState(activity.Info, ActivityState.IN_PROGRESS);
@@ -102,7 +109,7 @@ namespace Activity_System
             }
             
             activity.MoveToNextStep();
-            Debug.Log("Advance Activity");
+            // Debug.Log("Advance Activity");
             if (activity.CurrentStepExits())
                 activity.InstantiateCurrentActivityStep(this.transform);
             else
@@ -115,7 +122,7 @@ namespace Activity_System
         private void FinishActivity(ActivityInfoSo activityInfoSo)
         {
             Activity activity = GetActivityById(activityInfoSo.ID);
-            Debug.Log("Finish Activity");
+            // Debug.Log("Finish Activity");
             // Only change rewards if we can claim them. E.g. there aren't enough place for reward item
             if (ClaimRewards(activity)) 
                 ChangeActivityState(activity.Info, ActivityState.FINISHED);
@@ -150,7 +157,7 @@ namespace Activity_System
             return idToQuestMap;
         }
 
-        private Activity GetActivityById(string id)
+        public Activity GetActivityById(string id)
         {
             Activity activity = _activityMap[id];
             if (activity == null)

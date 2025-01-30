@@ -9,8 +9,8 @@ namespace Activity_System
         public UnityAction<ActivityInfoSo> OnAdvanceActivity {get; set;}
         public UnityAction<ActivityInfoSo> OnFinishActivity {get; set;}
         
-        public UnityAction<Activity> OnActivityStateChange;
-        public UnityAction<ActivityInfoSo, int, ActivityStepState> OnActivityStepStateChange;
+        public UnityAction<Activity> OnActivityStateChange {get; set;}
+        public UnityAction<ActivityInfoSo, int, ActivityStepState> OnActivityStepStateChange {get; set;}
 
         public void StartActivity(ActivityInfoSo activityInfoSo)
         {

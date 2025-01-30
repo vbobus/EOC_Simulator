@@ -16,7 +16,6 @@ namespace Events
         
         [Title("References")]
         [SerializeField] private InputActionAsset inputActions;
-        [SerializeField] private PlayerController playerController;
 
         [Title("Actions","Mouse Actions")]
         [SerializeField] [Required] private InputActionReference leftClickAction; // 
@@ -34,11 +33,7 @@ namespace Events
         /// <para>Can also use the arrow keys</para>
         /// </summary>
         public UnityAction<Vector2> On4DirectionMoveActionPressed { get; set; }
-        /// <summary>
-        /// Left click mouse, to select where player wants to go to, and right mouse for the rotation
-        /// </summary>
-        public UnityAction<Vector2> OnSimpleMovement { get; set; }
-
+        public UnityAction<Vector2> OnPointerDelta { get; set; }
         public UnityAction<Vector2> OnPointerPosition { get; set; }
         
         public UnityAction OnLeftClickActionPressed { get; set; }
@@ -47,7 +42,6 @@ namespace Events
         public UnityAction OnConfirmActionPressed { get; set; }
         
         private bool _actionMapPlayer;
-    
         
         #endregion
 
@@ -83,6 +77,28 @@ namespace Events
             confirmAction.action.performed -= OnConfirmPerformed;
         }       
         #endregion
+
+        #region Performed Methods
+        private void OnLeftClickPerformed(InputAction.CallbackContext context)
+        {
+            OnLeftClickActionPressed?.Invoke();
+        }
+
+        private void OnRightClickPerformed(InputAction.CallbackContext context)
+        {
+            OnRightClickActionPressed?.Invoke();
+        }
+
+        private void OnInteractionPerformed(InputAction.CallbackContext context)
+        {
+            OnInteractActionPressed?.Invoke();
+        }
+
+        private void OnConfirmPerformed(InputAction.CallbackContext context)
+        {
+            OnConfirmActionPressed?.Invoke();
+        }
+        #endregion
         
         private void Update()
         {
@@ -91,27 +107,6 @@ namespace Events
             else
                 UpdateUIChecks();
         }
-
-        #region Performed Methods
-        private void OnLeftClickPerformed(InputAction.CallbackContext context)
-        {
-        }
-
-        private void OnRightClickPerformed(InputAction.CallbackContext context)
-        {
-        }
-
-        private void OnInteractionPerformed(InputAction.CallbackContext context)
-        {
-        }
-
-        private void OnConfirmPerformed(InputAction.CallbackContext context)
-        {
-            
-        }
-        #endregion
-
-
         private void UpdateUIChecks()
         {
         }
@@ -122,18 +117,19 @@ namespace Events
         {
             // Move position every frame
             Vector2 directionMovement = move4DirectionAction.action.ReadValue<Vector2>();
-
+            On4DirectionMoveActionPressed?.Invoke(directionMovement);
+            
             // Poll the Delta value every frame
             Vector2 delta = pointerDeltaAction.action.ReadValue<Vector2>();
-
+            OnPointerDelta?.Invoke(delta);
+            
             // Poll the position value every frame
             Vector2 lookPosition = pointerPositionAction.action.ReadValue<Vector2>();
-            
-            if (playerController)
-                playerController.HandleInput(directionMovement, delta, lookPosition);
+            OnPointerPosition?.Invoke(lookPosition);
         }
 
-        
+
+         
         #endregion
 
         public void SwitchToUIMap()

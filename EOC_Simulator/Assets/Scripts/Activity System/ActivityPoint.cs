@@ -1,3 +1,4 @@
+using System;
 using Events;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -10,52 +11,47 @@ namespace Activity_System
     {
         [Header("Activity")]
         [SerializeField] private ActivityInfoSo activityInfoForPoint;
-        [SerializeField] private InputActionReference submitReference; // Maybe move this to player
-        
+        [FormerlySerializedAs("needToBeClose")] [SerializeField] private bool needToBeCloseToInteract = true;
+
         [Header("Config")]
         [SerializeField] private bool startPoint = true;
         [SerializeField] private bool finishPoint = true;
         
+        [Header("Automatic")]
+        [SerializeField] private bool automaticStartActivity;   // Will start the activity on its own
+        [SerializeField] private bool automaticFinishActivity; // Will finish the activity if it can, and give appropriate rewards
+
         [Header("Optional Settings")]
         [SerializeField] private ActivityIcon activityIcon;
-        /// <summary>
-        /// Goes to finish and have no need to call the finnish 
-        /// </summary>
-        [SerializeField] private bool automaticFinnishActivity;
-        // [SerializeField] private bool repeatableActivity; // Will start the
         
-        /*
-         * Needs player to be close, but first need a reference for the player.
-         * When spawning in a player based on the selected role, we will add the reference
-        */
         private bool _playerIsNear;
-
-        // private string _activityId;
         private ActivityState _currentActivityState;
-        
+
+        [SerializeField] private float radius = 2f;
+        private const float TimeBetweenChecks = 0.5f;
+
         private void Awake()
         {
-            // _activityId = activityInfoForPoint.ID;
+            InvokeRepeating(nameof(IsPlayerInsideCheck), 0, TimeBetweenChecks);
         }
 
         private void OnEnable()
         {
             GameEventsManager.Instance.ActivityEvents.OnActivityStateChange += ActivityStateChange;
-            submitReference.action.performed += SubmitPressed;
-            Debug.Log("Started Activity Point");
+            InputManager.Instance.OnConfirmActionPressed += SubmitPressed;
         }
         
         private void OnDisable()
         {
             GameEventsManager.Instance.ActivityEvents.OnActivityStateChange -= ActivityStateChange;
-            submitReference.action.performed -= SubmitPressed;
+            InputManager.Instance.OnConfirmActionPressed -= SubmitPressed;
         }
         
-        // Need to make
-        private void SubmitPressed(InputAction.CallbackContext obj)
+        private void SubmitPressed()
         {
-            // if (!_playerIsNear) return;
+            if (needToBeCloseToInteract && !_playerIsNear) return;
             
+            // Will either start or finish a activity if it's possible
             if (_currentActivityState.Equals(ActivityState.CAN_START) && startPoint)
                 GameEventsManager.Instance.ActivityEvents.StartActivity(activityInfoForPoint);
             else if (_currentActivityState.Equals(ActivityState.CAN_FINISH) && finishPoint)
@@ -68,23 +64,55 @@ namespace Activity_System
 
             _currentActivityState = activity.State;
 
-            if (automaticFinnishActivity && _currentActivityState.Equals(ActivityState.CAN_FINISH) && finishPoint)
-                GameEventsManager.Instance.ActivityEvents.FinishActivity(activityInfoForPoint);
-
+            AutomaticCheckStartFinishActivity();
+            
             if (activityIcon)
                 activityIcon.SetState(_currentActivityState, startPoint, finishPoint);
         }
 
-        // private void OnTriggerEnter2D(Collider2D other)
-        // {
-        //     if (other.CompareTag("Player"))
-        //         _playerIsNear = true;
-        // }
-        //
-        // private void OnTriggerExit2D(Collider2D other)
-        // {
-        //     if (other.CompareTag("Player"))
-        //         _playerIsNear = false;
-        // }
+
+        private void AutomaticCheckStartFinishActivity()
+        {
+            // Automatic start or finish if it has been enabled
+            
+            
+            /*
+             * DOSENT WORK WITH BEING NEAR AND ONLY COMPLETE WHEN ITS FINISHED.
+             * cHANGE THE IF STATESMENT
+             */
+            
+            
+            if (needToBeCloseToInteract && !_playerIsNear) return;
+            
+            if (automaticStartActivity && _currentActivityState.Equals(ActivityState.CAN_START) && startPoint)
+                GameEventsManager.Instance.ActivityEvents.StartActivity(activityInfoForPoint);
+            
+            if (automaticFinishActivity && _currentActivityState.Equals(ActivityState.CAN_FINISH) && finishPoint)
+                GameEventsManager.Instance.ActivityEvents.FinishActivity(activityInfoForPoint);
+        }
+        
+        private void IsPlayerInsideCheck()
+        {
+            if (_currentActivityState == ActivityState.FINISHED)
+            {
+                CancelInvoke(nameof(IsPlayerInsideCheck));
+                return;
+            }
+            if (!(_currentActivityState == ActivityState.CAN_START || _currentActivityState == ActivityState.CAN_FINISH)) return;
+
+            // Need to have a check, since we use a Character Controller component, and not a normal collider / rigidbody 
+            var sphereResults= Physics.OverlapSphere(transform.position, radius, LayerMask.GetMask("Player"));
+            _playerIsNear = sphereResults.Length > 0; // If player is near -> Can Start or finish the activity if they press the button.
+            
+            // 
+            AutomaticCheckStartFinishActivity();
+        }
+        
+        private void OnDrawGizmosSelected()
+        {
+            // Draws the radius of the overlap check
+            Gizmos.color = Color.blue;
+            Gizmos.DrawWireSphere(transform.position, radius);
+        }
     }
 }

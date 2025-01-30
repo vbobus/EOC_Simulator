@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;  // Make sure to include TMPro namespace if using TextMeshPro
+using TMPro;  
 
 public class UIManager : MonoBehaviour
 {
@@ -25,7 +25,6 @@ public class UIManager : MonoBehaviour
 
     void Start()
     {
-        // Hide UI elements at start
         if (playerInputField != null)
         {
             playerInputField.gameObject.SetActive(false);

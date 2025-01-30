@@ -27,7 +27,7 @@ namespace Character.Player
         void Start()
         {
             Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
+            // Cursor.visible = false;
             
             ResetCamera();
         }

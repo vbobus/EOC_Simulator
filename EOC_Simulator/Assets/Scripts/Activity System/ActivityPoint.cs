@@ -6,7 +6,6 @@ using UnityEngine.Serialization;
 
 namespace Activity_System
 {
-    [RequireComponent(typeof(Collider))]
     public class ActivityPoint: MonoBehaviour
     {
         [Header("Activity")]
@@ -23,12 +22,11 @@ namespace Activity_System
 
         [Header("Optional Settings")]
         [SerializeField] private ActivityIcon activityIcon;
+        [SerializeField] private float radius = 2f;
+        private const float TimeBetweenChecks = 0.5f;
         
         private bool _playerIsNear;
         private ActivityState _currentActivityState;
-
-        [SerializeField] private float radius = 2f;
-        private const float TimeBetweenChecks = 0.5f;
 
         private void Awake()
         {
@@ -52,10 +50,7 @@ namespace Activity_System
             if (needToBeCloseToInteract && !_playerIsNear) return;
             
             // Will either start or finish a activity if it's possible
-            if (_currentActivityState.Equals(ActivityState.CAN_START) && startPoint)
-                GameEventsManager.Instance.ActivityEvents.StartActivity(activityInfoForPoint);
-            else if (_currentActivityState.Equals(ActivityState.CAN_FINISH) && finishPoint)
-                GameEventsManager.Instance.ActivityEvents.FinishActivity(activityInfoForPoint);
+            StartFinishActivity();
         }
         
         private void ActivityStateChange(Activity activity)
@@ -70,24 +65,22 @@ namespace Activity_System
                 activityIcon.SetState(_currentActivityState, startPoint, finishPoint);
         }
 
-
         private void AutomaticCheckStartFinishActivity()
         {
-            // Automatic start or finish if it has been enabled
+            if (!automaticStartActivity && !automaticFinishActivity) return;
             
-            
-            /*
-             * DOSENT WORK WITH BEING NEAR AND ONLY COMPLETE WHEN ITS FINISHED.
-             * cHANGE THE IF STATESMENT
-             */
-            
-            
+            // Need to check if its not near, since it would otherwise just finish or start
             if (needToBeCloseToInteract && !_playerIsNear) return;
-            
-            if (automaticStartActivity && _currentActivityState.Equals(ActivityState.CAN_START) && startPoint)
+
+            // Automatic start or finish if it has been enabled
+            StartFinishActivity();
+        }
+
+        private void StartFinishActivity()
+        {
+            if (_currentActivityState.Equals(ActivityState.CAN_START) && startPoint)
                 GameEventsManager.Instance.ActivityEvents.StartActivity(activityInfoForPoint);
-            
-            if (automaticFinishActivity && _currentActivityState.Equals(ActivityState.CAN_FINISH) && finishPoint)
+            else if (_currentActivityState.Equals(ActivityState.CAN_FINISH) && finishPoint)
                 GameEventsManager.Instance.ActivityEvents.FinishActivity(activityInfoForPoint);
         }
         
@@ -98,13 +91,12 @@ namespace Activity_System
                 CancelInvoke(nameof(IsPlayerInsideCheck));
                 return;
             }
-            if (!(_currentActivityState == ActivityState.CAN_START || _currentActivityState == ActivityState.CAN_FINISH)) return;
+            if (_currentActivityState.Equals(ActivityState.REQUIREMENTS_NOT_MET)) return;
 
             // Need to have a check, since we use a Character Controller component, and not a normal collider / rigidbody 
             var sphereResults= Physics.OverlapSphere(transform.position, radius, LayerMask.GetMask("Player"));
             _playerIsNear = sphereResults.Length > 0; // If player is near -> Can Start or finish the activity if they press the button.
             
-            // 
             AutomaticCheckStartFinishActivity();
         }
         

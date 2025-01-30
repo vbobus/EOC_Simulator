@@ -6,6 +6,7 @@ using NUnit.Framework;
 using Pathfinding;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Character.Player
 {
@@ -37,6 +38,8 @@ namespace Character.Player
         [SerializeField] private LayerMask aiWalkTargetLayerMask;
         [SerializeField] private Transform aiTargetMoveTowards;
         private IAstarAI _astarAI;
+
+        [SerializeField] private Animator animator;
         
         #region SetUp
         private void Awake()

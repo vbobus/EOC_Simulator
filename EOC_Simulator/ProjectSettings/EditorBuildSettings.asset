@@ -15,5 +15,6 @@ EditorBuildSettings:
     path: Assets/Scenes/LLMTest.unity
     guid: 2ea027abc7021c24ca398685966cbfb8
   m_configObjects:
+    com.unity.addressableassets: {fileID: 11400000, guid: 4ec72ac4199a45b41acdf1e89f2aa2f9, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0

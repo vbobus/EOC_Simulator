@@ -6,8 +6,8 @@ namespace Character
     public class PlayerAiTargetMove : MonoBehaviour
     {
         [SerializeField] private LayerMask layerMask;
+        [SerializeField] private float maxDistanceRayCheck = 10f;
         [SerializeField] private float smoothSpeed = 10f; // Adjust for smoother movement
-
         private Vector3 _targetPosition;
         private Camera _mainCam;
         private void Awake()
@@ -22,11 +22,11 @@ namespace Character
         {
             if (!Application.isFocused) return;
 
-            Ray ray = _mainCam.ScreenPointToRay(pointerPosition);        
+            Ray ray = _mainCam.ScreenPointToRay(pointerPosition);
 
-            if (Physics.Raycast(ray, out RaycastHit hit, 100f, layerMask))
+            if (Physics.Raycast(ray, out RaycastHit hit, maxDistanceRayCheck, layerMask))
             {
-                _targetPosition = hit.point; // Store the target position
+                _targetPosition = hit.point; 
             }
 
             // Smoothly move the target towards the new position

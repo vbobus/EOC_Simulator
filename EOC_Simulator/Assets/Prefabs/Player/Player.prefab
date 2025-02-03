@@ -142,18 +142,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b833e99b7754b488680df9127283cd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  movementSpeed: 4.5
+  lookAwayMovementSpeedPenalty: 50
   animator: {fileID: 2481256370077890153}
   firstPersonCamera: {fileID: 1733320628288883663}
   collisionLayerMask:
     serializedVersion: 2
     m_Bits: 384
-  movementSpeed: 3
   rotationSpeedForWasdOnly: 140
-  aiWalkTargetLayerMask:
-    serializedVersion: 2
-    m_Bits: 1024
   aiTargetMoveTowards: {fileID: 0}
-  lookAwayMovementSpeedPenalty: 74
 --- !u!143 &766588095192492909
 CharacterController:
   m_ObjectHideFlags: 0
@@ -220,8 +217,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 5
-  radius: 0.51
-  height: 1.41
+  radius: 0.28
+  height: 1.79
   canMove: 1
   maxSpeed: 3
   gravity: {x: NaN, y: NaN, z: NaN}
@@ -242,9 +239,9 @@ MonoBehaviour:
   targetCompatibility: {fileID: 0}
   maxAcceleration: -2.5
   rotationSpeed: 360
-  slowdownDistance: 2.04
-  pickNextWaypointDist: 1.55
-  endReachedDistance: 1.48
+  slowdownDistance: 1.5
+  pickNextWaypointDist: 1.4
+  endReachedDistance: 1
   alwaysDrawGizmos: 1
   slowWhenNotFacingTarget: 1
   whenCloseToDestination: 0
@@ -331,7 +328,7 @@ PrefabInstance:
     - target: {fileID: 5866666021909216657, guid: 3c30e9607d4e9164aa637d936a93dc55, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: 13ee81896da981d44bb760943681dd0e, type: 2}
+      objectReference: {fileID: 9100000, guid: 0633f495fb9e72f43b8c0b86e185f2dd, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

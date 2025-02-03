@@ -45,6 +45,8 @@ namespace Character.Player
 
         // Pathfinding-related variables
         [Title("MovementType", "Pathfinding")]
+        
+        [InfoBox("Need to have a target prefab, to be able to use the pathfinding movement type!")]
         [SerializeField] private Transform aiTargetMoveTowards; // Target position for AI movement
 
         #endregion
@@ -83,10 +85,19 @@ namespace Character.Player
             MovementType = newMovementType;
             firstPersonCamera.ResetCamera(); // Reset camera to default state
 
+            bool isMouseOnly = newMovementType == InputMovementTypes.MOUSE_ONLY;
+            
+            // Show/hide the AI target object if the field has been set
+            if (aiTargetMoveTowards) aiTargetMoveTowards.gameObject.SetActive(isMouseOnly);
+            else
+            {
+                // We want to change the movement type again, since we can't use the Mouse Only type when there is no target
+                if (newMovementType == InputMovementTypes.MOUSE_ONLY) TestChangeMovement();
+            }
+            
             // Stop pathfinding if not in MOUSE_ONLY mode
             if (AstarAI == null) return;
 
-            bool isMouseOnly = newMovementType == InputMovementTypes.MOUSE_ONLY;
             AstarAI.isStopped = !isMouseOnly; // Stop or resume pathfinding
             AstarAI.destination = transform.position; // Reset destination
 
@@ -94,8 +105,6 @@ namespace Character.Player
             AIPath aiPath = AstarAI as AIPath;
             if (aiPath != null) aiPath.enabled = isMouseOnly;
 
-            // Show/hide the AI target object
-            aiTargetMoveTowards.gameObject.SetActive(isMouseOnly);
         }
 
         /// Unsubscribe from input events when the object is destroyed

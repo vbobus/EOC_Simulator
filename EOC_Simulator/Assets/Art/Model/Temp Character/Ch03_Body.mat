@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-4884576174762652745
+--- !u!114 &-1018959396780072350
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -40,11 +40,11 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: 63fecdbaf3d02094f90d95e867fb5006, type: 3}
+        m_Texture: {fileID: 2800000, guid: ca8b4a80dcf0c454f8d436d116b86987, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
-        m_Texture: {fileID: 2800000, guid: 42bae4de6be082d4b84df44b70cd063b, type: 3}
+        m_Texture: {fileID: 2800000, guid: d8a677f668148854ba6f33ed7d630f0b, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -64,7 +64,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 63fecdbaf3d02094f90d95e867fb5006, type: 3}
+        m_Texture: {fileID: 2800000, guid: ca8b4a80dcf0c454f8d436d116b86987, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:

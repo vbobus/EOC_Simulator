@@ -1,17 +1,9 @@
 fileFormatVersion: 2
-<<<<<<<< HEAD:EOC_Simulator/Assets/LLMUnity/Resources/llmunity_trash_icon.png.meta
-guid: 0e04eced3ed2d120e84e7c10c8b32ddc
-TextureImporter:
-  internalIDToNameTable: []
-  externalObjects: {}
-  serializedVersion: 12
-========
-guid: 63fecdbaf3d02094f90d95e867fb5006
+guid: ca8b4a80dcf0c454f8d436d116b86987
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
   serializedVersion: 13
->>>>>>>> NPC-Movement-Dialogue:EOC_Simulator/Assets/Art/Model/Temp Character/Ch03_1001_Diffuse.png.meta
   mipmaps:
     mipMapMode: 0
     enableMipMap: 1
@@ -101,26 +93,8 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-<<<<<<<< HEAD:EOC_Simulator/Assets/LLMUnity/Resources/llmunity_trash_icon.png.meta
-  - serializedVersion: 3
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Server
-========
   - serializedVersion: 4
     buildTarget: WebGL
->>>>>>>> NPC-Movement-Dialogue:EOC_Simulator/Assets/Art/Model/Temp Character/Ch03_1001_Diffuse.png.meta
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -154,10 +128,3 @@ TextureImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 273604
-  packageName: LLM for Unity
-  packageVersion: 2.4.1
-  assetPath: Assets/LLMUnity/Resources/llmunity_trash_icon.png
-  uploadId: 718179

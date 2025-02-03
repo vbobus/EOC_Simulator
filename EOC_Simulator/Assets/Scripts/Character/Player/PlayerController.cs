@@ -16,7 +16,7 @@ namespace Character.Player
         MOUSE_ONLY            // Click to move and right click to rotate
     }
 
-    public class PlayerController : MonoBehaviour
+    public class PlayerController : Character
     {
         #region Variables
 
@@ -27,7 +27,6 @@ namespace Character.Player
         [Required] [SerializeField] private Animator animator; // Handles player animations
         [Required] [SerializeField] private FirstPersonCamera firstPersonCamera; // Handles camera rotation
         [SerializeField] private LayerMask collisionLayerMask; // Layer mask for collision detection
-        [SerializeField] private float movementSpeed = 3.0f; // Base movement speed of the player
 
         // Penalty for walking backward (reduces movement speed)
         private readonly float _walkBackMovementPenalty = 0.5f;
@@ -42,42 +41,23 @@ namespace Character.Player
         // Input values for movement and camera rotation
         private Vector2 _directionMovement; // Stores WASD input
         private Vector2 _delta; // Stores mouse delta for camera rotation
+        private float _lastDirectionInputTime; // Tracks the last time movement input was received
 
         // Pathfinding-related variables
         [Title("MovementType", "Pathfinding")]
-        [SerializeField] private LayerMask aiWalkTargetLayerMask; // Layer mask for AI pathfinding targets
         [SerializeField] private Transform aiTargetMoveTowards; // Target position for AI movement
-        private IAstarAI _astarAI; // Reference to the A* pathfinding component
-
-        // Movement speed penalty when the player looks away from the movement direction
-        [SerializeField] [UnityEngine.Range(50, 100)]
-        private int lookAwayMovementSpeedPenalty = 75; // 50 -> 50% movement speed, 100 -> No penalty
-
-        // List of waypoints for pathfinding
-        private readonly List<Vector3> _waypoints = new List<Vector3>();
-
-        // Animation-related variables
-        private float _lastDirectionInputTime; // Tracks the last time movement input was received
-        private readonly float _smoothTime = 0.2f; // Smoothing time for animation transitions
-        private readonly float _directionIdleInputTime = 0.1f; // Delay before switching to idle animation
-        private readonly float _animThreshold = 0.05f; // Threshold for considering input values as zero
-
-        // Animator parameter hashes for performance optimization
-        private static readonly int AnimIsWalking = Animator.StringToHash("IsWalking");
-        private static readonly int AnimInputX = Animator.StringToHash("InputX");
-        private static readonly int AnimInputY = Animator.StringToHash("InputY");
 
         #endregion
 
         #region SetUp
 
-        private void Awake()
+        protected override void Awake()
         {
+            base.Awake();
+            
             // Get required components
             _characterController = GetComponent<CharacterController>();
-            _astarAI = GetComponent<IAstarAI>();
-            _astarAI.maxSpeed = movementSpeed; // Set initial speed for pathfinding
-
+            
             // Subscribe to input events
             InputManager.Instance.On4DirectionMoveActionPressed += HandleDirectionMovement;
             InputManager.Instance.OnPointerDelta += HandlePointerDelta;
@@ -104,14 +84,14 @@ namespace Character.Player
             firstPersonCamera.ResetCamera(); // Reset camera to default state
 
             // Stop pathfinding if not in MOUSE_ONLY mode
-            if (_astarAI == null) return;
+            if (AstarAI == null) return;
 
             bool isMouseOnly = newMovementType == InputMovementTypes.MOUSE_ONLY;
-            _astarAI.isStopped = !isMouseOnly; // Stop or resume pathfinding
-            _astarAI.destination = transform.position; // Reset destination
+            AstarAI.isStopped = !isMouseOnly; // Stop or resume pathfinding
+            AstarAI.destination = transform.position; // Reset destination
 
             // Enable/disable AIPath component based on movement type
-            AIPath aiPath = _astarAI as AIPath;
+            AIPath aiPath = AstarAI as AIPath;
             if (aiPath != null) aiPath.enabled = isMouseOnly;
 
             // Show/hide the AI target object
@@ -190,7 +170,7 @@ namespace Character.Player
             if (directionMovement == Vector2.zero)
             {
                 // Switch to idle animation if no input is received for a short time
-                if (Time.time - _lastDirectionInputTime >= _directionIdleInputTime)
+                if (Time.time - _lastDirectionInputTime >= DirectionIdleInputTime)
                 {
                     animator.SetBool(AnimIsWalking, false);
                     animator.SetFloat(AnimInputX, 0f);
@@ -207,12 +187,12 @@ namespace Character.Player
                 float currentInputY = animator.GetFloat(AnimInputY);
 
                 // Snap small input values to zero to avoid jittery animations
-                if (Math.Abs(currentInputX) <= _animThreshold) currentInputX = 0;
-                if (Math.Abs(currentInputY) <= _animThreshold) currentInputY = 0;
+                if (Math.Abs(currentInputX) <= AnimThreshold) currentInputX = 0;
+                if (Math.Abs(currentInputY) <= AnimThreshold) currentInputY = 0;
 
                 // Smoothly interpolate input values for animations
-                currentInputX = Mathf.Lerp(currentInputX, directionMovement.x, _smoothTime);
-                currentInputY = Mathf.Lerp(currentInputY, directionMovement.y, _smoothTime);
+                currentInputX = Mathf.Lerp(currentInputX, directionMovement.x, SmoothTime);
+                currentInputY = Mathf.Lerp(currentInputY, directionMovement.y, SmoothTime);
 
                 animator.SetFloat(AnimInputX, currentInputX);
                 animator.SetFloat(AnimInputY, currentInputY);
@@ -226,41 +206,12 @@ namespace Character.Player
             firstPersonCamera.RotateCamera(delta);
         }
 
-        /// Updates pathfinding movement and animations
-        private void CheckAstarMovement()
-        {
-            // Get the remaining path from the A* AI component
-            _waypoints.Clear();
-            _astarAI.GetRemainingPath(_waypoints, out bool hasFinishedPath);
-
-            // Update walk animation based on AI velocity
-            animator.SetBool(AnimIsWalking, _astarAI.velocity.magnitude > _animThreshold);
-
-            if (_waypoints.Count <= 1) return;
-
-            // Calculate the direction to the next waypoint and transform it into local space
-            Vector3 directionToWaypoint = (_waypoints[1] - transform.position).normalized;
-            Vector3 localDirection = transform.InverseTransformDirection(directionToWaypoint);
-
-            // Update animator parameters based on the local direction
-            animator.SetFloat(AnimInputX, localDirection.x);
-            animator.SetFloat(AnimInputY, localDirection.z);
-
-            // Apply movement speed penalty if the player is looking away from the movement direction
-            float t = Math.Clamp(localDirection.z + 1f, 0, 1f);
-            float speedLerp = Mathf.Lerp(movementSpeed * (lookAwayMovementSpeedPenalty / 100f), movementSpeed, t);
-            _astarAI.maxSpeed = speedLerp;
-        }
-
         /// Handles left-click input for setting a new pathfinding destination
         private void HandleLeftClickPathfinding()
         {
             if (MovementType != InputMovementTypes.MOUSE_ONLY) return;
-
-            if (_astarAI == null) throw new UnityException("No IAstar found in the player controller prefab");
-
             // Set the AI destination to the target position
-            _astarAI.destination = aiTargetMoveTowards.position;
+            SetDestination(aiTargetMoveTowards.position);
         }
     }
 }

@@ -12,24 +12,19 @@ namespace Character.Player
     public enum InputMovementTypes
     {
         WASD_MOUSE_TO_ROTATE, // WASD to move and Mouse will be used to rotate 
-        WASD_ONLY,            // Client idea of movement, WS => forward, back.   AD => rotate left or right
         MOUSE_ONLY            // Click to move and right click to rotate
     }
 
     public class PlayerController : Character
     {
         #region Variables
-
         // Movement type for the player (e.g., WASD + mouse, mouse only, etc.)
-        public static InputMovementTypes MovementType;
+        private static InputMovementTypes _movementType;
 
         // Required references for the player controller
         [Required] [SerializeField] private Animator animator; // Handles player animations
         [Required] [SerializeField] private FirstPersonCamera firstPersonCamera; // Handles camera rotation
         [SerializeField] private LayerMask collisionLayerMask; // Layer mask for collision detection
-
-        // Penalty for walking backward (reduces movement speed)
-        private readonly float _walkBackMovementPenalty = 0.5f;
 
         // Rotation speed for WASD-only movement type
         [Title("MovementType", "WASD Only")]
@@ -73,7 +68,7 @@ namespace Character.Player
         /// Test method to cycle through movement types
         private void TestChangeMovement()
         {
-            int current = (int)MovementType + 1;
+            int current = (int)_movementType + 1;
             if (current >= Enum.GetValues(typeof(InputMovementTypes)).Length)
                 current = 0;
             ChangeMovementType((InputMovementTypes)current);
@@ -82,18 +77,22 @@ namespace Character.Player
         /// Changes the player's movement type and updates related settings
         public void ChangeMovementType(InputMovementTypes newMovementType)
         {
-            MovementType = newMovementType;
-            firstPersonCamera.ResetCamera(); // Reset camera to default state
-
-            bool isMouseOnly = newMovementType == InputMovementTypes.MOUSE_ONLY;
             
+            bool isMouseOnly = newMovementType == InputMovementTypes.MOUSE_ONLY;
             // Show/hide the AI target object if the field has been set
             if (aiTargetMoveTowards) aiTargetMoveTowards.gameObject.SetActive(isMouseOnly);
             else
             {
                 // We want to change the movement type again, since we can't use the Mouse Only type when there is no target
-                if (newMovementType == InputMovementTypes.MOUSE_ONLY) TestChangeMovement();
+                if (newMovementType == InputMovementTypes.MOUSE_ONLY) 
+                    newMovementType = InputMovementTypes.WASD_MOUSE_TO_ROTATE;
             }
+            
+            _movementType = newMovementType;
+            firstPersonCamera.ResetCamera(); // Reset camera to default state
+
+            
+
             
             // Stop pathfinding if not in MOUSE_ONLY mode
             if (AstarAI == null) return;
@@ -126,7 +125,7 @@ namespace Character.Player
         private void Update()
         {
             // Handle input based on the current movement type
-            switch (MovementType)
+            switch (_movementType)
             {
                 case InputMovementTypes.WASD_MOUSE_TO_ROTATE:
                     HandleWasdMouseToRotate(_directionMovement, _delta);
@@ -134,9 +133,6 @@ namespace Character.Player
                 case InputMovementTypes.MOUSE_ONLY:
                     HandleMouseOnly(_delta);
                     CheckAstarMovement(); // Update pathfinding movement
-                    break;
-                case InputMovementTypes.WASD_ONLY:
-                    HandleWasdOnly(_directionMovement);
                     break;
             }
         }
@@ -150,27 +146,16 @@ namespace Character.Player
             Vector3 movement = new Vector3(directionMovement.x, 0, directionMovement.y);
             movement = transform.TransformDirection(movement);
             movement.Normalize();
+            
+            
+            transform.position = new Vector3(transform.position.x, 0f, transform.position.z);
+            
             _characterController.Move(movement * (movementSpeed * Time.deltaTime));
+            
+            Velocity = _characterController.velocity;
 
             // Rotate the camera based on mouse input
             firstPersonCamera.RotateCamera(delta);
-        }
-
-        /// Handles movement for WASD-only mode
-        private void HandleWasdOnly(Vector2 directionMovement)
-        {
-            UpdateWalkIdleAnimations(directionMovement); // Update animations based on input
-
-            // Calculate movement direction and apply backward movement penalty
-            Vector3 movement = transform.forward * directionMovement.y;
-            movement = movement.normalized;
-            if (directionMovement.y < 0)
-                movement *= _walkBackMovementPenalty; // Reduce speed when walking backward
-
-            _characterController.Move(movement * (movementSpeed * Time.deltaTime));
-
-            // Rotate the player based on A/D keys
-            transform.Rotate(0, directionMovement.x * (rotationSpeedForWasdOnly * Time.deltaTime), 0);
         }
 
         /// Updates walk/idle animations based on movement input
@@ -218,7 +203,7 @@ namespace Character.Player
         /// Handles left-click input for setting a new pathfinding destination
         private void HandleLeftClickPathfinding()
         {
-            if (MovementType != InputMovementTypes.MOUSE_ONLY) return;
+            if (_movementType != InputMovementTypes.MOUSE_ONLY) return;
             // Set the AI destination to the target position
             SetDestination(aiTargetMoveTowards.position);
         }

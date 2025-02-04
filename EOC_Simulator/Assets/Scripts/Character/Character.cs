@@ -2,13 +2,28 @@ using System;
 using System.Collections.Generic;
 using Pathfinding;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Character
 {
-    public abstract class Character : MonoBehaviour
+    [Serializable]
+    public enum CharacterStates
     {
+        IDLE,
+        WALKING,
+        DIALOGUE,
+        INTERACTING
+    }
+    
+    public abstract class Character : MonoBehaviour
+    { 
         [SerializeField] protected float movementSpeed = 3.0f; // Base movement speed of the player
         protected IAstarAI AstarAI; // Reference to the A* pathfinding component
+        public CharacterStates State { get; protected set; }
+
+        
+        
+        [SerializeField] private string testAnimLayerLockName;
         
         // List of waypoints for pathfinding
         private readonly List<Vector3> _waypoints = new List<Vector3>();
@@ -28,10 +43,18 @@ namespace Character
         [SerializeField] [Range(50, 100)]
         private int lookAwayMovementSpeedPenalty = 75; // 50 -> 50% movement speed, 100 -> No penalty
 
+        protected bool IsMoving;
+        public Vector3 Velocity { get; protected set; }
+        
         protected virtual void Awake()
         {
             AstarAI = GetComponent<IAstarAI>();
             Animator = GetComponentInChildren<Animator>();
+            if (!String.IsNullOrEmpty(testAnimLayerLockName))
+            {
+                int layerIndex = Animator.GetLayerIndex(testAnimLayerLockName);
+                Animator.SetLayerWeight(layerIndex, 1f);
+            }
         }
         
         protected void SetDestination(Vector3 destination) => AstarAI.destination = destination;
@@ -59,6 +82,17 @@ namespace Character
             float t = Math.Clamp(localDirection.z + 1f, 0, 1f);
             float speedLerp = Mathf.Lerp(movementSpeed * (lookAwayMovementSpeedPenalty / 100f), movementSpeed, t);
             AstarAI.maxSpeed = speedLerp;
+
+            Velocity = AstarAI.velocity;
+        }
+
+        private void LateUpdate()
+        {
+            if (State == CharacterStates.DIALOGUE || State == CharacterStates.INTERACTING) return;
+            
+            State = Velocity.magnitude < 0.1f ? CharacterStates.IDLE : CharacterStates.WALKING;
+            
+            if (Velocity != Vector3.zero) Debug.Log($"Velocity: {Velocity}");
         }
     }
 }

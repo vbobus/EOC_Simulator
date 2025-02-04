@@ -8,12 +8,15 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/RoleSelection.unity
     guid: 4394e4194e7dd48448567f8870ad9235
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/LLMTest.unity
     guid: 2ea027abc7021c24ca398685966cbfb8
+  - enabled: 1
+    path: Assets/Scenes/GreyBox_Activity Test.unity
+    guid: 615d3bf7aab08854fae8ad74b0a7ac38
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 4ec72ac4199a45b41acdf1e89f2aa2f9, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}

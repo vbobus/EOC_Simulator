@@ -6,12 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="f142a816-47ef-4712-9e45-f6fa5e92cb78" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.EOC_Simulator/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.EOC_Simulator/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/GreyBox_Activity Test.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/GreyBox_Activity Test.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/LLMTest.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/LLMTest.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/EOCGameManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/EOCGameManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/LLM/NewLLM/EOCDirector.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/LLM/NewLLM/EOCDirector.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Activities/Test Activity/LLMTasks.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Activities/Test Activity/LLMTasks.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/LLM-Quest.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/LLM-Quest.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/EOCInteraction.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/EOCInteraction.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/RoleSelection.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/RoleSelection.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Events/InputManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Events/InputManager.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,16 +25,9 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/84f0d810adef4e6c8deab33e4ae93f7c1dec00/06/d5c9b0bd/Transform.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/84f0d810adef4e6c8deab33e4ae93f7c1dec00/0b/278106d4/Component.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/84f0d810adef4e6c8deab33e4ae93f7c1dec00/11/2053e731/MonoBehaviour.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/84f0d810adef4e6c8deab33e4ae93f7c1dec00/40/5a233738/Mathf.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/84f0d810adef4e6c8deab33e4ae93f7c1dec00/42/d9a31419/Object.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/84f0d810adef4e6c8deab33e4ae93f7c1dec00/f0/439c2be5/Debug.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/ed969b0e627d471da4848289f9c322df46ae00/47/4330294b/ThrowHelper.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/ed969b0e627d471da4848289f9c322df46ae00/7d/fa477b3e/String.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/ed969b0e627d471da4848289f9c322df46ae00/b9/69389fce/Dictionary`2.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Activity System/ActivityData.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/QuestFunctions.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.inputsystem/InputSystem/Actions/InputActionAsset.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.inputsystem/InputSystem/Actions/InputActionReference.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.inputsystem/InputSystem/Actions/InputActionState.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.inputsystem/InputSystem/Utilities/DelegateHelpers.cs" root0="SKIP_HIGHLIGHTING" />
@@ -143,7 +136,7 @@
       <workItem from="1737939730425" duration="8772000" />
       <workItem from="1737999120897" duration="33758000" />
       <workItem from="1738170603676" duration="20722000" />
-      <workItem from="1738628296107" duration="25950000" />
+      <workItem from="1738628296107" duration="37745000" />
     </task>
     <servers />
   </component>

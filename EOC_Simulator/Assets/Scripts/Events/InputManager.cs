@@ -111,6 +111,7 @@ namespace Events
         {
         }
 
+       // [SerializeField] private InputActionReference uiClickAction;
         #region Player ActionMap Continuos Check Methods
 
         private void UpdatePlayerChecks()
@@ -134,6 +135,7 @@ namespace Events
 
         public void SwitchToUIMap()
         {
+            //uiClickAction.action.performed += ActionOnPerformed;
             // Disable the current action map
             inputActions.FindActionMap("Player").Disable();
 
@@ -142,6 +144,11 @@ namespace Events
             
             _actionMapPlayer = false;
         }
+
+        //private void ActionOnPerformed(InputAction.CallbackContext _)
+        //{
+            
+       // }
 
         public void SwitchToPlayerMap()
         {

@@ -1,3 +1,4 @@
+using Events;
 using UnityEngine;
 using UnityEngine.UI;
 using LLMUnity;
@@ -45,6 +46,8 @@ public class EOCInteraction : MonoBehaviour
         if (other.CompareTag("Player") && !isInteracting)
         {
             Debug.Log("Interacting");
+            
+            //InputManager.Instance.SwitchToUIMap();
             
             if (other.gameObject == this.gameObject) return; 
             isInteracting = true;

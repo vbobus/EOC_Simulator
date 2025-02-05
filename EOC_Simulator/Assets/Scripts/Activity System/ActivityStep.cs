@@ -9,6 +9,12 @@ namespace Activity_System
         private ActivityInfoSo _activityInfoSo;
         private int _stepIndex;
 
+        /*
+         * Go over to point A
+         * Talk with player B
+         */
+        public string stepHelp;
+        
         public void InitializeActivityStep(ActivityInfoSo id, int stepIndex, string activityStepState)
         {
             _activityInfoSo = id;

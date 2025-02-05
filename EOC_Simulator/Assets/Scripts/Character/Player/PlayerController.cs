@@ -6,6 +6,7 @@ using NUnit.Framework;
 using Pathfinding;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Character.Player
 {
@@ -19,7 +20,7 @@ namespace Character.Player
     {
         #region Variables
         // Movement type for the player (e.g., WASD + mouse, mouse only, etc.)
-        private static InputMovementTypes _movementType;
+        [HideInInspector] public InputMovementTypes movementType;
 
         // Required references for the player controller
         [Required] [SerializeField] private Animator animator; // Handles player animations
@@ -43,6 +44,7 @@ namespace Character.Player
         
         [InfoBox("Need to have a target prefab, to be able to use the pathfinding movement type!")]
         [SerializeField] private Transform aiTargetMoveTowards; // Target position for AI movement
+        [SerializeField] private GameObject aiEndDestinationPrefab;
 
         #endregion
 
@@ -68,7 +70,7 @@ namespace Character.Player
         /// Test method to cycle through movement types
         private void TestChangeMovement()
         {
-            int current = (int)_movementType + 1;
+            int current = (int)movementType + 1;
             if (current >= Enum.GetValues(typeof(InputMovementTypes)).Length)
                 current = 0;
             ChangeMovementType((InputMovementTypes)current);
@@ -77,10 +79,15 @@ namespace Character.Player
         /// Changes the player's movement type and updates related settings
         public void ChangeMovementType(InputMovementTypes newMovementType)
         {
-            
             bool isMouseOnly = newMovementType == InputMovementTypes.MOUSE_ONLY;
             // Show/hide the AI target object if the field has been set
-            if (aiTargetMoveTowards) aiTargetMoveTowards.gameObject.SetActive(isMouseOnly);
+
+
+            if (aiTargetMoveTowards)
+            {
+                aiEndDestinationPrefab.SetActive(isMouseOnly);
+                aiTargetMoveTowards.gameObject.SetActive(isMouseOnly);
+            }
             else
             {
                 // We want to change the movement type again, since we can't use the Mouse Only type when there is no target
@@ -88,12 +95,9 @@ namespace Character.Player
                     newMovementType = InputMovementTypes.WASD_MOUSE_TO_ROTATE;
             }
             
-            _movementType = newMovementType;
+            movementType = newMovementType;
             firstPersonCamera.ResetCamera(); // Reset camera to default state
 
-            
-
-            
             // Stop pathfinding if not in MOUSE_ONLY mode
             if (AstarAI == null) return;
 
@@ -103,7 +107,6 @@ namespace Character.Player
             // Enable/disable AIPath component based on movement type
             AIPath aiPath = AstarAI as AIPath;
             if (aiPath != null) aiPath.enabled = isMouseOnly;
-
         }
 
         /// Unsubscribe from input events when the object is destroyed
@@ -125,7 +128,7 @@ namespace Character.Player
         private void Update()
         {
             // Handle input based on the current movement type
-            switch (_movementType)
+            switch (movementType)
             {
                 case InputMovementTypes.WASD_MOUSE_TO_ROTATE:
                     HandleWasdMouseToRotate(_directionMovement, _delta);
@@ -203,9 +206,11 @@ namespace Character.Player
         /// Handles left-click input for setting a new pathfinding destination
         private void HandleLeftClickPathfinding()
         {
-            if (_movementType != InputMovementTypes.MOUSE_ONLY) return;
+            if (movementType != InputMovementTypes.MOUSE_ONLY) return;
             // Set the AI destination to the target position
+            aiEndDestinationPrefab.transform.position = aiTargetMoveTowards.position;
             SetDestination(aiTargetMoveTowards.position);
         }
+
     }
 }

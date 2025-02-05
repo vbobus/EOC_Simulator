@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/RoleSelection.unity
     guid: 4394e4194e7dd48448567f8870ad9235
   - enabled: 1
+    path: Assets/Scenes/LLM-Quest.unity
+    guid: 728e1176623b8924eb14699edfe85a3e
+  - enabled: 0
     path: Assets/Scenes/LLMTest.unity
     guid: 2ea027abc7021c24ca398685966cbfb8
   m_configObjects:

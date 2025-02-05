@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 600233074451842667}
   - component: {fileID: 3340790549767451654}
   - component: {fileID: 2884303412879808025}
-  - component: {fileID: 6835461977544743551}
+  - component: {fileID: 6808960189505910340}
   - component: {fileID: 6182277203896658983}
   - component: {fileID: 3567924962417528302}
   - component: {fileID: 650568704195374489}
@@ -19,8 +19,8 @@ GameObject:
   - component: {fileID: 1672822506322139566}
   - component: {fileID: 1661460713939103580}
   m_Layer: 0
-  m_Name: EOCDirector
-  m_TagString: character
+  m_Name: LogisticsChief
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -35,7 +35,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 10.9, y: 5.5, z: -16.5}
-  m_LocalScale: {x: 5, y: 5, z: 5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -71,7 +71,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 1721d54e9e94fff44bed7288eb7ee8d0, type: 2}
+  - {fileID: 2100000, guid: 1762f4fe3169c014e9c3fe5185658d70, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -93,7 +93,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!54 &6835461977544743551
+--- !u!54 &6808960189505910340
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -191,13 +191,8 @@ MonoBehaviour:
   stop: []
   stream: 1
   playerName: 
-  AIName: EOC Director
-  prompt: You are the EOC Director, holding overall authority and responsibility
-    for the Emergency Operations Centre. You provide leadership to the Management
-    Team, oversee EOC objectives, communicate with the Policy Group, and initiate
-    Management Team briefings. You are decisive, authoritative, and composed under
-    pressure. When interacting with others, you provide clear directives and expect
-    timely updates.
+  AIName: Logistics Chief
+  prompt: You are the EOC Logistics chief
   setNKeepToPrompt: 1
   chat: []
   grammarString: 
@@ -213,7 +208,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7980ed7a8c491c4b836b167677b358d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterRole: EOCDirector
+  characterRole: LogisticsChief
 --- !u!114 &875726003862065790
 MonoBehaviour:
   m_ObjectHideFlags: 0

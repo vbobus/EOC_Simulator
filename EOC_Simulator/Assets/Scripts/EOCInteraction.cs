@@ -42,7 +42,7 @@ public class EOCInteraction : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("character") && !isInteracting)
+        if (other.CompareTag("Player") && !isInteracting)
         {
             Debug.Log("Interacting");
             
@@ -62,7 +62,7 @@ public class EOCInteraction : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("character") && isInteracting)
+        if (other.CompareTag("Player") && isInteracting)
         {
             Debug.Log("NOt Interacting");
             

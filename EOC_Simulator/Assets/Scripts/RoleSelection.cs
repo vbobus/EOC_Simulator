@@ -8,6 +8,6 @@ public class RoleSelection : MonoBehaviour
         PlayerPrefs.SetString("SelectedRole", roleName);
         PlayerPrefs.Save();
         
-        SceneManager.LoadScene("LLMTest");
+        SceneManager.LoadScene("LLM-Quest");
     }
 }

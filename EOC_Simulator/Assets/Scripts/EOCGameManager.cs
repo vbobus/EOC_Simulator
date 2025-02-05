@@ -38,7 +38,7 @@ public class EOCGameManager : MonoBehaviour
             {
                 playerCharacter = Instantiate(prefab, playerSpawnPoint.position, playerSpawnPoint.rotation);
                 
-                PlayerController playerCtrl = playerCharacter.GetComponent<PlayerController>();
+                Character.Player.PlayerController playerCtrl = playerCharacter.GetComponent<Character.Player.PlayerController>();
                 if (playerCtrl != null) playerCtrl.enabled = true;
                 
                 NPCController npcCtrl = playerCharacter.GetComponent<NPCController>();
@@ -56,6 +56,7 @@ public class EOCGameManager : MonoBehaviour
                 {
                     llmChar.llm = GameObject.Find("LLMManager").GetComponent<LLM>();
                 }
+                
             }
             else
             {

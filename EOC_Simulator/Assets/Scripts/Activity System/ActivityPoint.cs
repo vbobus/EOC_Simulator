@@ -96,6 +96,7 @@ namespace Activity_System
             // Need to have a check, since we use a Character Controller component, and not a normal collider / rigidbody 
             var sphereResults= Physics.OverlapSphere(transform.position, radius, LayerMask.GetMask("Player"));
             _playerIsNear = sphereResults.Length > 0; // If player is near -> Can Start or finish the activity if they press the button.
+            // InputManager.Instance.SwitchToUIMap();
             
             AutomaticCheckStartFinishActivity();
         }

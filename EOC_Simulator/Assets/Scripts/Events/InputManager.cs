@@ -8,6 +8,13 @@ using UnityEngine.Serialization;
 
 namespace Events
 {
+    
+    public enum ActionMap
+    {
+        Player,
+        UI,
+    }
+    
     public class InputManager : MonoBehaviour
     {
         #region Parameters
@@ -27,6 +34,8 @@ namespace Events
         [SerializeField] [Required] private InputActionReference move4DirectionAction;
         [SerializeField] [Required] private InputActionReference interactionAction; // Properly just "E"?
         [SerializeField] [Required] private InputActionReference confirmAction; //
+
+        [SerializeField] private InputActionReference commonExitAction;
         
         /// <summary>
         /// Can be used for normal WASD movement, or WS for forward and back, and AD for rotation.
@@ -41,7 +50,9 @@ namespace Events
         public UnityAction OnInteractActionPressed { get; set; }
         public UnityAction OnConfirmActionPressed { get; set; }
         
-        private bool _actionMapPlayer;
+        public UnityAction OnCommonExitActionPressed { get; set; }
+        
+        [HideInInspector] public ActionMap ActionMap { get; private set; }
         
         #endregion
 
@@ -55,8 +66,13 @@ namespace Events
                 DontDestroyOnLoad(this); 
             }
             else Destroy(Instance);
-            
+         
+        }
+
+        private void Start()
+        {
             SwitchToPlayerMap();
+            inputActions.FindActionMap("Common").Enable();
         }
 
         private void OnEnable()
@@ -66,7 +82,11 @@ namespace Events
             rightClickAction.action.performed += OnRightClickPerformed;
             interactionAction.action.performed += OnInteractionPerformed;
             confirmAction.action.performed += OnConfirmPerformed;
+
+
+            commonExitAction.action.performed += OnCommonExitPerformed;
         }
+
 
         private void OnDisable()
         {
@@ -79,6 +99,14 @@ namespace Events
         #endregion
 
         #region Performed Methods
+        private void OnCommonExitPerformed(InputAction.CallbackContext obj)
+        {
+            OnCommonExitActionPressed?.Invoke();
+
+            if (ActionMap == ActionMap.Player) SwitchToUIMap();
+            else SwitchToPlayerMap();
+        }
+        
         private void OnLeftClickPerformed(InputAction.CallbackContext context)
         {
             OnLeftClickActionPressed?.Invoke();
@@ -102,7 +130,7 @@ namespace Events
         
         private void Update()
         {
-            if (_actionMapPlayer)
+            if (ActionMap == ActionMap.Player)
                 UpdatePlayerChecks();
             else
                 UpdateUIChecks();
@@ -110,7 +138,7 @@ namespace Events
         private void UpdateUIChecks()
         {
         }
-
+        
         #region Player ActionMap Continuos Check Methods
 
         private void UpdatePlayerChecks()
@@ -127,9 +155,6 @@ namespace Events
             Vector2 lookPosition = pointerPositionAction.action.ReadValue<Vector2>();
             OnPointerPosition?.Invoke(lookPosition);
         }
-
-
-         
         #endregion
 
         public void SwitchToUIMap()
@@ -140,9 +165,13 @@ namespace Events
             // Enable the UI action map
             inputActions.FindActionMap("UI").Enable();
             
-            _actionMapPlayer = false;
+            // inputActionRef.
+            ActionMap = ActionMap.UI;
+            OnSwitchedActionMap?.Invoke(ActionMap);
         }
 
+        public UnityAction<ActionMap> OnSwitchedActionMap { get; set; }
+        
         public void SwitchToPlayerMap()
         {
             // Disable the UI action map
@@ -151,7 +180,9 @@ namespace Events
             // Enable the Player action map
             inputActions.FindActionMap("Player").Enable();
             
-            _actionMapPlayer = true;
+            ActionMap = ActionMap.Player;
+            OnSwitchedActionMap?.Invoke(ActionMap);
         }
     }
+
 }

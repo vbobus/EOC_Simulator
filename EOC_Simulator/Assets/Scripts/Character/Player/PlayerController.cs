@@ -27,10 +27,6 @@ namespace Character.Player
         [Required] [SerializeField] private FirstPersonCamera firstPersonCamera; // Handles camera rotation
         [SerializeField] private LayerMask collisionLayerMask; // Layer mask for collision detection
 
-        // Rotation speed for WASD-only movement type
-        [Title("MovementType", "WASD Only")]
-        [SerializeField] private float rotationSpeedForWasdOnly = 0.8f;
-
         // Character controller for movement and collision
         private CharacterController _characterController;
 

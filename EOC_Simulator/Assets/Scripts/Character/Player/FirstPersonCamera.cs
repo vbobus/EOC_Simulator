@@ -1,4 +1,5 @@
 using System;
+using Events;
 using Unity.Cinemachine;
 using UnityEngine;
 
@@ -19,21 +20,38 @@ namespace Character.Player
 
         private float _minLockRotation = -50;
         private float _maxLockRotation = 30;
+        
         private void Awake()
         {
             playerCamera = GetComponent<CinemachineCamera>();
+            InputManager.Instance.OnSwitchedActionMap += SwitchedActionMap;
         }
 
         void Start()
         {
-            Cursor.lockState = CursorLockMode.Locked;
-            // Cursor.visible = false;
+            ResetCamera();
+        }
+        
+        private void SwitchedActionMap(ActionMap currentActionMap)
+        {
+            if (currentActionMap == ActionMap.Player)
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+            }
+            else
+            {
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+            }
             
             ResetCamera();
         }
-
         public void RotateCamera(Vector2 delta, bool rotatePlayerTransform = true)
         {
+            // Don't rotate the camera, since it will make the frame data
+            if (InputManager.Instance.ActionMap != ActionMap.Player) return;
+            
             // Scale the delta by sensitivity and frame time
             Vector2 rawFrameVelocity = Vector2.Scale(delta, Vector2.one * (sensitivity * Time.deltaTime));
 
@@ -56,13 +74,7 @@ namespace Character.Player
     
         public void ResetCamera()
         {
-            // Initialize camera velocity to zero
-            _cameraVelocity = Vector2.zero;
             _frameVelocity = Vector2.zero;
-
-            // Ensure the camera starts with no rotation
-            transform.localRotation = Quaternion.identity;
-            playerTransform.localRotation = Quaternion.identity;
         }
     }
 }

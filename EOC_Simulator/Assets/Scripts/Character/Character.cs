@@ -92,7 +92,7 @@ namespace Character
             
             State = Velocity.magnitude < 0.1f ? CharacterStates.IDLE : CharacterStates.WALKING;
             
-            if (Velocity != Vector3.zero) Debug.Log($"Velocity: {Velocity}");
+            // if (Velocity != Vector3.zero) Debug.Log($"Velocity: {Velocity}");
         }
     }
 }

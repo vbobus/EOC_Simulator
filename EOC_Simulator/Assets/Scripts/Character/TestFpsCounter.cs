@@ -11,7 +11,6 @@ namespace Character
         private float[] fpsBuffer; // Buffer to store FPS values for the last 5 seconds
         private int bufferIndex = 0; // Current index in the buffer
         private float timer = 0f; // Timer to track when to update the buffer
-        private int triangleCount = 0; // Number of triangles drawn in the current frame
 
         void Start()
         {
@@ -47,26 +46,8 @@ namespace Character
                 averageFPS += fpsBuffer[i];
             }
             averageFPS /= fpsBuffer.Length;
-
-            // Get the number of triangles drawn in the current frame
-            // triangleCount = GetTriangleCount();
-
             // Update the TMP text
             fpsText.text = $"FPS: {currentFPS:F1}\nAvg FPS (5s): {averageFPS:F1}";
-        }
-
-        // Helper function to get the number of triangles drawn in the current frame
-        private int GetTriangleCount()
-        {
-            int triangles = 0;
-            foreach (var filter in FindObjectsOfType<MeshFilter>())
-            {
-                if (filter.sharedMesh != null)
-                {
-                    triangles += filter.sharedMesh.triangles.Length / 3;
-                }
-            }
-            return triangles;
         }
     }
 }

@@ -3,13 +3,6 @@
 
 # From https://github.com/github/gitignore/blob/main/Unity.gitignore
 
-# Jetbrain Rider Cache
-.idea/
-Assets/Plugins/Editor/JetBrains*
-
-# Visual Studio Code
-.vscode/
-
 # === Unity generated folders & files ===
 /EOC_Simulator/[Ll]ibrary/
 /EOC_Simulator/[Tt]emp/
@@ -18,7 +11,6 @@ Assets/Plugins/Editor/JetBrains*
 /EOC_Simulator/[Bb]uilds/
 /EOC_Simulator/[Ll]ogs/
 /EOC_Simulator/[Uu]ser[Ss]ettings/
-/EOC_Simulator/LLMUnity/Samples/
 
 # MemoryCaptures can get excessive in size.
 /EOC_Simulator/[Mm]emoryCaptures/
@@ -83,4 +75,4 @@ crashlytics-build.properties
 
 # Unity package cache
 /EOC_Simulator/[Ll]ibrary/PackageCache/
-EOC_Simulator/.idea
+EOC_Simulator/Assets/Settings/PC_RPAsset.asset

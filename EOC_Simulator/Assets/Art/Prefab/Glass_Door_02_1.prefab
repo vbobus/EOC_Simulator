@@ -56,41 +56,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Glass_Door_02_1
       objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: 5a42a62dc9737d445a8ef91436fa24b7, type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5a42a62dc9737d445a8ef91436fa24b7, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 8918723402256084209}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5a42a62dc9737d445a8ef91436fa24b7, type: 3}
---- !u!1 &9054204484675563494 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 5a42a62dc9737d445a8ef91436fa24b7, type: 3}
-  m_PrefabInstance: {fileID: 8171665869334172343}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &8918723402256084209
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9054204484675563494}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1.7927018, y: 0.19311325, z: 2.260001}
-  m_Center: {x: -0.8963506, y: -0.00000041723288, z: 1.13}

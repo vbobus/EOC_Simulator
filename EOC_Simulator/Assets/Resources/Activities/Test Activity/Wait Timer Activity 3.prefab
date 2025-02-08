@@ -44,5 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a3a8b1e57674079acc20dcf60407c4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stepHelp: Wait for 3 seconds
   timeToFinish: 3
   time: 0

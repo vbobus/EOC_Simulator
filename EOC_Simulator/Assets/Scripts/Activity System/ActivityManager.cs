@@ -1,13 +1,15 @@
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using Events;
 using UnityEngine;
+using Debug = UnityEngine.Debug;
 
 namespace Activity_System
 {
     public class ActivityManager: MonoBehaviour
     {
-        private Dictionary<string, Activity> _activityMap;
+        public Dictionary<string, Activity> ActivityMap {get; private set;}
         
         public static ActivityManager Instance;
         
@@ -19,7 +21,7 @@ namespace Activity_System
                 Destroy(this.gameObject);
                 return;
             }
-            _activityMap = CreateActivityMap();
+            ActivityMap = CreateActivityMap();
         }
 
         private void OnEnable()
@@ -40,18 +42,19 @@ namespace Activity_System
 
         private void Start()
         {
-            if (_activityMap == null) throw new UnityException($"No activity map made in {this.name}");
+            if (ActivityMap == null) throw new UnityException($"No activity map made in {this.name}");
             
-            foreach (var quest in _activityMap.Values)
+            // Tests how long it takes to spawn each step + destroy them (To get the descriptions on each object) 
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+            foreach (var activity in ActivityMap.Values)
             { 
-                // Initialize any loaded quest steps.
-                // Done here so they can get to subscribe, otherwise it will be called first
-                if (quest.State == ActivityState.IN_PROGRESS)
-                {
-                    quest.InstantiateCurrentActivityStep(this.transform);
-                }
-                GameEventsManager.Instance.ActivityEvents.QuestStateChange(quest);
+                activity.SetStepDescriptionList(this.transform);
+                
+                GameEventsManager.Instance.ActivityEvents.QuestStateChange(activity);
             }
+            stopwatch.Stop();
+            Debug.Log($"Elapsed time: {stopwatch.ElapsedMilliseconds} ms");
         }
         
         private void ChangeActivityState(ActivityInfoSo activityInfoSo, ActivityState state)
@@ -77,7 +80,7 @@ namespace Activity_System
 
         private void Update()
         {
-            foreach (var activity in _activityMap.Values)
+            foreach (var activity in ActivityMap.Values)
             {
                 if (activity.State == ActivityState.REQUIREMENTS_NOT_MET && CheckRequirementsMet(activity))
                     ChangeActivityState(activity.Info, ActivityState.CAN_START);
@@ -159,7 +162,7 @@ namespace Activity_System
 
         public Activity GetActivityById(string id)
         {
-            Activity activity = _activityMap[id];
+            Activity activity = ActivityMap[id];
             if (activity == null)
                 Debug.LogError($"Quest {id} not found in quest map");
             return activity;

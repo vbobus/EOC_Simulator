@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Activity_System
@@ -54,19 +55,35 @@ namespace Activity_System
             {
                 var questStep = Object.Instantiate<GameObject>(questStepPrefab, parentTransform)
                     .GetComponent<ActivityStep>();
-                
+
                 questStep.InitializeActivityStep(Info, _currentActivityStepIndex, _questStepStates[_currentActivityStepIndex].State);
             }
         }
 
+
+        public void SetStepDescriptionList(Transform parentTransform)
+        {
+            foreach (var prefab in Info.activityStepPrefabs)
+            {
+                var activityStep = Object.Instantiate(prefab, parentTransform).GetComponent<ActivityStep>();
+                ActivityStepDescriptions.Add(activityStep.GetStepDescription());
+                Object.Destroy(activityStep.gameObject);
+            }
+            
+            // Debug.Log($"Descriptions count = {ActivityStepDescriptions.Count}");
+        }
+        
+        public List<string> ActivityStepDescriptions = new List<string>(); 
+        
+        
         private GameObject GetCurrentQuestStepPrefab()
         {
-            GameObject questStepPrefab = null;
+            GameObject activityStepPrefab = null;
             if (CurrentStepExits())
-                questStepPrefab = Info.activityStepPrefabs[_currentActivityStepIndex];
+                activityStepPrefab = Info.activityStepPrefabs[_currentActivityStepIndex];
             else 
                 Debug.LogWarning($"Tried to get quest step prefab, but step index is out of range. QuestID={Info.ID}, stepIndex={_currentActivityStepIndex}");
-            return questStepPrefab;
+            return activityStepPrefab;
         }
 
         public void StoreActivityStepState(ActivityStepState activityStep, int stepIndex)

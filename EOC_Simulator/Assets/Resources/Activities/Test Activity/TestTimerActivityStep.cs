@@ -28,6 +28,10 @@ namespace Resources.Activities.Test_Activity
             if (time >= timeToFinish)
                 FinishActivityStep();
         }
-        
+
+        public override string GetStepDescription()
+        {
+            return $"{time:F2}/{timeToFinish} Wait for timer to finish";
+        }
     }
 }

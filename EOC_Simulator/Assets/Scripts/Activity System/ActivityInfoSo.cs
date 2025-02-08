@@ -6,7 +6,7 @@ namespace Activity_System
     [CreateAssetMenu(fileName = "ActivityInfoSO", menuName = "ScriptableObjects/ActivityInfoSO", order = 1)]
     public class ActivityInfoSo : ScriptableObject
     {
-        [field: SerializeField] public string ID { get;  set; }
+        [field: SerializeField] public string ID { get; private set; }
 
         [Header("General")] 
         public string displayName;

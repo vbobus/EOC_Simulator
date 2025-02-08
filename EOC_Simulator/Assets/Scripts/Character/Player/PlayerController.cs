@@ -27,6 +27,12 @@ namespace Character.Player
         [Required] [SerializeField] private FirstPersonCamera firstPersonCamera; // Handles camera rotation
         [SerializeField] private LayerMask collisionLayerMask; // Layer mask for collision detection
 
+        // Gravity settings
+        [Header("Gravity Settings")]
+        [SerializeField] private float gravity = -9.81f; // Default gravity value
+        [SerializeField] private float groundCheckDistance = 0.2f; // Distance to check for ground
+        [SerializeField] private LayerMask groundLayer; // Layer mask for ground detection
+
         // Character controller for movement and collision
         private CharacterController _characterController;
 
@@ -37,10 +43,13 @@ namespace Character.Player
 
         // Pathfinding-related variables
         [Title("MovementType", "Pathfinding")]
-        
         [InfoBox("Need to have a target prefab, to be able to use the pathfinding movement type!")]
         [SerializeField] private Transform aiTargetMoveTowards; // Target position for AI movement
         [SerializeField] private GameObject aiEndDestinationPrefab;
+
+        // Gravity-related variables
+        private Vector3 _velocity; // Tracks vertical velocity (for gravity)
+        private bool _isGrounded; // Tracks if the player is on the ground
 
         #endregion
 
@@ -49,10 +58,10 @@ namespace Character.Player
         protected override void Awake()
         {
             base.Awake();
-            
+
             // Get required components
             _characterController = GetComponent<CharacterController>();
-            
+
             // Subscribe to input events
             InputManager.Instance.On4DirectionMoveActionPressed += HandleDirectionMovement;
             InputManager.Instance.OnPointerDelta += HandlePointerDelta;
@@ -78,7 +87,6 @@ namespace Character.Player
             bool isMouseOnly = newMovementType == InputMovementTypes.MOUSE_ONLY;
             // Show/hide the AI target object if the field has been set
 
-
             if (aiTargetMoveTowards)
             {
                 aiEndDestinationPrefab.SetActive(isMouseOnly);
@@ -87,10 +95,10 @@ namespace Character.Player
             else
             {
                 // We want to change the movement type again, since we can't use the Mouse Only type when there is no target
-                if (newMovementType == InputMovementTypes.MOUSE_ONLY) 
+                if (newMovementType == InputMovementTypes.MOUSE_ONLY)
                     newMovementType = InputMovementTypes.WASD_MOUSE_TO_ROTATE;
             }
-            
+
             movementType = newMovementType;
             firstPersonCamera.ResetCamera(); // Reset camera to default state
 
@@ -123,6 +131,8 @@ namespace Character.Player
 
         private void Update()
         {
+            CheckGrounded(); // Check if the player is on the ground
+
             // Handle input based on the current movement type
             switch (movementType)
             {
@@ -134,6 +144,8 @@ namespace Character.Player
                     CheckAstarMovement(); // Update pathfinding movement
                     break;
             }
+
+            ApplyGravity(); // Apply gravity to the player
         }
 
         /// Handles movement for WASD + mouse rotation mode
@@ -145,12 +157,10 @@ namespace Character.Player
             Vector3 movement = new Vector3(directionMovement.x, 0, directionMovement.y);
             movement = transform.TransformDirection(movement);
             movement.Normalize();
-            
-            
-            transform.position = new Vector3(transform.position.x, 0f, transform.position.z);
-            
-            _characterController.Move(movement * (movementSpeed * Time.deltaTime));
-            
+
+            // Apply movement and gravity
+            _characterController.Move(movement * (movementSpeed * Time.deltaTime) + _velocity * Time.deltaTime);
+
             Velocity = _characterController.velocity;
 
             // Rotate the camera based on mouse input
@@ -208,5 +218,35 @@ namespace Character.Player
             SetDestination(aiTargetMoveTowards.position);
         }
 
+        /// Checks if the player is grounded
+        private void CheckGrounded()
+        {
+            _isGrounded = Physics.CheckSphere(transform.position, groundCheckDistance, groundLayer);
+        }
+
+        /// Applies gravity to the player
+        private void ApplyGravity()
+        {
+            if (_isGrounded && _velocity.y < 0)
+            {
+                // Reset vertical velocity when grounded
+                _velocity.y = -2f; // Small force to keep the player grounded
+            }
+            else
+            {
+                // Apply gravity when not grounded
+                _velocity.y += gravity * Time.deltaTime;
+            }
+
+            // Move the player vertically
+            _characterController.Move(_velocity * Time.deltaTime);
+        }
+
+        /// Draws a gizmo to visualize the ground check
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position, groundCheckDistance);
+        }
     }
 }

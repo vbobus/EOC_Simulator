@@ -1,5 +1,6 @@
 using Events;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Activity_System
 {
@@ -9,12 +10,6 @@ namespace Activity_System
         private ActivityInfoSo _activityInfoSo;
         private int _stepIndex;
 
-        /*
-         * Go over to point A
-         * Talk with player B
-         */
-        public string stepHelp;
-        
         public void InitializeActivityStep(ActivityInfoSo id, int stepIndex, string activityStepState)
         {
             _activityInfoSo = id;
@@ -29,9 +24,16 @@ namespace Activity_System
             Destroy(gameObject);
         }
 
+        protected void UpdateActivityStepInformation()
+        {
+            GameEventsManager.Instance.ActivityEvents.ActivityStepUpdateInfo(_activityInfoSo, _stepIndex);
+        }
+        
         protected void ChangeState(string newState)
         {
             GameEventsManager.Instance.ActivityEvents.ActivityStateStepChange(_activityInfoSo, _stepIndex, new ActivityStepState(newState));
         }
+
+        public abstract string GetStepDescription();
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Activity_System;
+using Events;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -13,29 +14,56 @@ namespace UI
         
         private readonly Dictionary<string, ActivityLogButton> _activityLogMap = new Dictionary<string, ActivityLogButton>();
 
-        private void Start()
+
+        private void OnEnable()
         {
-            for (int i = 0; i < 30; i++)
+            GameEventsManager.Instance.ActivityEvents.OnActivityStateChange += StateChange;
+        }
+        private void OnDisable()
+        {
+            GameEventsManager.Instance.ActivityEvents.OnActivityStateChange -= StateChange;
+        }
+        private void StateChange(Activity activity)
+        {
+            Debug.Log($"Changed activity quest. {activity.Info.displayName}: New State {activity.State}");
+            switch (activity.State)
             {
-                ActivityInfoSo infoSo = ScriptableObject.CreateInstance<ActivityInfoSo>();
-                infoSo.ID = $"test{i}";
-                infoSo.displayName = $"Activity {i}";
-                infoSo.activityStepPrefabs = Array.Empty<GameObject>();
-                Activity activity = new Activity(infoSo);
-                var button = CreateButtonIfNotExits(activity, () => { Debug.Log($"Selected {infoSo.ID}"); });
-                
-                if (i == 0)
-                    button.Button.Select();
+                case ActivityState.CAN_START:
+                    CreateButtonIfNotExits(activity);
+                    SetActivityLogInfo(activity);
+                    break;
+                case ActivityState.IN_PROGRESS:
+                case ActivityState.FINISHED:
+                    SetActivityLogInfo(activity);
+                    break;
             }
         }
 
-        public ActivityLogButton CreateButtonIfNotExits(Activity activity, UnityAction selectAction)
+        private void SetActivityLogInfo(Activity activity)
+        {
+            _activityLogMap.TryGetValue(activity.Info.ID, out ActivityLogButton activityLogButton);
+            if (activityLogButton == null) throw new UnityException($"Activity Log Button with ID {activity.Info.ID} not found in the activity map for the scrolling list");
+
+            if (activity.State == ActivityState.CAN_START)
+            {
+                activityLogButton.StartAndUpdateActivityBtn();
+            }
+            else if (activity.State == ActivityState.FINISHED)
+            {
+                activityLogButton.FinishActivityBtn();
+            }else if (activity.State == ActivityState.IN_PROGRESS)
+            {
+                
+            }
+        }
+        
+        public ActivityLogButton CreateButtonIfNotExits(Activity activity)
         {
             ActivityLogButton logButton = null;
             
             if (!_activityLogMap.TryGetValue(activity.Info.ID, out ActivityLogButton value))
             { 
-                logButton = InstantiateLogButton(activity, selectAction);   
+                logButton = InstantiateLogButton(activity);   
             }
             else
             {
@@ -45,7 +73,7 @@ namespace UI
             return logButton;
         }
         
-        private ActivityLogButton InstantiateLogButton(Activity activity, UnityAction selectAction)
+        private ActivityLogButton InstantiateLogButton(Activity activity)
         {
             ActivityLogButton logButton = Instantiate(activityLogButtonPrefab, contentParent.transform).GetComponentInChildren<ActivityLogButton>();
             logButton.gameObject.name = activity.Info.name + "_Button";
@@ -54,5 +82,6 @@ namespace UI
             _activityLogMap[activity.Info.ID] = logButton;
             return logButton;
         }
+
     }
 }

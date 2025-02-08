@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 1037432517666996779}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 1.509, z: -0.009}
+  m_LocalPosition: {x: 0, y: 1.578, z: 0.154}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -145,13 +145,14 @@ MonoBehaviour:
   movementSpeed: 4.5
   testAnimLayerLockName: 
   lookAwayMovementSpeedPenalty: 50
+  movementType: 0
   animator: {fileID: 2481256370077890153}
   firstPersonCamera: {fileID: 1733320628288883663}
   collisionLayerMask:
     serializedVersion: 2
     m_Bits: 384
-  rotationSpeedForWasdOnly: 140
   aiTargetMoveTowards: {fileID: 0}
+  aiEndDestinationPrefab: {fileID: 0}
 --- !u!143 &766588095192492909
 CharacterController:
   m_ObjectHideFlags: 0

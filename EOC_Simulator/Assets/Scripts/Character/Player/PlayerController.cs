@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using Events;
 using NUnit.Framework;
 using Pathfinding;
-using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -23,8 +22,8 @@ namespace Character.Player
         [HideInInspector] public InputMovementTypes movementType;
 
         // Required references for the player controller
-        [Required] [SerializeField] private Animator animator; // Handles player animations
-        [Required] [SerializeField] private FirstPersonCamera firstPersonCamera; // Handles camera rotation
+        [SerializeField] private Animator animator; // Handles player animations
+        [SerializeField] private FirstPersonCamera firstPersonCamera; // Handles camera rotation
         [SerializeField] private LayerMask collisionLayerMask; // Layer mask for collision detection
 
         // Gravity settings
@@ -42,8 +41,7 @@ namespace Character.Player
         private float _lastDirectionInputTime; // Tracks the last time movement input was received
 
         // Pathfinding-related variables
-        [Title("MovementType", "Pathfinding")]
-        [InfoBox("Need to have a target prefab, to be able to use the pathfinding movement type!")]
+        // "Need to have a target prefab, to be able to use the pathfinding movement type!"
         [SerializeField] private Transform aiTargetMoveTowards; // Target position for AI movement
         [SerializeField] private GameObject aiEndDestinationPrefab;
 

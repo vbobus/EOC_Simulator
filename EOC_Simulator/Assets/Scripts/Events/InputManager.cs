@@ -1,6 +1,5 @@
 using System;
 using Character.Player;
-using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -21,19 +20,19 @@ namespace Events
         
         public static InputManager Instance;
         
-        [Title("References")]
+        [Header("References")]
         [SerializeField] private InputActionAsset inputActions;
 
-        [Title("Actions","Mouse Actions")]
-        [SerializeField] [Required] private InputActionReference leftClickAction; // 
-        [SerializeField] [Required] private InputActionReference rightClickAction; // 
-        [SerializeField] [Required] private InputActionReference pointerDeltaAction; // The amount that the mouse has moved this frame
-        [SerializeField] [Required] private InputActionReference pointerPositionAction; // The position on the screen
+        [Header("Actions: Mouse Actions")]
+        [SerializeField] private InputActionReference leftClickAction; // 
+        [SerializeField] private InputActionReference rightClickAction; // 
+        [SerializeField] private InputActionReference pointerDeltaAction; // The amount that the mouse has moved this frame
+        [SerializeField] private InputActionReference pointerPositionAction; // The position on the screen
 
-        [Title("Actions","Misc Player Actions")]
-        [SerializeField] [Required] private InputActionReference move4DirectionAction;
-        [SerializeField] [Required] private InputActionReference interactionAction; // Properly just "E"?
-        [SerializeField] [Required] private InputActionReference confirmAction; //
+        [Header("Actions: Misc Player Actions")]
+        [SerializeField] private InputActionReference move4DirectionAction;
+        [SerializeField] private InputActionReference interactionAction; // Properly just "E"?
+        [SerializeField] private InputActionReference confirmAction; //
 
         [SerializeField] private InputActionReference commonExitAction;
         

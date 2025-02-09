@@ -106,11 +106,7 @@ Material:
     - _Parallax: 0.005
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-<<<<<<<< HEAD:EOC_Simulator/Assets/Art/Material/Board/Materials/PlayerTest_1.mat
     - _Smoothness: 0.5
-========
-    - _Smoothness: 0.422
->>>>>>>> 18e2c9c0 (NPCs for Week 5 meeting):EOC_Simulator/Assets/Art/Material/Board/Mat And Textures/Ch03_Body.mat
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
@@ -121,11 +117,7 @@ Material:
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-<<<<<<<< HEAD:EOC_Simulator/Assets/Art/Material/Board/Materials/PlayerTest_1.mat
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-========
-    - _EmissionColor: {r: 20.590864, g: 6.5074897, b: 20.111204, a: 1}
->>>>>>>> 18e2c9c0 (NPCs for Week 5 meeting):EOC_Simulator/Assets/Art/Material/Board/Mat And Textures/Ch03_Body.mat
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

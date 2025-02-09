@@ -34,8 +34,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.0117, y: 0.0128}
-  m_SizeDelta: {x: 0.9896, y: 1.0138}
+  m_AnchoredPosition: {x: -0.0117, y: 0.2381}
+  m_SizeDelta: {x: 0.9896, y: 0.5179}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &1771214186714626220
 MeshRenderer:
@@ -210,8 +210,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.0117, y: 0.0128}
-  m_SizeDelta: {x: 0.9896, y: 1.0138}
+  m_AnchoredPosition: {x: -0.0117, y: 0.2381}
+  m_SizeDelta: {x: 0.9896, y: 0.5179}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &6388675394614436992
 MeshRenderer:
@@ -380,8 +380,8 @@ Transform:
   m_GameObject: {fileID: 3280707221360644671}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 0.01547601}
+  m_LocalPosition: {x: 0, y: 0.2412, z: 0}
+  m_LocalScale: {x: 1, y: 0.5176, z: 0.01547601}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6760352112269337295}
@@ -446,7 +446,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3280707221360644671}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
@@ -466,6 +466,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6760352112269337295}
+  - component: {fileID: 3010638825584298643}
   m_Layer: 0
   m_Name: Sign
   m_TagString: Untagged
@@ -491,3 +492,19 @@ Transform:
   - {fileID: 1380254963127896137}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3010638825584298643
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4100637779631099529}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 126aa5dd6ee918b458edd36b4914beb2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  signText: Sample
+  signTmpTexts:
+  - {fileID: 8407797646890309019}
+  - {fileID: 1727286610394704819}

@@ -9,6 +9,9 @@ namespace Activity_System
 {
     public class ActivityManager: MonoBehaviour
     {
+        // What activities that can start. An overview of the activities. No need for it to be in correct 
+        // Could later on if the game is linar, make it just go though each activity, making it clear what activity is after which! 
+        public ActivityInfoSo[] allActivities;
         public Dictionary<string, Activity> ActivityMap {get; private set;}
         
         public static ActivityManager Instance;
@@ -147,8 +150,6 @@ namespace Activity_System
         private Dictionary<string, Activity> CreateActivityMap()
         {
             // Get all info for quests
-            ActivityInfoSo[] allActivities = UnityEngine.Resources.LoadAll<ActivityInfoSo>($"Activities");
-            
             var idToQuestMap = new Dictionary<string, Activity>();
             foreach (var activityInfoSo in allActivities)
             {

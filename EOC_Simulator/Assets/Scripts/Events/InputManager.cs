@@ -182,6 +182,8 @@ namespace Events
             ActionMap = ActionMap.Player;
             OnSwitchedActionMap?.Invoke(ActionMap);
         }
+        
+        public bool ActionMapIsUI() => ActionMap == ActionMap.UI;
     }
 
 }

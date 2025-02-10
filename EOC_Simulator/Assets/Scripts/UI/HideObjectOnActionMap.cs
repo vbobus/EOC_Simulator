@@ -10,7 +10,7 @@ namespace UI
         [SerializeField] private ActionMap showOnSelectedMap;
      
         /*
-         * There were errors with the exicution of some scrolling list, so we want it to finish
+         * There were errors with the execution of some scrolling list, so we want it to finish
          * the Awake/Start before we hide it. So we just hide it on the first update
          */
         private bool _reachedFirstUpdateLoop;  // Make sure the tmppro loads in correctly
@@ -19,6 +19,12 @@ namespace UI
         private void Awake()
         {
             InputManager.Instance.OnSwitchedActionMap += OnSwitchedActionMap;
+            InputManager.Instance.OnCommonExitActionPressed += ShowGameObject;
+        }
+
+        private void ShowGameObject()
+        {
+            gameObject.SetActive(!gameObject.activeSelf);
         }
 
         private void Update()

@@ -42,13 +42,20 @@ namespace Character.Player
 
         // Pathfinding-related variables
         // "Need to have a target prefab, to be able to use the pathfinding movement type!"
+        [Header("Pathfinding")]
         [SerializeField] private Transform aiTargetMoveTowards; // Target position for AI movement
         [SerializeField] private GameObject aiEndDestinationPrefab;
+        public bool CanAstarMove { get; set; } = true;
 
         // Gravity-related variables
         private Vector3 _velocity; // Tracks vertical velocity (for gravity)
         private bool _isGrounded; // Tracks if the player is on the ground
-
+        
+        public bool CanMoveWithAstar()
+        {
+            return !InputManager.Instance.ActionMapIsUI() && CanAstarMove;
+        }
+        
         #endregion
 
         #region SetUp
@@ -67,7 +74,7 @@ namespace Character.Player
             InputManager.Instance.OnInteractActionPressed += TestChangeMovement;
 
             // Set initial movement type
-            ChangeMovementType(InputMovementTypes.MOUSE_ONLY);
+            ChangeMovementType(InputMovementTypes.WASD_MOUSE_TO_ROTATE);
         }
 
         /// Test method to cycle through movement types
@@ -210,12 +217,14 @@ namespace Character.Player
         /// Handles left-click input for setting a new pathfinding destination
         private void HandleLeftClickPathfinding()
         {
-            if (movementType != InputMovementTypes.MOUSE_ONLY) return;
+            if (movementType != InputMovementTypes.MOUSE_ONLY || !CanMoveWithAstar()) return;
+            
             // Set the AI destination to the target position
             aiEndDestinationPrefab.transform.position = aiTargetMoveTowards.position;
             SetDestination(aiTargetMoveTowards.position);
         }
 
+        
         /// Checks if the player is grounded
         private void CheckGrounded()
         {

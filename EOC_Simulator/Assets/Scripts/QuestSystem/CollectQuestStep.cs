@@ -7,6 +7,7 @@ namespace QuestSystem
     {
         private void Start()
         {
+            if (!Interactable) throw new UnityException($"Interactable component not set {gameObject.name}");
             Interactable.OnInteracted += InteractedWithObject;
         }
 

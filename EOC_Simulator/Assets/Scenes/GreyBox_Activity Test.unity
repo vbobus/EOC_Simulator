@@ -504,7 +504,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &33278222
 RectTransform:
   m_ObjectHideFlags: 0
@@ -13458,7 +13458,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3414435984416205730, guid: 56d579f10018d8342864fc5703683440, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -9.489
+      value: -9.324
       objectReference: {fileID: 0}
     - target: {fileID: 3414435984416205730, guid: 56d579f10018d8342864fc5703683440, type: 3}
       propertyPath: m_LocalRotation.w
@@ -23026,7 +23026,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3010638825584298643, guid: f2044fc4a4220e945a4b6eacde5163b0, type: 3}
       propertyPath: signText
-      value: EOC
+      value: Situation Room
       objectReference: {fileID: 0}
     - target: {fileID: 4100637779631099529, guid: f2044fc4a4220e945a4b6eacde5163b0, type: 3}
       propertyPath: m_Name
@@ -27067,11 +27067,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 3.0000007, y: 0.0800005, z: 1.7400004}
   m_Center: {x: -1.4999951, y: 0.04000138, z: 3.1300006}
---- !u!1 &2013142591 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1441066325872006592, guid: 7c000b36e80a1fd48a799a8174b5ec74, type: 3}
-  m_PrefabInstance: {fileID: 2047959980}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2016758665
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -27694,30 +27689,13 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1441066325872006592, guid: 7c000b36e80a1fd48a799a8174b5ec74, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2047959985}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7c000b36e80a1fd48a799a8174b5ec74, type: 3}
 --- !u!4 &2047959981 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1780156177721626490, guid: 7c000b36e80a1fd48a799a8174b5ec74, type: 3}
   m_PrefabInstance: {fileID: 2047959980}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2047959985
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2013142591}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 576360b4df0c4da7a55d0dc254c32d73, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  questDescription: Collect__
-  status: 0
 --- !u!1001 &2048146454
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -29060,7 +29038,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 3209877827828943628, guid: 089130991470ba44994a1016406c481e, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 8505322212700488435, guid: 089130991470ba44994a1016406c481e, type: 3}
       insertIndex: -1

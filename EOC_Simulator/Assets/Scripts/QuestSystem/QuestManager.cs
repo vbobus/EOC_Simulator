@@ -10,7 +10,7 @@ namespace QuestSystem
         private int _currentActiveQuestIndex = 0; 
         public UnityAction<QuestStep> OnQuestStepCompleted;
         
-        private void Awake()
+        private void Start()
         {
             // Start the first quest
             StartQuest();

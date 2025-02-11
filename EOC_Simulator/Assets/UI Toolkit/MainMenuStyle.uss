@@ -1,0 +1,15 @@
+.header {
+}
+
+.button {
+    transition-duration: 0.35s;
+}
+
+.button:hover {
+    scale: 1.1 1.1;
+    -unity-background-image-tint-color: rgb(15, 214, 53);
+    color: rgb(58, 214, 39);
+    -unity-background-scale-mode: stretch-to-fill;
+    background-color: rgba(255, 255, 255, 0);
+    background-image: none;
+}

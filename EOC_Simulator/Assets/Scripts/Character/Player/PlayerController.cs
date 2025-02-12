@@ -53,8 +53,12 @@ namespace Character.Player
         
         public bool CanMoveWithAstar()
         {
-            return !InputManager.Instance.ActionMapIsUI() && CanAstarMove;
+            return !InputManager.Instance.ActionMapIsUI() && CanAstarMove && CanMove;
         }
+
+        
+        // On canmove false, stop the velocity.
+        public bool CanMove { get; set; } = true;
         
         #endregion
 
@@ -137,7 +141,10 @@ namespace Character.Player
         private void Update()
         {
             CheckGrounded(); // Check if the player is on the ground
+            ApplyGravity(); // Apply gravity to the player
 
+            
+            
             // Handle input based on the current movement type
             switch (movementType)
             {
@@ -150,7 +157,6 @@ namespace Character.Player
                     break;
             }
 
-            ApplyGravity(); // Apply gravity to the player
         }
 
         /// Handles movement for WASD + mouse rotation mode

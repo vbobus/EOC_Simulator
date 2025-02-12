@@ -9,13 +9,14 @@ namespace Interactable
     [RequireComponent(typeof(Collider), typeof(Outline))]
     public class InteractableObject: MonoBehaviour
     {
+        [SerializeField] private bool hideOnQuestFinish = false;
+        
+        public UnityAction OnInteracted {get; set;}
+        
         private Outline _outline;
 
         private readonly Color _baseColor = new(5.3f, 5.3f, 0f, 1f); 
         private readonly Color _hoverColor = new(5.3f, 1.3f, 0f, 1f);
-        
-        public UnityAction OnInteracted {get; set;}
-        [SerializeField] private bool hideOnQuestFinish = false;
         
         private void Awake()
         {

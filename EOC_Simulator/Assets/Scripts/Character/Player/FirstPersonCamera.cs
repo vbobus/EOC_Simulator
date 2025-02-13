@@ -34,6 +34,7 @@ namespace Character.Player
         
         private void SwitchedActionMap(ActionMap currentActionMap)
         {
+            Debug.Log($"Switched to {currentActionMap}");
             if (currentActionMap == ActionMap.Player)
             {
                 Cursor.lockState = CursorLockMode.Locked;

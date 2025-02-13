@@ -6,6 +6,8 @@ using NUnit.Framework;
 using Pathfinding;
 using UnityEngine;
 using UnityEngine.Serialization;
+using PixelCrushers.DialogueSystem;
+
 
 namespace Character.Player
 {
@@ -76,9 +78,28 @@ namespace Character.Player
             InputManager.Instance.OnPointerDelta += HandlePointerDelta;
             InputManager.Instance.OnLeftClickActionPressed += HandleLeftClickPathfinding;
             InputManager.Instance.OnInteractActionPressed += TestChangeMovement;
-
+            InputManager.Instance.OnSwitchedActionMap += SwitchedActionMap;
             // Set initial movement type
             ChangeMovementType(InputMovementTypes.WASD_MOUSE_TO_ROTATE);
+            
+            // DialogueLua.SetVariable("Player.Role.Position", "Planning Chief");
+            
+        }
+
+        private void SwitchedActionMap(ActionMap newActionMap)
+        {
+            if (newActionMap == ActionMap.Player)
+            {
+                CanMove = true;
+            }
+            else
+            {
+                CanMove = false;
+                // Set the input to be reset.
+                _directionMovement = Vector2.zero;
+                _delta = Vector2.zero;
+            }
+            AstarAI.canMove = CanMove;
         }
 
         /// Test method to cycle through movement types
@@ -142,8 +163,6 @@ namespace Character.Player
         {
             CheckGrounded(); // Check if the player is on the ground
             ApplyGravity(); // Apply gravity to the player
-
-            
             
             // Handle input based on the current movement type
             switch (movementType)
@@ -156,7 +175,6 @@ namespace Character.Player
                     CheckAstarMovement(); // Update pathfinding movement
                     break;
             }
-
         }
 
         /// Handles movement for WASD + mouse rotation mode
@@ -164,6 +182,8 @@ namespace Character.Player
         {
             UpdateWalkIdleAnimations(directionMovement); // Update animations based on input
 
+            if (!CanMove) return;
+            
             // Calculate movement direction and move the player
             Vector3 movement = new Vector3(directionMovement.x, 0, directionMovement.y);
             movement = transform.TransformDirection(movement);

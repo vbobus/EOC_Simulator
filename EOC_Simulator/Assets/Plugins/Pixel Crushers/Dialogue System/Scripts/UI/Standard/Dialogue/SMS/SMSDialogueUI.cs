@@ -80,7 +80,7 @@ namespace PixelCrushers.DialogueSystem
         [Tooltip("Disable Audio() and AudioWait() sequencer commands when resuming last entry.")]
         public bool disableAudioOnLastSequence = true;
 
-        [Tooltip("When entering these scene(s), don't resume the conversation. Typically used for the start menu (scene 0).")]
+        [Tooltip("When entering these scene(s), don't resume the conversation. Typically used for the start  (scene 0).")]
         public int[] dontLoadConversationInScenes = new int[] { 0 };
 
         public static string conversationVariableOverride;

@@ -7,6 +7,7 @@ public class PlayerStress : MonoBehaviour
     public float stressDecreaseRate = 10f; // 每秒减少压力值
     private bool isInStressZone = false;
     private bool isInRelaxZone = false;
+    public TaskManager taskManager;
 
     void Update()
     {
@@ -30,6 +31,8 @@ public class PlayerStress : MonoBehaviour
         if (other.CompareTag("StressZone"))
         {
             isInStressZone = true;
+            taskManager.CompleteCurrentTask();
+            Debug.Log("Task 1 (Stress Zone) completed.");
         }
         else if (other.CompareTag("RelaxZone"))
         {

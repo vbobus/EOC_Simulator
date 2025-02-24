@@ -5,19 +5,28 @@ public class MiniMapTarget : MonoBehaviour
 {
     public Transform target;          // 目标（Stress Zone）
     public Transform player;          // 玩家
+  
     public RectTransform miniMapPanel; // MiniMap 的 UI Panel
     private RectTransform iconTransform;
 
-    [SerializeField] private float mapScale = 3f; // MiniMap 缩放系数
+    [SerializeField] private float mapScale = 30f; // MiniMap 缩放系数
     [SerializeField] private bool clampToEdge = true; // 是否固定在 MiniMap 边缘
 
+    private bool hasInteracted = false;
     void Start()
     {
         iconTransform = GetComponent<RectTransform>();
     }
-
     void Update()
     {
+        // 如果任务已完成，则隐藏图标和文字
+        if (hasInteracted)
+        {
+            if (iconTransform.gameObject.activeSelf)
+                iconTransform.gameObject.SetActive(false);
+            
+            return;
+        }
         if (target == null || player == null || miniMapPanel == null) return;
 
         // **计算目标在世界坐标中的相对位置**
@@ -41,5 +50,10 @@ public class MiniMapTarget : MonoBehaviour
 
         // **更新 Target Icon 的 UI 位置**
         iconTransform.anchoredPosition = miniMapPos;
+    }
+    // 外部调用，当任务完成后隐藏图标和文字
+    public void MarkAsInteracted()
+    {
+        hasInteracted = true;
     }
 }

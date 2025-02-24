@@ -39,7 +39,7 @@ namespace PixelCrushers.DialogueSystem
         /// <summary>
         /// The max distance at which the object can be used.
         /// </summary>
-        public float maxUseDistance = 5f;
+        public float maxUseDistance = 1.5f;
 
         [Serializable]
         public class UsableEvents

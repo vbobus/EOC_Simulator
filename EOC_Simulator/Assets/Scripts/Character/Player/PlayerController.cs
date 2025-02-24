@@ -7,6 +7,7 @@ using Pathfinding;
 using UnityEngine;
 using UnityEngine.Serialization;
 using PixelCrushers.DialogueSystem;
+using QuickOutline.Scripts;
 
 
 namespace Character.Player
@@ -64,11 +65,15 @@ namespace Character.Player
         
         #endregion
 
+        public static Transform playerTransform;
+        
         #region SetUp
 
         protected override void Awake()
         {
             base.Awake();
+            
+            playerTransform = transform;
 
             // Get required components
             _characterController = GetComponent<CharacterController>();

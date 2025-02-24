@@ -689,12 +689,15 @@ MonoBehaviour:
     mainPanel: {fileID: 2610087147799014414}
     dontDeactivateMainPanel: 0
     waitForMainPanelOpen: 0
-    subtitlePanels: []
+    subtitlePanels:
+    - {fileID: 4269690543402474651}
+    - {fileID: 2309029787499364583}
     defaultNPCSubtitlePanel: {fileID: 4269690543402474651}
     defaultPCSubtitlePanel: {fileID: 2309029787499364583}
     allowOpenSubtitlePanelsOnStartConversation: 1
     allowDialogueActorCustomPanels: 1
-    menuPanels: []
+    menuPanels:
+    - {fileID: 8597106988420982772}
     defaultMenuPanel: {fileID: 8597106988420982772}
     useFirstResponseForMenuPortrait: 0
     waitForClose: 1

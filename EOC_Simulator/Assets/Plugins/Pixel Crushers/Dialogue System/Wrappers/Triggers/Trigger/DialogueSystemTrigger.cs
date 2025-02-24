@@ -1,5 +1,6 @@
 ﻿// Copyright (c) Pixel Crushers. All rights reserved.
 
+using QuickOutline.Scripts;
 using UnityEngine;
 
 namespace PixelCrushers.DialogueSystem.Wrappers
@@ -13,6 +14,7 @@ namespace PixelCrushers.DialogueSystem.Wrappers
     [AddComponentMenu("Pixel Crushers/Dialogue System/Trigger/Dialogue System Trigger")]
     public class DialogueSystemTrigger : PixelCrushers.DialogueSystem.DialogueSystemTrigger
     {
+
     }
 
 }

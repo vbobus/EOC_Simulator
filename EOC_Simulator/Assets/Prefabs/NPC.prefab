@@ -17,7 +17,8 @@ GameObject:
   - component: {fileID: 2857596919547308095}
   - component: {fileID: 1724631550639586629}
   - component: {fileID: 3120841300177176533}
-  m_Layer: 6
+  - component: {fileID: 1675595631372719629}
+  m_Layer: 13
   m_Name: NPC
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -59,13 +60,13 @@ CharacterController:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Height: 1.44
-  m_Radius: 0.22
+  m_Height: 2.02
+  m_Radius: 0.26
   m_SlopeLimit: 0
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0.72, z: 0}
+  m_Center: {x: 0, y: 0.93, z: 0}
 --- !u!114 &7165081066694652400
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -303,6 +304,19 @@ MonoBehaviour:
     onUse:
       m_PersistentCalls:
         m_Calls: []
+--- !u!114 &1675595631372719629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2217057892338519726}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3357c4ab14b142ce9b873f359281ed0f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outline: {fileID: 174832244992875900}
 --- !u!1 &4182239570491853379
 GameObject:
   m_ObjectHideFlags: 0
@@ -553,8 +567,33 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7313917298076121644, guid: 6881fd16748b6414f93868a9a402db0c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 174832244992875900}
   m_SourcePrefab: {fileID: 100100000, guid: 6881fd16748b6414f93868a9a402db0c, type: 3}
+--- !u!1 &8331194078662324889 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7313917298076121644, guid: 6881fd16748b6414f93868a9a402db0c, type: 3}
+  m_PrefabInstance: {fileID: 1593739731926517941}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &174832244992875900
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8331194078662324889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 1
+  outlineWidth: 2
+  precomputeOutline: 1
+  bakeKeys: []
+  bakeValues: []
 --- !u!4 &9183205893019397328 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7597384337878279269, guid: 6881fd16748b6414f93868a9a402db0c, type: 3}

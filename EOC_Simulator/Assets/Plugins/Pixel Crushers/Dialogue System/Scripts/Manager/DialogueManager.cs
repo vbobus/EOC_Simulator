@@ -1,6 +1,7 @@
 // Copyright (c) Pixel Crushers. All rights reserved.
 
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace PixelCrushers.DialogueSystem
 {
@@ -1158,8 +1159,11 @@ namespace PixelCrushers.DialogueSystem
         {
             if (!hasInstance) return;
             instance.BroadcastMessage(DialogueSystemMessages.UpdateTracker, SendMessageOptions.DontRequireReceiver);
+            OnUpdateTracker?.Invoke();
         }
 
+        
+        public static UnityAction OnUpdateTracker { get; set; }
     }
 
 }

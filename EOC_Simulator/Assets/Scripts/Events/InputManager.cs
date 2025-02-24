@@ -70,7 +70,11 @@ namespace Events
 
         private void Start()
         {
-            SwitchToPlayerMap();
+            // Temp solution
+            // SwitchToPlayerMap();
+            SwitchToUIMap();
+            // SwitchToPlayerMap();
+            
             inputActions.FindActionMap("Common").Enable();
         }
 
@@ -129,11 +133,10 @@ namespace Events
         
         private void Update()
         {
-            if (ActionMap == ActionMap.Player)
-                UpdatePlayerChecks();
-            else
-                UpdateUIChecks();
+            UpdatePlayerChecks();
+            UpdateUIChecks();
         }
+        
         private void UpdateUIChecks()
         {
         }
@@ -155,6 +158,15 @@ namespace Events
             OnPointerPosition?.Invoke(lookPosition);
         }
         #endregion
+
+
+        public void SwitchToUIMapInDialogue()
+        {
+        }
+        
+        public void SwitchToPlayerMapInDialogue()
+        {
+        }
 
         public void SwitchToUIMap()
         {

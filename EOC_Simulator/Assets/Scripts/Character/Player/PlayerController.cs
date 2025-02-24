@@ -6,6 +6,9 @@ using NUnit.Framework;
 using Pathfinding;
 using UnityEngine;
 using UnityEngine.Serialization;
+using PixelCrushers.DialogueSystem;
+using QuickOutline.Scripts;
+
 
 namespace Character.Player
 {
@@ -53,16 +56,24 @@ namespace Character.Player
         
         public bool CanMoveWithAstar()
         {
-            return !InputManager.Instance.ActionMapIsUI() && CanAstarMove;
+            return !InputManager.Instance.ActionMapIsUI() && CanAstarMove && CanMove;
         }
+
+        
+        // On canmove false, stop the velocity.
+        public bool CanMove { get; set; } = true;
         
         #endregion
 
+        public static Transform playerTransform;
+        
         #region SetUp
 
         protected override void Awake()
         {
             base.Awake();
+            
+            playerTransform = transform;
 
             // Get required components
             _characterController = GetComponent<CharacterController>();
@@ -72,9 +83,28 @@ namespace Character.Player
             InputManager.Instance.OnPointerDelta += HandlePointerDelta;
             InputManager.Instance.OnLeftClickActionPressed += HandleLeftClickPathfinding;
             InputManager.Instance.OnInteractActionPressed += TestChangeMovement;
-
+            InputManager.Instance.OnSwitchedActionMap += SwitchedActionMap;
             // Set initial movement type
             ChangeMovementType(InputMovementTypes.WASD_MOUSE_TO_ROTATE);
+            
+            // DialogueLua.SetVariable("Player.Role.Position", "Planning Chief");
+            
+        }
+
+        private void SwitchedActionMap(ActionMap newActionMap)
+        {
+            if (newActionMap == ActionMap.Player)
+            {
+                CanMove = true;
+            }
+            else
+            {
+                CanMove = false;
+                // Set the input to be reset.
+                _directionMovement = Vector2.zero;
+                _delta = Vector2.zero;
+            }
+            AstarAI.canMove = CanMove;
         }
 
         /// Test method to cycle through movement types
@@ -137,7 +167,8 @@ namespace Character.Player
         private void Update()
         {
             CheckGrounded(); // Check if the player is on the ground
-
+            ApplyGravity(); // Apply gravity to the player
+            
             // Handle input based on the current movement type
             switch (movementType)
             {
@@ -149,8 +180,6 @@ namespace Character.Player
                     CheckAstarMovement(); // Update pathfinding movement
                     break;
             }
-
-            ApplyGravity(); // Apply gravity to the player
         }
 
         /// Handles movement for WASD + mouse rotation mode
@@ -158,6 +187,8 @@ namespace Character.Player
         {
             UpdateWalkIdleAnimations(directionMovement); // Update animations based on input
 
+            if (!CanMove) return;
+            
             // Calculate movement direction and move the player
             Vector3 movement = new Vector3(directionMovement.x, 0, directionMovement.y);
             movement = transform.TransformDirection(movement);

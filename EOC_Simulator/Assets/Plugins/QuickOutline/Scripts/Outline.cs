@@ -55,11 +55,11 @@ namespace QuickOutline.Scripts
       public List<Vector3> data;
     }
 
-    [SerializeField]
-    private Mode outlineMode;
+    [SerializeField] private Mode outlineMode = Mode.OutlineVisible;
 
-    [SerializeField] [ColorUsage(true, true)]
-    private Color outlineColor = Color.white;
+
+    [ColorUsage(true, true)]
+    private Color outlineColor = new Color(5.4f, 5.4f, 0, 1f);
 
     [SerializeField, Range(0f, 4f)]
     private float outlineWidth = 2f;
@@ -68,7 +68,7 @@ namespace QuickOutline.Scripts
 
     [SerializeField, Tooltip("Precompute enabled: Per-vertex calculations are performed in the editor and serialized with the object. "
                              + "Precompute disabled: Per-vertex calculations are performed at runtime in Awake(). This may cause a pause for large meshes.")]
-    private bool precomputeOutline;
+    private bool precomputeOutline = true;
 
     [SerializeField, HideInInspector]
     private List<Mesh> bakeKeys = new List<Mesh>();

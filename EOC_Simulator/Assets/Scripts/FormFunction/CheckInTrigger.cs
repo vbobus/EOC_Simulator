@@ -4,7 +4,7 @@ public class CheckInTrigger : MonoBehaviour
 {
     public CheckInForm checkInForm; // 绑定 Check-in 表单
     public GameObject interactText; // "Press [E] to Check-in" 提示
-
+    public TaskManager taskManager;
     private bool isPlayerNearby = false; // 玩家是否靠近
 
     void Start()
@@ -18,6 +18,8 @@ public class CheckInTrigger : MonoBehaviour
         if (isPlayerNearby && Input.GetKeyDown(KeyCode.E))
         {
             checkInForm.OpenForm();
+            taskManager.CompleteCurrentTask();
+            Debug.Log("Task 2 (Sign In Form) completed.");
         }
     }
 

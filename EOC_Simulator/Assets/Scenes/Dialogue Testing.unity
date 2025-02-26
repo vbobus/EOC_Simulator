@@ -127,10 +127,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1619142721}
     m_Modifications:
-    - target: {fileID: 304953411615044938, guid: 4a316c9007fb9ca418cf962744725afa, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
+    - target: {fileID: 81374953490030338, guid: 4a316c9007fb9ca418cf962744725afa, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 740967273}
     - target: {fileID: 844936995926832038, guid: 4a316c9007fb9ca418cf962744725afa, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -227,26 +227,22 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 1481065787}
-    - target: {fileID: 5365481775324692765, guid: 4a316c9007fb9ca418cf962744725afa, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 0
+    - target: {fileID: 4263778168217318677, guid: 4a316c9007fb9ca418cf962744725afa, type: 3}
+      propertyPath: m_Color.b
+      value: 0.4891153
       objectReference: {fileID: 0}
-    - target: {fileID: 5365481775324692765, guid: 4a316c9007fb9ca418cf962744725afa, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 0
+    - target: {fileID: 4263778168217318677, guid: 4a316c9007fb9ca418cf962744725afa, type: 3}
+      propertyPath: m_Color.g
+      value: 0.035294116
       objectReference: {fileID: 0}
-    - target: {fileID: 6280176554874700107, guid: 4a316c9007fb9ca418cf962744725afa, type: 3}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 740967273}
-    m_RemovedComponents:
-    - {fileID: 6280176554874700107, guid: 4a316c9007fb9ca418cf962744725afa, type: 3}
+    - target: {fileID: 4263778168217318677, guid: 4a316c9007fb9ca418cf962744725afa, type: 3}
+      propertyPath: m_Color.r
+      value: 0.8666667
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8965495734243771528, guid: 4a316c9007fb9ca418cf962744725afa, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 682184514}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4a316c9007fb9ca418cf962744725afa, type: 3}
 --- !u!224 &236596585 stripped
 RectTransform:
@@ -337,24 +333,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &682184509 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8965495734243771528, guid: 4a316c9007fb9ca418cf962744725afa, type: 3}
-  m_PrefabInstance: {fileID: 236596584}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &682184514
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 682184509}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1317362c1839f884caf3ce121d88eebb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 740967273}
 --- !u!4 &740967273 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5726783533540138913, guid: 805458cf24d559d4eaf42f7181ec2d56, type: 3}
@@ -724,7 +702,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: MiniMapCamera
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6142171061755591462, guid: 7b9b8c168740a1641a4f3c9a772707f9, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -990,6 +969,58 @@ PrefabInstance:
       propertyPath: onExecute.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1481065788}
+    - target: {fileID: 8057236138048921876, guid: cffca0f4b1d2c004eb8c6b226c427bac, type: 3}
+      propertyPath: condition.questConditions.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8057236138048921876, guid: cffca0f4b1d2c004eb8c6b226c427bac, type: 3}
+      propertyPath: condition.questConditions.Array.data[0].questName
+      value: Orientation Briefing
+      objectReference: {fileID: 0}
+    - target: {fileID: 8057236138048921876, guid: cffca0f4b1d2c004eb8c6b226c427bac, type: 3}
+      propertyPath: condition.questConditions.Array.data[1].questName
+      value: Orientation Briefing
+      objectReference: {fileID: 0}
+    - target: {fileID: 8057236138048921876, guid: cffca0f4b1d2c004eb8c6b226c427bac, type: 3}
+      propertyPath: condition.questConditions.Array.data[0].questState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8057236138048921876, guid: cffca0f4b1d2c004eb8c6b226c427bac, type: 3}
+      propertyPath: condition.questConditions.Array.data[1].questState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8057236138048921876, guid: cffca0f4b1d2c004eb8c6b226c427bac, type: 3}
+      propertyPath: condition.questConditions.Array.data[0].entryNumber
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8057236138048921876, guid: cffca0f4b1d2c004eb8c6b226c427bac, type: 3}
+      propertyPath: condition.questConditions.Array.data[1].entryNumber
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8057236138048921876, guid: cffca0f4b1d2c004eb8c6b226c427bac, type: 3}
+      propertyPath: condition.questConditions.Array.data[0].checkQuestEntry
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8057236138048921876, guid: cffca0f4b1d2c004eb8c6b226c427bac, type: 3}
+      propertyPath: condition.questConditions.Array.data[0].questEntryState
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8057236138048921876, guid: cffca0f4b1d2c004eb8c6b226c427bac, type: 3}
+      propertyPath: condition.questConditions.Array.data[1].checkQuestEntry
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8057236138048921876, guid: cffca0f4b1d2c004eb8c6b226c427bac, type: 3}
+      propertyPath: condition.questConditions.Array.data[1].questEntryState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8718039539237219597, guid: cffca0f4b1d2c004eb8c6b226c427bac, type: 3}
+      propertyPath: alertMessage
+      value: Finished all tasks!
+      objectReference: {fileID: 0}
+    - target: {fileID: 8718039539237219597, guid: cffca0f4b1d2c004eb8c6b226c427bac, type: 3}
+      propertyPath: alertDuration
+      value: 20
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

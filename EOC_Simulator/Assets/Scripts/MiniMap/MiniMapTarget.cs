@@ -3,32 +3,38 @@ using UnityEngine.UI;
 
 public class MiniMapTarget : MonoBehaviour
 {
-    public Transform target;          // 目标（Stress Zone）
-    public Transform player;          // 玩家
+    [HideInInspector] public Transform player;          // 玩家
+    [HideInInspector] public Transform target;          // 目标（Stress Zone）
   
-    public RectTransform miniMapPanel; // MiniMap 的 UI Panel
+    [HideInInspector] public RectTransform miniMapPanel; // MiniMap 的 UI Panel
     private RectTransform iconTransform;
 
-    [SerializeField] private float mapScale = 30f; // MiniMap 缩放系数
+    
+    [Tooltip("This variable has to be changed, when we change the size of the MiniMap Camera (how far it can look)")] 
+    [SerializeField] private float mapScale = 30f; // MiniMap 缩放系数    Need to make this happen in code, since its dependent on another variable in the Camera
     [SerializeField] private bool clampToEdge = true; // 是否固定在 MiniMap 边缘
 
     private bool hasInteracted = false;
-    void Start()
+    private Image _icon;
+    void Awake()
     {
         iconTransform = GetComponent<RectTransform>();
+        _icon = GetComponent<Image>();
     }
+
+    public void Show(bool show)
+    {
+        _icon.enabled = show;
+        Debug.Log($"Show icon {show}");
+    }
+    
     void Update()
     {
-        // 如果任务已完成，则隐藏图标和文字
-        // if (hasInteracted)
-        // {
-        //     if (iconTransform.gameObject.activeSelf)
-        //         iconTransform.gameObject.SetActive(false);
-        //     
-        //     return;
-        // }
-        if (target == null || player == null || miniMapPanel == null) return;
-
+        if (target == null || player == null || miniMapPanel == null)
+        {
+            return;
+        }
+        
         // Calculate the target's relative position in world coordinates
         Vector3 relativePos = player.InverseTransformPoint(target.position); // Convert to player's local coordinates
         Vector2 miniMapPos = new Vector2(relativePos.x, relativePos.z) * mapScale; // Map to MiniMap coordinates
@@ -53,6 +59,7 @@ public class MiniMapTarget : MonoBehaviour
         // **更新 Target Icon 的 UI 位置**
         iconTransform.anchoredPosition = miniMapPos;
     }
+    
     // 外部调用，当任务完成后隐藏图标和文字
     public void MarkAsInteracted()
     {

@@ -7,6 +7,9 @@ TagManager:
   - character
   - NPCOutput
   - PlayerInput
+  - StressZone
+  - RelaxZone
+  - MiniMap
   layers:
   - Default
   - TransparentFX
@@ -17,7 +20,7 @@ TagManager:
   - Player
   - Wall
   - Obstacle
-  - 
+  - Ceiling
   - Ground
   - 
   - 

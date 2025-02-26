@@ -20,31 +20,33 @@ public class MiniMapTarget : MonoBehaviour
     void Update()
     {
         // 如果任务已完成，则隐藏图标和文字
-        if (hasInteracted)
-        {
-            if (iconTransform.gameObject.activeSelf)
-                iconTransform.gameObject.SetActive(false);
-            
-            return;
-        }
+        // if (hasInteracted)
+        // {
+        //     if (iconTransform.gameObject.activeSelf)
+        //         iconTransform.gameObject.SetActive(false);
+        //     
+        //     return;
+        // }
         if (target == null || player == null || miniMapPanel == null) return;
 
-        // **计算目标在世界坐标中的相对位置**
-        Vector3 relativePos = player.InverseTransformPoint(target.position); // 转换到玩家局部坐标
-        Vector2 miniMapPos = new Vector2(relativePos.x, relativePos.z) * mapScale; // 映射到 MiniMap
+        // Calculate the target's relative position in world coordinates
+        Vector3 relativePos = player.InverseTransformPoint(target.position); // Convert to player's local coordinates
+        Vector2 miniMapPos = new Vector2(relativePos.x, relativePos.z) * mapScale; // Map to MiniMap coordinates
 
-        // **确保 Target 在 MiniMap 上保持正确相对位置**
-        float halfWidth = miniMapPanel.rect.width / 2;
-        float halfHeight = miniMapPanel.rect.height / 2;
+        // Get the minimap radius (assuming it's a square panel with a circular shape)
+        float miniMapRadius = miniMapPanel.rect.width / 2;
 
         if (clampToEdge)
         {
-            // **如果目标超出 MiniMap 范围，固定在 MiniMap 边缘**
-            if (Mathf.Abs(miniMapPos.x) > halfWidth || Mathf.Abs(miniMapPos.y) > halfHeight)
+            // Check if the position is outside the minimap circle
+            float distanceFromCenter = miniMapPos.magnitude;
+    
+            if (distanceFromCenter > miniMapRadius)
             {
+                // Clamp to the edge of the minimap circle
                 float angle = Mathf.Atan2(miniMapPos.y, miniMapPos.x);
-                miniMapPos.x = Mathf.Cos(angle) * halfWidth;
-                miniMapPos.y = Mathf.Sin(angle) * halfHeight;
+                miniMapPos.x = Mathf.Cos(angle) * miniMapRadius;
+                miniMapPos.y = Mathf.Sin(angle) * miniMapRadius;
             }
         }
 

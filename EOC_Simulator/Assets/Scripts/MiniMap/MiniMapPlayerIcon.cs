@@ -1,9 +1,10 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class MiniMapPlayerIcon : MonoBehaviour
 {
-    public Transform player; // 绑定玩家
+    [HideInInspector] public Transform player; // 绑定玩家
     private RectTransform iconTransform;
 
     void Start()

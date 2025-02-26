@@ -31,7 +31,7 @@ namespace Character.Player
 
         // Gravity settings
         [Header("Gravity Settings")]
-        [SerializeField] private float gravity = -9.81f; // Default gravity value
+        private const float Gravity = -9.81f; // Default gravity value
         [SerializeField] private float groundCheckDistance = 0.2f; // Distance to check for ground
         [SerializeField] private LayerMask groundLayer; // Layer mask for ground detection
 
@@ -51,7 +51,7 @@ namespace Character.Player
         public bool CanAstarMove { get; set; } = true;
 
         // Gravity-related variables
-        private Vector3 _velocity; // Tracks vertical velocity (for gravity)
+        private Vector3 _velocity; // Tracks vertical velocity (for gravity) Otherwise the character controller from Unity will handle the movement
         private bool _isGrounded; // Tracks if the player is on the ground
         
         public bool CanMoveWithAstar()
@@ -273,7 +273,7 @@ namespace Character.Player
             else
             {
                 // Apply gravity when not grounded
-                _velocity.y += gravity * Time.deltaTime;
+                _velocity.y += Gravity * Time.deltaTime;
             }
 
             // Move the player vertically

@@ -1,6 +1,7 @@
 using System;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace MiniMap
 {
@@ -59,5 +60,6 @@ namespace MiniMap
             _miniMapTargetIcon.Show(newTarget);
             _miniMapTargetIcon.target = newTarget;
         }
+        
     }
 }

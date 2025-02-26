@@ -215,6 +215,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: HUD
       objectReference: {fileID: 0}
+    - target: {fileID: 3055480210696198700, guid: 4a316c9007fb9ca418cf962744725afa, type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3055480210696198700, guid: 4a316c9007fb9ca418cf962744725afa, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -541377902, guid: 2477b84e7a63c8441881c0d6a61fa6b5, type: 3}
     - target: {fileID: 3111093894612775323, guid: 4a316c9007fb9ca418cf962744725afa, type: 3}
       propertyPath: player
       value: 
@@ -470,6 +478,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 79.94, y: 0, z: 0}
+--- !u!4 &835968085 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8050836281235847875, guid: f23b4a2f6d05ef04c81ab7e06807c121, type: 3}
+  m_PrefabInstance: {fileID: 5691424512822439665}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1202361378 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4752380034454149384, guid: 861555ba466d1294f8a5c15cb53e473e, type: 3}
@@ -713,11 +726,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5279166475365532844, guid: 7b9b8c168740a1641a4f3c9a772707f9, type: 3}
   m_PrefabInstance: {fileID: 1779265489}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &2046052393 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7152063715808272617, guid: f23b4a2f6d05ef04c81ab7e06807c121, type: 3}
-  m_PrefabInstance: {fileID: 5691424512822439665}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &400656714422588665
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -838,7 +846,7 @@ PrefabInstance:
     - target: {fileID: 9075711147270941308, guid: 805458cf24d559d4eaf42f7181ec2d56, type: 3}
       propertyPath: aiTargetMoveTowards
       value: 
-      objectReference: {fileID: 2046052393}
+      objectReference: {fileID: 835968085}
     - target: {fileID: 9075711147270941308, guid: 805458cf24d559d4eaf42f7181ec2d56, type: 3}
       propertyPath: aiEndDestinationPrefab
       value: 
@@ -1146,6 +1154,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: --- Player Prefabs ---
       objectReference: {fileID: 0}
+    - target: {fileID: 8247837889656007054, guid: f23b4a2f6d05ef04c81ab7e06807c121, type: 3}
+      propertyPath: playerController
+      value: 
+      objectReference: {fileID: 740967278}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

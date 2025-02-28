@@ -24,7 +24,7 @@ namespace MiniMap
                 return;
             }
             
-            if (player == null) throw new UnityException($"For the minimap to work, we need to set the player transform reference");
+            if (!player) player = GameObject.FindGameObjectWithTag("Player").transform;
             
             _playerIcon = GetComponentInChildren<MiniMapPlayerIcon>();
             if (!_playerIcon) throw new UnityException($"Need to have a {nameof(MiniMapPlayerIcon)} on a child, to show the player");

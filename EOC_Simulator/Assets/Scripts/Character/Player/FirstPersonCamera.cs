@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using Events;
 using Unity.Cinemachine;
 using UnityEngine;
@@ -39,6 +40,7 @@ namespace Character.Player
             {
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
+                StartCoroutine(ConfineCursor());
             }
             else
             {
@@ -48,6 +50,13 @@ namespace Character.Player
             
             ResetCamera();
         }
+
+        private IEnumerator ConfineCursor()
+        {
+            yield return new WaitForEndOfFrame(); // Wait for Unity to update
+            Cursor.lockState = CursorLockMode.Confined;
+        }
+        
         public void RotateCamera(Vector2 delta, bool rotatePlayerTransform = true)
         {
             // Don't rotate the camera, since it will make the frame data

@@ -52,6 +52,8 @@ namespace Events
         public UnityAction OnCommonExitActionPressed { get; set; }
         
         [HideInInspector] public ActionMap ActionMap { get; private set; }
+        public UnityAction<ActionMap> OnSwitchedActionMap { get; set; }
+
         
         #endregion
 
@@ -71,9 +73,9 @@ namespace Events
         private void Start()
         {
             // Temp solution
-            // SwitchToPlayerMap();
+            SwitchToPlayerMap();
             SwitchToUIMap();
-            // SwitchToPlayerMap();
+            SwitchToPlayerMap();
             
             inputActions.FindActionMap("Common").Enable();
         }
@@ -181,7 +183,6 @@ namespace Events
             OnSwitchedActionMap?.Invoke(ActionMap);
         }
 
-        public UnityAction<ActionMap> OnSwitchedActionMap { get; set; }
         
         public void SwitchToPlayerMap()
         {

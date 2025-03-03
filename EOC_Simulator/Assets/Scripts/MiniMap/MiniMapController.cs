@@ -1,8 +1,15 @@
+using System;
 using UnityEngine;
 
 public class MiniMapController : MonoBehaviour
 {
     public Transform player; // 绑定玩家
+
+    private void Awake()
+    {
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+        if (!player) throw new UnityException($"Player not found in the scene");
+    }
 
     void LateUpdate()
     {

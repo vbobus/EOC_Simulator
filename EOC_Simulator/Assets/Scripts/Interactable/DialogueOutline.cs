@@ -8,7 +8,6 @@ using UnityEngine.Serialization;
 
 namespace Interactable
 {
-    [RequireComponent(typeof(DialogueSystemTrigger))]
     public class DialogueOutline : MonoBehaviour
     {
         private readonly List<Outline> _outlines = new();
@@ -28,14 +27,13 @@ namespace Interactable
             Outline[] outlinesInChildren = GetComponentsInChildren<Outline>();
             if (outlinesInChildren != null && outlinesInChildren.Length > 0) _outlines.AddRange(outlinesInChildren);
             if (_outlines.Count == 0) throw new NullReferenceException($"There is no Outline component on {gameObject.name} object or it's children");
-            
-            _dialogueTriggers = GetComponents<DialogueSystemTrigger>();
-            if (_dialogueTriggers.Length == 0) throw new NullReferenceException($"There are missing a dialogue system trigger on {gameObject.name}, for the outline to work");
-
             EnableDisableOutlines(false);
             
             _usable = GetComponent<Usable>();
             if (_usable && canDisableUsable) _usable.enabled = false;
+            
+            _dialogueTriggers = GetComponents<DialogueSystemTrigger>();
+            if (_dialogueTriggers.Length == 0) throw new NullReferenceException($"There are missing a dialogue system trigger on {gameObject.name}, for the outline to work");
         }
 
         private void Start()

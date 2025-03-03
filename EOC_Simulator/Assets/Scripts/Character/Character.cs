@@ -20,10 +20,6 @@ namespace Character
         [SerializeField] protected float movementSpeed = 3.0f; // Base movement speed of the player
         protected IAstarAI AstarAI; // Reference to the A* pathfinding component
         public CharacterStates State { get; protected set; }
-
-        
-        
-        [SerializeField] private string testAnimLayerLockName;
         
         // List of waypoints for pathfinding
         private readonly List<Vector3> _waypoints = new List<Vector3>();
@@ -50,11 +46,6 @@ namespace Character
         {
             AstarAI = GetComponent<IAstarAI>();
             Animator = GetComponentInChildren<Animator>();
-            if (!String.IsNullOrEmpty(testAnimLayerLockName))
-            {
-                int layerIndex = Animator.GetLayerIndex(testAnimLayerLockName);
-                Animator.SetLayerWeight(layerIndex, 1f);
-            }
         }
         
         protected void SetDestination(Vector3 destination) => AstarAI.destination = destination;
@@ -63,7 +54,7 @@ namespace Character
         {
             // Get the remaining path from the A* AI component
             _waypoints.Clear();
-            AstarAI.GetRemainingPath(_waypoints, out bool hasFinishedPath);
+            AstarAI.GetRemainingPath(_waypoints, out _);
 
             // Update walk animation based on AI velocity
             Animator.SetBool(AnimIsWalking, AstarAI.velocity.magnitude > AnimThreshold);
@@ -91,8 +82,6 @@ namespace Character
             if (State == CharacterStates.DIALOGUE || State == CharacterStates.INTERACTING) return;
             
             State = Velocity.magnitude < 0.1f ? CharacterStates.IDLE : CharacterStates.WALKING;
-            
-            // if (Velocity != Vector3.zero) Debug.Log($"Velocity: {Velocity}");
         }
     }
 }

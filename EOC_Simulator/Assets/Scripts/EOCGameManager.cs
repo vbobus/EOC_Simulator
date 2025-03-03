@@ -38,8 +38,8 @@ public class EOCGameManager : MonoBehaviour
             {
                 playerCharacter = Instantiate(prefab, playerSpawnPoint.position, playerSpawnPoint.rotation);
                 
-                PlayerController playerCtrl = playerCharacter.GetComponent<PlayerController>();
-                if (playerCtrl != null) playerCtrl.enabled = true;
+                //PlayerController playerCtrl = playerCharacter.GetComponent<PlayerController>();
+                //if (playerCtrl != null) playerCtrl.enabled = true;
                 
                 NPCController npcCtrl = playerCharacter.GetComponent<NPCController>();
                 if (npcCtrl != null) npcCtrl.enabled = false;
@@ -65,8 +65,8 @@ public class EOCGameManager : MonoBehaviour
                 NPCController npcCtrl = npcCharacter.GetComponent<NPCController>();
                 if (npcCtrl != null) npcCtrl.enabled = !npcCtrl.enabled ? true : npcCtrl.enabled; 
                 
-                PlayerController playerCtrl = npcCharacter.GetComponent<PlayerController>();
-                if (playerCtrl != null) playerCtrl.enabled = false;
+                //PlayerController playerCtrl = npcCharacter.GetComponent<PlayerController>();
+                //if (playerCtrl != null) playerCtrl.enabled = false;
                 
                 EOCInteraction interaction = npcCharacter.GetComponent<EOCInteraction>();
                 if (interaction != null) interaction.enabled = false;

@@ -256,7 +256,7 @@ namespace Pathfinding {
 		public AutoRepathPolicy autoRepath = new AutoRepathPolicy();
 
 		/// <summary>Indicates if gravity is used during this frame</summary>
-		protected bool usingGravity { get; set; }
+		protected bool usingGravity { get; set; } 
 
 		/// <summary>Delta time used for movement during the last frame</summary>
 		protected float lastDeltaTime;

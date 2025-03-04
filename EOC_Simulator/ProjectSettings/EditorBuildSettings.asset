@@ -17,9 +17,15 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/GreyBox_Activity Test.unity
     guid: 615d3bf7aab08854fae8ad74b0a7ac38
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Dialogue Testing.unity
     guid: 70a9db9883e03c447b13cbb8116933aa
+  - enabled: 1
+    path: Assets/Scenes/MainMenuScene.unity
+    guid: 15703c77e643f4c90a986be7630a6403
+  - enabled: 1
+    path: Assets/Scenes/Main.unity
+    guid: 7a59e9a2761762c4788c30fc83d52ca7
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 4ec72ac4199a45b41acdf1e89f2aa2f9, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}

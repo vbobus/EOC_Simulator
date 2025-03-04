@@ -7,7 +7,7 @@ namespace UI_Scripts
     public class MainMenuManager : MonoBehaviour
     {
         private Button startButton;
-        [SerializeField] private string nextLoadSceneName = "GreyBox_V1";
+        [SerializeField] private string nextLoadSceneName = "Main";
         void Start()
         {
             // Get the root VisualElement

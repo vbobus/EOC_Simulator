@@ -60,13 +60,15 @@ namespace Interactable
                 if (shouldEnable) break;
             }
             
-            // if (_debugThis) Debug.Log($"{gameObject.name}: ShouldEnable: {shouldEnable} = IsEnabled: {_isOutlineEnabled}");
-            
+            Debug.Log($"HideShow GO {gameObject.name}: Is enabled: {_isOutlineEnabled}: Should enable {shouldEnable}");
             if (_isOutlineEnabled == shouldEnable) return;
+            
             // Change the enabled based
             _isOutlineEnabled = shouldEnable;
             EnableDisableOutlines(shouldEnable);
 
+            MiniMap.MiniMap.Instance.UpdateNewTarget(shouldEnable ? transform : null);
+            
             if (_usable && canDisableUsable) _usable.enabled = shouldEnable;
         }
         

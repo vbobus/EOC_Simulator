@@ -165,15 +165,20 @@ namespace Events
         public void SwitchToUIMapInDialogue()
         {
             SwitchToUIMap();
+            _inDialogue = true;
         }
         
         public void SwitchToPlayerMapInDialogue()
         {
+            _inDialogue = false;
             SwitchToPlayerMap();
         }
 
+        private bool _inDialogue = false;
+        
         public void SwitchToUIMap()
         {
+            if (_inDialogue) return;
             // Disable the current action map
             inputActions.FindActionMap("Player").Disable();
 
@@ -188,6 +193,7 @@ namespace Events
         
         public void SwitchToPlayerMap()
         {
+            if (_inDialogue) return;
             // Disable the UI action map
             inputActions.FindActionMap("UI").Disable();
 

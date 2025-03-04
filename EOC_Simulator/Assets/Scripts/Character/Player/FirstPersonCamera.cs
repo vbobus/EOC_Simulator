@@ -3,6 +3,7 @@ using System.Collections;
 using Events;
 using Unity.Cinemachine;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Character.Player
 {
@@ -11,7 +12,7 @@ namespace Character.Player
     public class FirstPersonCamera : MonoBehaviour
     {
         [SerializeField] private PlayerController playerController;
-        private Transform _playerTransform; // Reference to the player's transform
+        [SerializeField] private Transform playerTransform; // Reference to the player's transform
         [SerializeField] private float sensitivity = 2; // Mouse sensitivity
         [SerializeField] private float smoothing = 1.5f; // Smoothing factor for mouse movement
 
@@ -25,7 +26,6 @@ namespace Character.Player
         
         private void Awake()
         {
-            _playerTransform = playerController.transform;
             playerCamera = GetComponent<CinemachineCamera>();
             InputManager.Instance.OnSwitchedActionMap += SwitchedActionMap;
         }
@@ -81,7 +81,7 @@ namespace Character.Player
             
             // Apply the horizontal rotation to the player (Y-axis)
             if (rotatePlayerTransform)
-                _playerTransform.localRotation = Quaternion.AngleAxis(_cameraVelocity.x, Vector3.up);
+                playerTransform.localRotation = Quaternion.AngleAxis(_cameraVelocity.x, Vector3.up);
         }
     
         public void ResetCamera()

@@ -35,9 +35,11 @@ namespace MiniMap
                     $"Need to have a {nameof(MiniMapTarget)} on a child, since it will be used in the dialogue system");
             
             _rectTransform = GetComponent<RectTransform>();
+            
+            SetUpTarget();
         }
 
-        private void Start()
+        private void SetUpTarget()
         {
             // Set start reference to player
             _playerIcon.player = player;
@@ -56,10 +58,14 @@ namespace MiniMap
         public void UpdateNewTarget(Transform newTarget)
         {
             if (!_miniMapTargetIcon) return;
+
+            if (newTarget != null)
+                Debug.Log($"UpdateNewTarget: {newTarget.name}");
+            else 
+                Debug.Log($"UpdateNewTarget");
             
             _miniMapTargetIcon.Show(newTarget);
             _miniMapTargetIcon.target = newTarget;
         }
-        
     }
 }

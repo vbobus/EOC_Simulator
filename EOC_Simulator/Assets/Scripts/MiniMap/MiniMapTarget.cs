@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class MiniMapTarget : MonoBehaviour
 {
     [HideInInspector] public Transform player;          // 玩家
-    [HideInInspector] public Transform target;          // 目标（Stress Zone）
+    public Transform target;          // 目标（Stress Zone）
   
     [HideInInspector] public RectTransform miniMapPanel; // MiniMap 的 UI Panel
     private RectTransform iconTransform;

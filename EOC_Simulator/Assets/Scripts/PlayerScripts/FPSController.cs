@@ -20,12 +20,14 @@ public class FPSController : MonoBehaviour
     public Camera playerCamera;
     private float xRotation = 0f;
 
+    private bool isCursorVisible = false; // 记录鼠标状态
+
     void Start()
     {
         controller = GetComponent<CharacterController>();
         playerCamera = GetComponentInChildren<Camera>();
 
-        // 锁定鼠标
+        // 初始化时隐藏鼠标
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
@@ -34,6 +36,7 @@ public class FPSController : MonoBehaviour
     {
         MovePlayer();
         RotateView();
+        ToggleCursor();
     }
 
     void MovePlayer()
@@ -67,16 +70,28 @@ public class FPSController : MonoBehaviour
 
     void RotateView()
     {
-        // 获取鼠标输入
-        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity;
-        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity;
+        if (!isCursorVisible) // 当鼠标隐藏时，才能进行视角旋转
+        {
+            float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity;
+            float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity;
 
-        // 控制 X 轴旋转（上下）
-        xRotation -= mouseY;
-        xRotation = Mathf.Clamp(xRotation, -90f, 90f);
-        playerCamera.transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+            // 控制 X 轴旋转（上下）
+            xRotation -= mouseY;
+            xRotation = Mathf.Clamp(xRotation, -90f, 90f);
+            playerCamera.transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
 
-        // 控制 Y 轴旋转（左右）
-        transform.Rotate(Vector3.up * mouseX);
+            // 控制 Y 轴旋转（左右）
+            transform.Rotate(Vector3.up * mouseX);
+        }
+    }
+
+    void ToggleCursor()
+    {
+        if (Input.GetKeyDown(KeyCode.Q)) // 按 Q 切换鼠标状态
+        {
+            isCursorVisible = !isCursorVisible; // 切换状态
+            Cursor.visible = isCursorVisible;
+            Cursor.lockState = isCursorVisible ? CursorLockMode.None : CursorLockMode.Locked;
+        }
     }
 }

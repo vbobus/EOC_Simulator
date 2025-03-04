@@ -3,23 +3,21 @@ using UnityEngine;
 
 public class MiniMapController : MonoBehaviour
 {
-    public Transform player; // 绑定玩家
+    private Transform _player; // 绑定玩家
 
     private void Awake()
     {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
-        if (!player) throw new UnityException($"Player not found in the scene");
+        _player = GameObject.FindGameObjectWithTag("Player").transform;
+        if (!_player) throw new UnityException($"Player not found in the scene");
     }
 
     void LateUpdate()
     {
-        if (player)
-        {
-            // 让 MiniMapCamera 始终跟随玩家位置，但固定高度
-            transform.position = new Vector3(player.position.x, transform.position.y, player.position.z);
+        if (!_player) return;
+        // 让 MiniMapCamera 始终跟随玩家位置，但固定高度
+        transform.position = new Vector3(_player.position.x, transform.position.y, _player.position.z);
          
-            Quaternion newRotation = Quaternion.Euler(90f, player.transform.rotation.eulerAngles.y, 0f);
-            transform.rotation = newRotation;
-        }
+        Quaternion newRotation = Quaternion.Euler(90f, _player.transform.rotation.eulerAngles.y, 0f);
+        transform.rotation = newRotation;
     }
 }

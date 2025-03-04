@@ -202,9 +202,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 847588046222538510, guid: bf0e4dbdd7e3a064da062f379c764011, type: 3}
+      propertyPath: inputDevice
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 847588046222540158, guid: bf0e4dbdd7e3a064da062f379c764011, type: 3}
       propertyPath: debugLevel
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 847588046222540158, guid: bf0e4dbdd7e3a064da062f379c764011, type: 3}
+      propertyPath: displaySettings.subtitleSettings.subtitleCharsPerSecond
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 847588046222540158, guid: bf0e4dbdd7e3a064da062f379c764011, type: 3}
+      propertyPath: displaySettings.alertSettings.allowAlertsDuringConversations
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

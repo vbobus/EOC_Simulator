@@ -13,6 +13,17 @@ namespace PixelCrushers.DialogueSystem.Wrappers
     [AddComponentMenu("Pixel Crushers/Dialogue System/UI/Standard UI/Dialogue/Standard UI Menu Panel")]
     public class StandardUIMenuPanel : PixelCrushers.DialogueSystem.StandardUIMenuPanel
     {
+        
+        protected override void Start()
+        {
+            base.Start();
+            ClearResponseButtons();
+        }
+
+        public void ClearButtons()
+        {
+            ClearResponseButtons();
+        }
     }
 
 }

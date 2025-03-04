@@ -1,7 +1,9 @@
 using System;
+using System.Collections;
 using Events;
 using Unity.Cinemachine;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Character.Player
 {
@@ -9,6 +11,7 @@ namespace Character.Player
 
     public class FirstPersonCamera : MonoBehaviour
     {
+        [SerializeField] private PlayerController playerController;
         [SerializeField] private Transform playerTransform; // Reference to the player's transform
         [SerializeField] private float sensitivity = 2; // Mouse sensitivity
         [SerializeField] private float smoothing = 1.5f; // Smoothing factor for mouse movement
@@ -39,6 +42,7 @@ namespace Character.Player
             {
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
+                // StartCoroutine(ConfineCursor());
             }
             else
             {
@@ -48,6 +52,13 @@ namespace Character.Player
             
             ResetCamera();
         }
+
+        private IEnumerator ConfineCursor()
+        {
+            yield return new WaitForEndOfFrame(); // Wait for Unity to update
+            Cursor.lockState = CursorLockMode.Confined;
+        }
+        
         public void RotateCamera(Vector2 delta, bool rotatePlayerTransform = true)
         {
             // Don't rotate the camera, since it will make the frame data

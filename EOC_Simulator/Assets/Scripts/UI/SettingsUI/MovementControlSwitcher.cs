@@ -30,7 +30,7 @@ public class MovementControlSwitcher : MonoBehaviour
     private void PrevOption()
     {
         currentIndex = (currentIndex + 1) % 2;
-        UpdateOptionDisplay();
+        UpdateOptionDisplay(); 
     }
 
     private void NextOption()

@@ -153,7 +153,7 @@ MonoBehaviour:
   m_Color: {r: 0.121885024, g: 0.48312736, b: 0.7830189, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
+  m_Maskable: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -179,8 +179,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 301324621c8e74f9dbf6a758c4c4262b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
   player: {fileID: 0}
+  target: {fileID: 0}
   miniMapPanel: {fileID: 6886009393983904029}
   mapScale: 30
   clampToEdge: 1

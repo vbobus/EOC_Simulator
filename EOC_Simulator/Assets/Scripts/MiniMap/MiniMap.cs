@@ -1,6 +1,7 @@
 using System;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace MiniMap
 {
@@ -23,7 +24,7 @@ namespace MiniMap
                 return;
             }
             
-            if (player == null) throw new UnityException($"For the minimap to work, we need to set the player transform reference");
+            if (!player) player = GameObject.FindGameObjectWithTag("Player").transform;
             
             _playerIcon = GetComponentInChildren<MiniMapPlayerIcon>();
             if (!_playerIcon) throw new UnityException($"Need to have a {nameof(MiniMapPlayerIcon)} on a child, to show the player");
@@ -34,9 +35,11 @@ namespace MiniMap
                     $"Need to have a {nameof(MiniMapTarget)} on a child, since it will be used in the dialogue system");
             
             _rectTransform = GetComponent<RectTransform>();
+            
+            SetUpTarget();
         }
 
-        private void Start()
+        private void SetUpTarget()
         {
             // Set start reference to player
             _playerIcon.player = player;
@@ -55,6 +58,11 @@ namespace MiniMap
         public void UpdateNewTarget(Transform newTarget)
         {
             if (!_miniMapTargetIcon) return;
+
+            if (newTarget != null)
+                Debug.Log($"UpdateNewTarget: {newTarget.name}");
+            else 
+                Debug.Log($"UpdateNewTarget");
             
             _miniMapTargetIcon.Show(newTarget);
             _miniMapTargetIcon.target = newTarget;

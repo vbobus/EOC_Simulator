@@ -164,10 +164,12 @@ namespace Events
 
         public void SwitchToUIMapInDialogue()
         {
+            SwitchToUIMap();
         }
         
         public void SwitchToPlayerMapInDialogue()
         {
+            SwitchToPlayerMap();
         }
 
         public void SwitchToUIMap()

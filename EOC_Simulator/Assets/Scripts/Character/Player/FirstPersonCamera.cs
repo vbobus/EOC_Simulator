@@ -10,7 +10,8 @@ namespace Character.Player
 
     public class FirstPersonCamera : MonoBehaviour
     {
-        [SerializeField] private Transform playerTransform; // Reference to the player's transform
+        [SerializeField] private PlayerController playerController;
+        private Transform _playerTransform; // Reference to the player's transform
         [SerializeField] private float sensitivity = 2; // Mouse sensitivity
         [SerializeField] private float smoothing = 1.5f; // Smoothing factor for mouse movement
 
@@ -24,6 +25,7 @@ namespace Character.Player
         
         private void Awake()
         {
+            _playerTransform = playerController.transform;
             playerCamera = GetComponent<CinemachineCamera>();
             InputManager.Instance.OnSwitchedActionMap += SwitchedActionMap;
         }
@@ -40,7 +42,7 @@ namespace Character.Player
             {
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
-                StartCoroutine(ConfineCursor());
+                // StartCoroutine(ConfineCursor());
             }
             else
             {
@@ -79,7 +81,7 @@ namespace Character.Player
             
             // Apply the horizontal rotation to the player (Y-axis)
             if (rotatePlayerTransform)
-                playerTransform.localRotation = Quaternion.AngleAxis(_cameraVelocity.x, Vector3.up);
+                _playerTransform.localRotation = Quaternion.AngleAxis(_cameraVelocity.x, Vector3.up);
         }
     
         public void ResetCamera()

@@ -8,10 +8,12 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using PixelCrushers.DialogueSystem;
 using QuickOutline.Scripts;
+using UnityEngine.Events;
 
 
 namespace Character.Player
 {
+    [Serializable]
     public enum InputMovementTypes
     {
         WASD_MOUSE_TO_ROTATE, // WASD to move and Mouse will be used to rotate 
@@ -74,7 +76,7 @@ namespace Character.Player
             // Set initial movement type
             ChangeMovementType(InputMovementTypes.WASD_MOUSE_TO_ROTATE);
         }
-
+        
         private void SwitchedActionMap(ActionMap newActionMap)
         {
             if (newActionMap == ActionMap.Player)
@@ -100,6 +102,8 @@ namespace Character.Player
             ChangeMovementType((InputMovementTypes)current);
         }
 
+        public UnityAction<InputMovementTypes> OnChangeMovementType;
+        
         /// Changes the player's movement type and updates related settings
         public void ChangeMovementType(InputMovementTypes newMovementType)
         {
@@ -130,6 +134,8 @@ namespace Character.Player
             // Enable/disable AIPath component based on movement type
             AIPath aiPath = AstarAI as AIPath;
             if (aiPath != null) aiPath.enabled = isMouseOnly;
+            
+            OnChangeMovementType?.Invoke(newMovementType);
         }
 
         /// Unsubscribe from input events when the object is destroyed

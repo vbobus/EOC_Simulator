@@ -10,3 +10,8 @@
     background-color: rgba(149, 42, 42, 0);
     background-image: none;
 }
+
+.selected {
+    border-width: 10px;
+    border-color: yellow;
+}

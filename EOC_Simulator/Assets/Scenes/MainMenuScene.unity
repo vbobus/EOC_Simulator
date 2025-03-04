@@ -240,6 +240,53 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
+--- !u!1 &1633204151
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1633204153}
+  - component: {fileID: 1633204152}
+  m_Layer: 0
+  m_Name: SelectionManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1633204152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1633204151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ea140bc1723eee49a19d6b5af1074ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectedRole: {fileID: 0}
+  selectedScenario: {fileID: 0}
+  roleScenarioConfig: {fileID: 11400000, guid: f43f24d99c16fb2459348d3cfa4a7c91, type: 2}
+--- !u!4 &1633204153
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1633204151}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 93.07772, y: -126.02365, z: 227.41325}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1669154900
 GameObject:
   m_ObjectHideFlags: 0
@@ -305,6 +352,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6f6ae35a3cf1455896f2b87611db356, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nextLoadSceneName: Main
 --- !u!114 &1669154904
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -317,6 +365,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f91714ab42dd47e89d71871a31955aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  availableRoles:
+  - {fileID: 11400000, guid: 5bef1e1752a597d418285ffd4df29189, type: 2}
+  availableScenarios:
+  - {fileID: 11400000, guid: 4fa454abc616d15498ce599a8e38ecb6, type: 2}
 --- !u!1 &1865629438
 GameObject:
   m_ObjectHideFlags: 0
@@ -573,3 +625,4 @@ SceneRoots:
   - {fileID: 1865629439}
   - {fileID: 1669154902}
   - {fileID: 2100420987}
+  - {fileID: 1633204153}

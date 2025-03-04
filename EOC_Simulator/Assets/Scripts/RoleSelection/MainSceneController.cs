@@ -4,6 +4,8 @@ public class MainSceneController : MonoBehaviour
 {
     void Start()
     {
+        if (SelectionManager.Instance == null) return;
+        
         // Immediately instantiate the correct prefab based on the selected role and scenario.
         GameObject interactivesPrefab = SelectionManager.Instance.GetInteractivesPrefab();
         if (interactivesPrefab != null)

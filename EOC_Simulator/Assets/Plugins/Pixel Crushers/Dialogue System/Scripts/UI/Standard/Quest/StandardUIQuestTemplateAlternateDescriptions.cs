@@ -2,6 +2,7 @@
 
 using UnityEngine;
 using System;
+using TMPro;
 
 namespace PixelCrushers.DialogueSystem
 {
@@ -11,15 +12,15 @@ namespace PixelCrushers.DialogueSystem
     {
 
         [Tooltip("(Optional) If set, use if state is success.")]
-        public UITextField successDescription;
+        public TMP_Text successDescription;
 
         [Tooltip("(Optional) If set, use if state is failure.")]
-        public UITextField failureDescription;
+        public TMP_Text failureDescription;
 
         public void SetActive(bool value)
         {
-            successDescription.SetActive(value);
-            failureDescription.SetActive(value);
+            successDescription.gameObject.SetActive(value);
+            failureDescription.gameObject.SetActive(value);
         }
 
     }

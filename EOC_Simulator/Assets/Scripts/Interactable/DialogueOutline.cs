@@ -60,7 +60,7 @@ namespace Interactable
                 if (shouldEnable) break;
             }
             
-            Debug.Log($"HideShow GO {gameObject.name}: Is enabled: {_isOutlineEnabled}: Should enable {shouldEnable}");
+            // Debug.Log($"HideShow GO {gameObject.name}: Is enabled: {_isOutlineEnabled}: Should enable {shouldEnable}");
             if (_isOutlineEnabled == shouldEnable) return;
             
             // Change the enabled based

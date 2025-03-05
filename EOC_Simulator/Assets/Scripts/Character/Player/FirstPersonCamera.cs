@@ -39,7 +39,7 @@ namespace Character.Player
         
         private void SwitchedActionMap(ActionMap currentActionMap)
         {
-            Debug.Log($"Switched to {currentActionMap}");
+            // Debug.Log($"Switched to {currentActionMap}");
             _currentActionMap = currentActionMap;
             
             if (currentActionMap == ActionMap.Player)

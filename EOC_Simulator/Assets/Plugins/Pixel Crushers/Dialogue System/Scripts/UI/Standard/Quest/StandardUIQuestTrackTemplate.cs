@@ -2,6 +2,7 @@
 
 using UnityEngine;
 using System.Collections.Generic;
+using TMPro;
 
 namespace PixelCrushers.DialogueSystem
 {
@@ -17,7 +18,7 @@ namespace PixelCrushers.DialogueSystem
 
         [Header("Quest Heading")]
         [Tooltip("The heading - name or description depends on tracker setting")]
-        public UITextField description;
+        public TMP_Text  description;
 
         public StandardUIQuestTemplateAlternateDescriptions alternateDescriptions = new StandardUIQuestTemplateAlternateDescriptions();
 
@@ -26,7 +27,7 @@ namespace PixelCrushers.DialogueSystem
         public Transform entryContainer;
 
         [Tooltip("Used for quest entries")]
-        public UITextField entryDescription;
+        public TMP_Text entryDescription;
 
         public StandardUIQuestTemplateAlternateDescriptions alternateEntryDescriptions = new StandardUIQuestTemplateAlternateDescriptions();
 
@@ -38,9 +39,9 @@ namespace PixelCrushers.DialogueSystem
 
         public virtual void Initialize()
         {
-            description.SetActive(false);
+            description.gameObject.SetActive(false);
             alternateDescriptions.SetActive(false);
-            entryDescription.SetActive(false);
+            entryDescription.gameObject.SetActive(false);
             alternateEntryDescriptions.SetActive(false);
             if (entryContainer != null)
             {
@@ -87,7 +88,7 @@ namespace PixelCrushers.DialogueSystem
                 {
                     if (numEntries == 0)
                     {
-                        entryDescription.SetActive(true);
+                        entryDescription.gameObject.SetActive(true);
                         entryDescription.text = text;
                     }
                     else
@@ -121,20 +122,20 @@ namespace PixelCrushers.DialogueSystem
             numEntries++;
         }
 
-        protected void SetFirstValidTextElement(string text, params UITextField[] textElements)
+        protected void SetFirstValidTextElement(string text, params TMP_Text[] textElements)
         {
             for (int i = 0; i < textElements.Length; i++)
             {
                 if (textElements[i] != null && textElements[i].gameObject != null)
                 {
-                    textElements[i].SetActive(true);
+                    textElements[i].gameObject.SetActive(true);
                     textElements[i].text = text;
                     return;
                 }
             }
         }
 
-        protected void InstantiateFirstValidTextElement(string text, Transform container, params UITextField[] textElements)
+        protected void InstantiateFirstValidTextElement(string text, Transform container, params TMP_Text[] textElements)
         {
             for (int i = 0; i < textElements.Length; i++)
             {

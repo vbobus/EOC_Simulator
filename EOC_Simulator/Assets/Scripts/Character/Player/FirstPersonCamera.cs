@@ -32,17 +32,20 @@ namespace Character.Player
 
         void Start()
         {
-            ResetCamera();
+            SwitchedActionMap(ActionMap.Player);
         }
+        
+        private ActionMap _currentActionMap;
         
         private void SwitchedActionMap(ActionMap currentActionMap)
         {
             Debug.Log($"Switched to {currentActionMap}");
+            _currentActionMap = currentActionMap;
+            
             if (currentActionMap == ActionMap.Player)
             {
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
-                // StartCoroutine(ConfineCursor());
             }
             else
             {
@@ -53,12 +56,17 @@ namespace Character.Player
             ResetCamera();
         }
 
-        private IEnumerator ConfineCursor()
-        {
-            yield return new WaitForEndOfFrame(); // Wait for Unity to update
-            Cursor.lockState = CursorLockMode.Confined;
-        }
         
+        // Change
+        private void Update()
+        {
+            if (_currentActionMap == ActionMap.Player)
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+            }
+        }
+
         public void RotateCamera(Vector2 delta, bool rotatePlayerTransform = true)
         {
             // Don't rotate the camera, since it will make the frame data

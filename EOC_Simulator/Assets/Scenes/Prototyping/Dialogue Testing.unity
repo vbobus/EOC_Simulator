@@ -835,6 +835,10 @@ PrefabInstance:
       propertyPath: displaySettings.subtitleSettings.subtitleCharsPerSecond
       value: 60
       objectReference: {fileID: 0}
+    - target: {fileID: 8280490298227547198, guid: 089130991470ba44994a1016406c481e, type: 3}
+      propertyPath: displaySettings.subtitleSettings.requireContinueOnLastLine
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8670908413527057646, guid: 089130991470ba44994a1016406c481e, type: 3}
       propertyPath: m_Name
       value: Managers

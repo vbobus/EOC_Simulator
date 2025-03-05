@@ -39,10 +39,10 @@ namespace PixelCrushers.DialogueSystem
 
         public virtual void Initialize()
         {
-            description.gameObject.SetActive(false);
-            alternateDescriptions.SetActive(false);
+            // description.gameObject.SetActive(false);
+            // alternateDescriptions.SetActive(false);
             entryDescription.gameObject.SetActive(false);
-            alternateEntryDescriptions.SetActive(false);
+            // alternateEntryDescriptions.SetActive(false);
             if (entryContainer != null)
             {
                 entryContainer.gameObject.SetActive(false);
@@ -83,7 +83,7 @@ namespace PixelCrushers.DialogueSystem
             if (entryContainer == null)
             {
                 // No container, so make entryDescription a big multi-line string:
-                alternateEntryDescriptions.SetActive(false);
+                // alternateEntryDescriptions.SetActive(false);
                 if (entryDescription != null)
                 {
                     if (numEntries == 0)
@@ -102,9 +102,9 @@ namespace PixelCrushers.DialogueSystem
                 // Instantiate into container:
                 if (numEntries == 0)
                 {
-                    entryContainer.gameObject.SetActive(true);
-                    if (entryDescription != null) entryDescription.gameObject.SetActive(false);
-                    alternateEntryDescriptions.SetActive(false);
+                    // entryContainer.gameObject.SetActive(true);
+                    if (entryDescription) entryDescription.gameObject.SetActive(false);
+                    // alternateEntryDescriptions.SetActive(false);
                 }
                 switch (entryState)
                 {

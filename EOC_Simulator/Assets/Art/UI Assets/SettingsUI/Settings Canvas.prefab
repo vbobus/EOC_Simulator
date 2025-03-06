@@ -342,7 +342,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 26.23191, y: 3.1522083}
+  m_AnchoredPosition: {x: 26.231934, y: 3.1522083}
   m_SizeDelta: {x: 127.9549, y: 20.362}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6975489713074187027
@@ -1458,6 +1458,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4218445180931229682}
+  - component: {fileID: 1973379513621776560}
   m_Layer: 5
   m_Name: MovementControlsContainer
   m_TagString: Untagged
@@ -1487,6 +1488,27 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1973379513621776560
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3458260243726960999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5952ad29115115640acb34478ff948f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftArrowButton: {fileID: 3058905060598272405}
+  rightArrowButton: {fileID: 3058905060598272405}
+  optionsImage: {fileID: 2132293003145683176}
+  optionsLabel: {fileID: 1982550376058900044}
+  wasdSprite: {fileID: 21300000, guid: b6d72099025eb52419483fe913b6738b, type: 3}
+  mouseSprite: {fileID: 21300000, guid: 186c94bc43c93264abec98c01aae8b81, type: 3}
+  wasdText: 'Option 1: Keyboard [WASD]'
+  mouseText: 'Option 2: Mouse [Point & Click]'
+  playerController: {fileID: 0}
 --- !u!1 &3511329290392636049
 GameObject:
   m_ObjectHideFlags: 0
@@ -1541,6 +1563,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8213892895979439525}
+  - component: {fileID: 9196568628606032233}
   m_Layer: 5
   m_Name: ScreenView
   m_TagString: Untagged
@@ -1572,6 +1595,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -442, y: -254}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &9196568628606032233
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3552880381312183320}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1226b5120bff70f49a753148102c5242, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  windowedButton: {fileID: 0}
+  borderlessWindowButton: {fileID: 0}
 --- !u!1 &3559270848231925123
 GameObject:
   m_ObjectHideFlags: 0
@@ -2639,7 +2676,19 @@ MonoBehaviour:
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &5958659801830284455
 GameObject:
   m_ObjectHideFlags: 0
@@ -3231,7 +3280,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5269931130219637372}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onValueChangedNullable:
     m_PersistentCalls:
       m_Calls: []
@@ -3823,6 +3884,7 @@ GameObject:
   - component: {fileID: 7710903556395533957}
   - component: {fileID: 586673620330516130}
   - component: {fileID: 6635850372446918504}
+  - component: {fileID: 6942844827467190755}
   m_Layer: 5
   m_Name: CloseButton
   m_TagString: Untagged
@@ -3930,7 +3992,32 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 586673620330516130}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &6942844827467190755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8747554084909015976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73c476fa8b46d1f4da5bbaa25e1aec72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  settingsPanel: {fileID: 0}
 --- !u!1 &9042930103158208826
 GameObject:
   m_ObjectHideFlags: 0

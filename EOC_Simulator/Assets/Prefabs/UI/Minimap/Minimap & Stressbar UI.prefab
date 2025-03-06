@@ -68,7 +68,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 39, y: 23.4286}
+  m_AnchoredPosition: {x: 39, y: 23.42871}
   m_SizeDelta: {x: 351.7543, y: 59.7206}
   m_Pivot: {x: 0, y: 0}
 --- !u!222 &2891385463304178981
@@ -371,6 +371,10 @@ PrefabInstance:
     - target: {fileID: 1257276981390628840, guid: 4a316c9007fb9ca418cf962744725afa, type: 3}
       propertyPath: m_Name
       value: HUD
+      objectReference: {fileID: 0}
+    - target: {fileID: 2291728171654209959, guid: 4a316c9007fb9ca418cf962744725afa, type: 3}
+      propertyPath: m_SortingOrder
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 3055480210696198700, guid: 4a316c9007fb9ca418cf962744725afa, type: 3}
       propertyPath: m_Type

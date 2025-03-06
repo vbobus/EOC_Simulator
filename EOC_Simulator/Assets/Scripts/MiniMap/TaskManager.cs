@@ -26,7 +26,7 @@ public class TaskManager : MonoBehaviour
         if (currentTaskIndex < taskDots.Count)
         {
             // 标记当前任务已完成（让当前任务点 dot 隐藏）
-            taskDots[currentTaskIndex].MarkAsInteracted();
+            // taskDots[currentTaskIndex].MarkAsInteracted();
             taskDots[currentTaskIndex].gameObject.SetActive(false);
 
             // 切换到下一个任务

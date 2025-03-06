@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class CheckInTrigger : MonoBehaviour
 {
-    public CheckInForm checkInForm; // 绑定 Check-in 表单
+    public SignInSignOutForm form; // 绑定 Check-in 表单
     public GameObject interactText; // "Press [E] to Check-in" 提示
     public TaskManager taskManager;
     private bool isPlayerNearby = false; // 玩家是否靠近
@@ -17,7 +17,7 @@ public class CheckInTrigger : MonoBehaviour
         // 只有靠近时才能交互
         if (isPlayerNearby && Input.GetKeyDown(KeyCode.E))
         {
-            checkInForm.OpenForm();
+            form.OpenForm();
             taskManager.CompleteCurrentTask();
             Debug.Log("Task 2 (Sign In Form) completed.");
         }

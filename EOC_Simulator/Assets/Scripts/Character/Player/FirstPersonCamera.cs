@@ -39,7 +39,7 @@ namespace Character.Player
         
         private void SwitchedActionMap(ActionMap currentActionMap)
         {
-            Debug.Log($"Switched to {currentActionMap}");
+            // Debug.Log($"Switched to {currentActionMap}");
             _currentActionMap = currentActionMap;
             
             if (currentActionMap == ActionMap.Player)
@@ -57,7 +57,7 @@ namespace Character.Player
         }
 
         
-        // Change
+        // TO DO : Change to on event focuses in the game. Then check
         private void Update()
         {
             if (_currentActionMap == ActionMap.Player)
@@ -69,6 +69,12 @@ namespace Character.Player
 
         public void RotateCamera(Vector2 delta, bool rotatePlayerTransform = true)
         {
+            if (!Application.isFocused)
+            {
+                ResetCamera();
+                return;
+            }
+            
             // Don't rotate the camera, since it will make the frame data
             if (InputManager.Instance.ActionMap != ActionMap.Player) return;
             

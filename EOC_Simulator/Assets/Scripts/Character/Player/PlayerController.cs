@@ -24,7 +24,7 @@ namespace Character.Player
     {
         #region Variables
         // Movement type for the player (e.g., WASD + mouse, mouse only, etc.)
-        [HideInInspector] public InputMovementTypes movementType;
+        public static InputMovementTypes MovementType { get; private set; }
 
         // Required references for the player controller
         [SerializeField] private Animator animator; // Handles player animations
@@ -71,10 +71,10 @@ namespace Character.Player
             InputManager.Instance.On4DirectionMoveActionPressed += HandleDirectionMovement;
             InputManager.Instance.OnPointerDelta += HandlePointerDelta;
             InputManager.Instance.OnLeftClickActionPressed += HandleLeftClickPathfinding;
-            InputManager.Instance.OnInteractActionPressed += TestChangeMovement;
+            // InputManager.Instance.OnInteractActionPressed += TestChangeMovement;
             InputManager.Instance.OnSwitchedActionMap += SwitchedActionMap;
             // Set initial movement type
-            ChangeMovementType(InputMovementTypes.WASD_MOUSE_TO_ROTATE);
+            ChangeMovementType(InputMovementTypes.MOUSE_ONLY);
         }
         
         private void SwitchedActionMap(ActionMap newActionMap)
@@ -93,17 +93,6 @@ namespace Character.Player
             AstarAI.canMove = CanMove;
         }
 
-        /// Test method to cycle through movement types
-        private void TestChangeMovement()
-        {
-            int current = (int)movementType + 1;
-            if (current >= Enum.GetValues(typeof(InputMovementTypes)).Length)
-                current = 0;
-            ChangeMovementType((InputMovementTypes)current);
-        }
-
-        public UnityAction<InputMovementTypes> OnChangeMovementType;
-        
         /// Changes the player's movement type and updates related settings
         public void ChangeMovementType(InputMovementTypes newMovementType)
         {
@@ -122,7 +111,7 @@ namespace Character.Player
                     newMovementType = InputMovementTypes.WASD_MOUSE_TO_ROTATE;
             }
 
-            movementType = newMovementType;
+            MovementType = newMovementType;
             firstPersonCamera.ResetCamera(); // Reset camera to default state
 
             // Stop pathfinding if not in MOUSE_ONLY mode
@@ -134,8 +123,6 @@ namespace Character.Player
             // Enable/disable AIPath component based on movement type
             AIPath aiPath = AstarAI as AIPath;
             if (aiPath != null) aiPath.enabled = isMouseOnly;
-            
-            OnChangeMovementType?.Invoke(newMovementType);
         }
 
         /// Unsubscribe from input events when the object is destroyed
@@ -159,7 +146,7 @@ namespace Character.Player
             base.Update();
 
             // Handle input based on the current movement type
-            switch (movementType)
+            switch (MovementType)
             {
                 case InputMovementTypes.WASD_MOUSE_TO_ROTATE:
                     HandleWasdMouseToRotate(_directionMovement, _delta);
@@ -169,6 +156,16 @@ namespace Character.Player
                     CheckAstarMovement(); // Update pathfinding movement
                     break;
             }
+        }
+
+        protected override void CheckAstarMovement()
+        {
+            if (InputManager.Instance.ActionMapIsUI())
+            {
+                StopWalkingAnimation();
+                return;
+            }
+            base.CheckAstarMovement();
         }
 
         /// Handles movement for WASD + mouse rotation mode
@@ -200,9 +197,7 @@ namespace Character.Player
                 // Switch to idle animation if no input is received for a short time
                 if (Time.time - _lastDirectionInputTime >= DirectionIdleInputTime)
                 {
-                    animator.SetBool(AnimIsWalking, false);
-                    animator.SetFloat(AnimInputX, 0f);
-                    animator.SetFloat(AnimInputY, 0f);
+                    StopWalkingAnimation();
                 }
             }
             else
@@ -227,6 +222,13 @@ namespace Character.Player
             }
         }
 
+        private void StopWalkingAnimation()
+        {
+            animator.SetBool(AnimIsWalking, false);
+            animator.SetFloat(AnimInputX, 0f);
+            animator.SetFloat(AnimInputY, 0f);
+        }
+        
         /// Handles movement for mouse-only mode (uses pathfinding)
         private void HandleMouseOnly(Vector2 delta)
         {
@@ -237,7 +239,7 @@ namespace Character.Player
         /// Handles left-click input for setting a new pathfinding destination
         private void HandleLeftClickPathfinding()
         {
-            if (movementType != InputMovementTypes.MOUSE_ONLY || !CanMoveWithAstar()) return;
+            if (MovementType != InputMovementTypes.MOUSE_ONLY || !CanMoveWithAstar()) return;
             
             // Set the AI destination to the target position
             aiEndDestinationPrefab.transform.position = aiTargetMoveTowards.position;

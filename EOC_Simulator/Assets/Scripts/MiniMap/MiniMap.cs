@@ -36,16 +36,14 @@ namespace MiniMap
             
             _rectTransform = GetComponent<RectTransform>();
             
-            SetUpTarget();
-        }
-
-        private void SetUpTarget()
-        {
             // Set start reference to player
             _playerIcon.player = player;
             _miniMapTargetIcon.player = player;
             _miniMapTargetIcon.miniMapPanel = _rectTransform;
-            
+        }
+
+        private void Start()
+        {
             // Hide the icon at the start
             UpdateNewTarget(null);
         }
@@ -58,13 +56,15 @@ namespace MiniMap
         public void UpdateNewTarget(Transform newTarget)
         {
             if (!_miniMapTargetIcon) return;
-
+            
+            /*
             if (newTarget != null)
                 Debug.Log($"UpdateNewTarget: {newTarget.name}");
             else 
                 Debug.Log($"UpdateNewTarget");
+                */
             
-            _miniMapTargetIcon.Show(newTarget);
+            _miniMapTargetIcon.Show(!newTarget ? false: newTarget);
             _miniMapTargetIcon.target = newTarget;
         }
     }

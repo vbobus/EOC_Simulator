@@ -23,8 +23,9 @@ public class MiniMapTarget : MonoBehaviour
 
     public void Show(bool show)
     {
+        if (_icon == null) return;
         _icon.enabled = show;
-        Debug.Log($"Show icon {show}");
+        // Debug.Log($"Show icon {show}");
     }
     
     void Update()
@@ -55,7 +56,6 @@ public class MiniMapTarget : MonoBehaviour
             }
         }
 
-        // **更新 Target Icon 的 UI 位置**
         iconTransform.anchoredPosition = miniMapPos;
     }
     

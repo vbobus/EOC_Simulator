@@ -1,6 +1,8 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 using Character.Player;
+using Events;
 using TMPro;
 
 public class MovementControlSwitcher : MonoBehaviour
@@ -17,31 +19,33 @@ public class MovementControlSwitcher : MonoBehaviour
 
     [SerializeField] private PlayerController playerController;
 
-    private int currentIndex = 0; // 0 => WASD, 1 => Mouse
-
+    private int _currentMovementIndex = 0;
+    private int _maxMovementIndex = 0;
     private void Start()
     {
         leftArrowButton.onClick.AddListener(PrevOption);
         rightArrowButton.onClick.AddListener(NextOption);
 
+        _currentMovementIndex = (int)PlayerController.MovementType;
+        _maxMovementIndex = Enum.GetValues(typeof(InputMovementTypes)).Length;
         UpdateOptionDisplay();
     }
 
     private void PrevOption()
     {
-        currentIndex = (currentIndex + 1) % 2;
+        _currentMovementIndex = (_currentMovementIndex + 1) % _maxMovementIndex;
         UpdateOptionDisplay(); 
     }
 
     private void NextOption()
     {
-        currentIndex = (currentIndex + 1) % 2;
+        _currentMovementIndex = (_currentMovementIndex + 1) % _maxMovementIndex;
         UpdateOptionDisplay();
     }
 
     private void UpdateOptionDisplay()
     {
-        if (currentIndex == 0)
+        if (_currentMovementIndex == 0)
         {
             optionsImage.sprite = wasdSprite;
             optionsLabel.text = wasdText;

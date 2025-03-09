@@ -1,3 +1,4 @@
+using System;
 using Events;
 using UnityEngine;
 
@@ -7,7 +8,6 @@ namespace Character.Player
     {
         [SerializeField] private LayerMask layerMask;
         [SerializeField] private float maxDistanceRayCheck = 10f;
-        [SerializeField] private float smoothSpeed = 10f; // Adjust for smoother movement
         private Vector3 _targetPosition;
         private Camera _mainCam;
 
@@ -17,12 +17,17 @@ namespace Character.Player
         
         private void Awake()
         {
-            InputManager.Instance.OnPointerPosition += PointerPositionUpdate;
+            // InputManager.Instance.OnPointerPosition += PointerPositionUpdate;
             _mainCam = Camera.main;
             if (!_mainCam) 
                 throw new UnityException($"Missing main camera");
         }
-        
+
+        private void Update()
+        {
+            PointerPositionUpdate(new Vector2(Screen.width / 2f, Screen.height / 2f));
+        }
+
         private void PointerPositionUpdate(Vector2 pointerPosition)
         {
             if (!playerController.CanMoveWithAstar())
@@ -46,9 +51,8 @@ namespace Character.Player
                 Physics.Raycast(wallToGroundRay, out hit, maxDistanceRayCheck, LayerMask.GetMask("Ground"));
                 _targetPosition = hit.point;
             }
-                
-            // Smoothly move the target towards the new position
-            transform.position = Vector3.Lerp(transform.position, _targetPosition, smoothSpeed * Time.deltaTime);
+
+            transform.position = _targetPosition;
         }
     }
 }

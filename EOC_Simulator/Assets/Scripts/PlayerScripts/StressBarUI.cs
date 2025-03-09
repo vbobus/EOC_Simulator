@@ -33,7 +33,7 @@ public class StressBarUI : MonoBehaviour
     [Header("🎯 Screen Blur Effect")]
     public Volume postProcessVolume;
     private DepthOfField depthOfField;
-    private float blurIntensity = 0f; // 模糊强度
+    // private float blurIntensity = 0f; // 模糊强度
     private bool isBlurred = false;
 
     void Start()

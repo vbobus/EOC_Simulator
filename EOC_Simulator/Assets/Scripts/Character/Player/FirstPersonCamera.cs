@@ -32,7 +32,7 @@ namespace Character.Player
 
         void Start()
         {
-            SwitchedActionMap(ActionMap.Player);
+            SwitchedActionMap(InputManager.Instance.ActionMap);
         }
         
         private ActionMap _currentActionMap;
@@ -60,25 +60,19 @@ namespace Character.Player
         // TO DO : Change to on event focuses in the game. Then check
         private void Update()
         {
-            if (_currentActionMap == ActionMap.Player)
-            {
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
-            }
+            if (_currentActionMap != ActionMap.Player) return;
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
         }
 
         public void RotateCamera(Vector2 delta, bool rotatePlayerTransform = true)
         {
-            if (!Application.isFocused)
+            if (!Application.isFocused || InputManager.Instance.ActionMap != ActionMap.Player || Cursor.lockState != CursorLockMode.Locked || !IsMouseInsideScreen())
             {
                 ResetCamera();
                 return;
             }
             
-            // Don't rotate the camera, since it will make the frame data
-            if (InputManager.Instance.ActionMap != ActionMap.Player) return;
-            
-            // Scale the delta by sensitivity and frame time
             Vector2 rawFrameVelocity = Vector2.Scale(delta, Vector2.one * (sensitivity * Time.deltaTime));
 
             // Smooth the frame velocity
@@ -101,6 +95,13 @@ namespace Character.Player
         public void ResetCamera()
         {
             _frameVelocity = Vector2.zero;
+        }
+        
+        private bool IsMouseInsideScreen()
+        {
+            Vector3 mousePos = Input.mousePosition;
+            return mousePos.x >= 0 && mousePos.x <= Screen.width &&
+                   mousePos.y >= 0 && mousePos.y <= Screen.height;
         }
     }
 }

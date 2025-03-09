@@ -73,9 +73,9 @@ namespace Events
         private void Start()
         {
             // Temp solution
-            SwitchToPlayerMap();
+            // SwitchToPlayerMap();
             SwitchToUIMap();
-            SwitchToPlayerMap();
+            // SwitchToPlayerMap();
             
             inputActions.FindActionMap("Common").Enable();
         }

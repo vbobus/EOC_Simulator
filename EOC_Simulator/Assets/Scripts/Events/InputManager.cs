@@ -203,8 +203,8 @@ namespace Events
         {
             if (_inDialogue) return;
          
-            InFocusPlayerMap();
-            // clickToPlayCanvas.SetActive(true);
+            // InFocusPlayerMap();
+            clickToPlayCanvas.SetActive(true);
         }
 
         public void InFocusPlayerMap()

@@ -1346,18 +1346,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3915082635581450221, guid: a75fbda30c73dc34fab497e294564157, type: 3}
-      propertyPath: selectedColor.b
-      value: 0.32941177
-      objectReference: {fileID: 0}
-    - target: {fileID: 3915082635581450221, guid: a75fbda30c73dc34fab497e294564157, type: 3}
-      propertyPath: selectedColor.g
-      value: 0.76470596
-      objectReference: {fileID: 0}
-    - target: {fileID: 3915082635581450221, guid: a75fbda30c73dc34fab497e294564157, type: 3}
-      propertyPath: selectedColor.r
-      value: 0.2509804
-      objectReference: {fileID: 0}
     - target: {fileID: 3926480896895206316, guid: a75fbda30c73dc34fab497e294564157, type: 3}
       propertyPath: m_Name
       value: UI
@@ -1422,10 +1410,6 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 1690724189}
-    - target: {fileID: 7283598258844233520, guid: a75fbda30c73dc34fab497e294564157, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: SwitchToPlayerMapInDialogue
-      objectReference: {fileID: 0}
     - target: {fileID: 7709268391055308214, guid: a75fbda30c73dc34fab497e294564157, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

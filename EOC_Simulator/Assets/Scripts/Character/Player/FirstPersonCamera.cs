@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using Events;
+using PixelCrushers;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -51,16 +52,18 @@ namespace Character.Player
             // Debug.Log($"Switched to {currentActionMap}");
             _currentActionMap = currentActionMap;
             
-            if (currentActionMap == ActionMap.Player)
-            {
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
-            }
-            else
-            {
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true;
-            }
+            // if (currentActionMap == ActionMap.Player)
+            // {
+            //     Cursor.lockState = CursorLockMode.Locked;
+            //     // Cursor.visible = false;
+            // }
+            // else
+            // {
+            //     Cursor.lockState = CursorLockMode.None;
+            //     // Cursor.visible = true;
+            // }
+            
+            CursorControl.LockCursor(currentActionMap == ActionMap.Player);
             
             ResetCamera();
         }
@@ -82,7 +85,7 @@ namespace Character.Player
         
         public void RotateCamera(Vector2 delta, bool rotatePlayerTransform = true)
         {
-            if (!Application.isFocused || InputManager.Instance.ActionMap != ActionMap.Player || Cursor.lockState != CursorLockMode.Locked || !IsMouseInsideScreen())
+            if (!Application.isFocused || InputManager.Instance.ActionMap != ActionMap.Player)
             {
                 ResetCamera();
                 return;

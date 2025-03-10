@@ -9009,6 +9009,18 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6391574422998011657, guid: 90d7d951bde8a23489cf921c62dacaa8, type: 3}
+      propertyPath: selectedColor.b
+      value: 0.32941177
+      objectReference: {fileID: 0}
+    - target: {fileID: 6391574422998011657, guid: 90d7d951bde8a23489cf921c62dacaa8, type: 3}
+      propertyPath: selectedColor.g
+      value: 0.76470596
+      objectReference: {fileID: 0}
+    - target: {fileID: 6391574422998011657, guid: 90d7d951bde8a23489cf921c62dacaa8, type: 3}
+      propertyPath: selectedColor.r
+      value: 0.2509804
+      objectReference: {fileID: 0}
+    - target: {fileID: 6391574422998011657, guid: 90d7d951bde8a23489cf921c62dacaa8, type: 3}
       propertyPath: laptopScreenPanel
       value: 
       objectReference: {fileID: 8389146202752166312}

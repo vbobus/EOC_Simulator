@@ -59,12 +59,12 @@ namespace UI.Forms
             }
             
             signInFormsPanel.SetActive(false);
-            InputManager.Instance.SwitchToPlayerMap();
+            InputManager.Instance.SwitchToPlayerMapInDialogue();
         }
 
         public void OnStartSignIn()
         {
-            InputManager.Instance.SwitchToUIMap();
+            InputManager.Instance.SwitchToUIMapInDialogue();
             _signState = SignState.SignIn;
 
             nameInputField.enabled = true;
@@ -76,7 +76,7 @@ namespace UI.Forms
         
         public void OnStartSignOut()
         {
-            InputManager.Instance.SwitchToUIMap();
+            InputManager.Instance.SwitchToUIMapInDialogue();
             _signState = SignState.SignOut;
             
             nameInputField.enabled = false;

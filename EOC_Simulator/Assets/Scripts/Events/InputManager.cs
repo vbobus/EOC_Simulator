@@ -202,8 +202,9 @@ namespace Events
         public void SwitchToPlayerMap()
         {
             if (_inDialogue) return;
-            
-            clickToPlayCanvas.SetActive(true);
+         
+            InFocusPlayerMap();
+            // clickToPlayCanvas.SetActive(true);
         }
 
         public void InFocusPlayerMap()

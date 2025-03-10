@@ -28,7 +28,6 @@ namespace Character.Player
 
         // Required references for the player controller
         [SerializeField] private Animator animator; // Handles player animations
-        [SerializeField] private FirstPersonCamera firstPersonCamera; // Handles camera rotation
         [SerializeField] private LayerMask collisionLayerMask; // Layer mask for collision detection
 
         // Input values for movement and camera rotation
@@ -112,7 +111,6 @@ namespace Character.Player
             }
 
             MovementType = newMovementType;
-            firstPersonCamera.ResetCamera(); // Reset camera to default state
 
             // Stop pathfinding if not in MOUSE_ONLY mode
             if (AstarAI == null) return;
@@ -152,7 +150,6 @@ namespace Character.Player
                     HandleWasdMouseToRotate(_directionMovement, _delta);
                     break;
                 case InputMovementTypes.MOUSE_ONLY:
-                    HandleMouseOnly(_delta);
                     CheckAstarMovement(); // Update pathfinding movement
                     break;
             }
@@ -184,9 +181,6 @@ namespace Character.Player
             _characterController.Move(movement * (movementSpeed * Time.deltaTime) + _velocity * Time.deltaTime);
 
             Velocity = _characterController.velocity;
-
-            // Rotate the camera based on mouse input
-            firstPersonCamera.RotateCamera(delta);
         }
 
         /// Updates walk/idle animations based on movement input
@@ -229,13 +223,6 @@ namespace Character.Player
             animator.SetFloat(AnimInputY, 0f);
         }
         
-        /// Handles movement for mouse-only mode (uses pathfinding)
-        private void HandleMouseOnly(Vector2 delta)
-        {
-            // Rotate the camera based on mouse input
-            firstPersonCamera.RotateCamera(delta);
-        }
-
         /// Handles left-click input for setting a new pathfinding destination
         private void HandleLeftClickPathfinding()
         {

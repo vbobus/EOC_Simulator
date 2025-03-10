@@ -3,6 +3,7 @@ using System.Collections;
 using Events;
 using Unity.Cinemachine;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 
 namespace Character.Player
@@ -28,6 +29,14 @@ namespace Character.Player
         {
             playerCamera = GetComponent<CinemachineCamera>();
             InputManager.Instance.OnSwitchedActionMap += SwitchedActionMap;
+            InputManager.Instance.OnPointerDelta += OnUpdateDelta;
+        }
+
+        private Vector2 _delta;
+        
+        private void OnUpdateDelta(Vector2 arg0)
+        {
+            _delta = arg0;
         }
 
         void Start()
@@ -58,13 +67,19 @@ namespace Character.Player
 
         
         // TO DO : Change to on event focuses in the game. Then check
-        private void Update()
-        {
-            if (_currentActionMap != ActionMap.Player) return;
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
-        }
+        // private void Update()
+        // {
+        //     if (_currentActionMap != ActionMap.Player) return;
+        //     Cursor.lockState = CursorLockMode.Locked;
+        //     Cursor.visible = false;
+        // }
 
+        private void LateUpdate()
+        {
+            RotateCamera(_delta);
+        }
+        
+        
         public void RotateCamera(Vector2 delta, bool rotatePlayerTransform = true)
         {
             if (!Application.isFocused || InputManager.Instance.ActionMap != ActionMap.Player || Cursor.lockState != CursorLockMode.Locked || !IsMouseInsideScreen())

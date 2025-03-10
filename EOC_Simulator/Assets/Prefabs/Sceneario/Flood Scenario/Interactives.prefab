@@ -32,8 +32,8 @@ Transform:
   m_GameObject: {fileID: 216340704627163285}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.7102, y: 0.552, z: 8.1121}
-  m_LocalScale: {x: 6.7095494, y: 1, z: 5.568047}
+  m_LocalPosition: {x: -2.3083, y: 0.552, z: 5.82}
+  m_LocalScale: {x: 2.265455, y: 1, z: 0.98387355}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2267636193640314571}
@@ -3539,7 +3539,19 @@ MonoBehaviour:
   setAnimatorStateActions: []
   onExecute:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: LaptopUIController, Assembly-CSharp
+        m_MethodName: ShowLaptopUI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   useConversationTitlePicker: 1
   useBarkTitlePicker: 1
   useQuestNamePicker: 1
@@ -3716,35 +3728,35 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 035a2e0fd0636aa409a57498b2f2b349, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8.36
+      value: -8.493
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 035a2e0fd0636aa409a57498b2f2b349, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.9582299
+      value: 2.075
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 035a2e0fd0636aa409a57498b2f2b349, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.85
+      value: 0.581
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 035a2e0fd0636aa409a57498b2f2b349, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.7071065
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 035a2e0fd0636aa409a57498b2f2b349, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 035a2e0fd0636aa409a57498b2f2b349, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.7071071
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 035a2e0fd0636aa409a57498b2f2b349, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 035a2e0fd0636aa409a57498b2f2b349, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
+      value: -90
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 035a2e0fd0636aa409a57498b2f2b349, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -3761,7 +3773,11 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 035a2e0fd0636aa409a57498b2f2b349, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 5bafa177a67d1de4199b3215026c9129, type: 2}
+      objectReference: {fileID: 2100000, guid: 2b04df400be5f344893711b66db97989, type: 2}
+    - target: {fileID: -5754084199372789682, guid: 035a2e0fd0636aa409a57498b2f2b349, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 3941715523697911101, guid: 8a12c1743f1bccf4998718bdb54a01b6, type: 3}
     - target: {fileID: 919132149155446097, guid: 035a2e0fd0636aa409a57498b2f2b349, type: 3}
       propertyPath: m_Name
       value: Display Board
@@ -3817,8 +3833,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.2225436, y: 2.6435282, z: 1.7068421}
-  m_Center: {x: -0.011396289, y: -0.6364552, z: 0.84142655}
+  m_Size: {x: 1.2225436, y: 2.6435285, z: 1.8458612}
+  m_Center: {x: -0.011396289, y: -1.2, z: -1.1295096}
 --- !u!114 &955294886924904013
 MonoBehaviour:
   m_ObjectHideFlags: 0

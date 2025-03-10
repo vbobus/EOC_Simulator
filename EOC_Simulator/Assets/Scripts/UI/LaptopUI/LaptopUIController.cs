@@ -6,88 +6,88 @@ using System.Linq;
 
 public class LaptopUIController : MonoBehaviour
 {
+    [Header("Main Panel")]
+    [SerializeField] private GameObject laptopScreenPanel;  
+
     [Header("Panels")]
-    [SerializeField] private GameObject panelSelectDisplays;
-    [SerializeField] private GameObject panelResults;
+    [SerializeField] private GameObject panelSelectDisplays; 
+    [SerializeField] private GameObject panelResults;        
 
     [Header("Selection Panel UI")]
-    [SerializeField] private Button[] displayButtons;      // 6 Buttons in DisplayGrid
+    [SerializeField] private Button[] displayButtons;       
     [SerializeField] private TextMeshProUGUI selectionCountText;
     [SerializeField] private Button confirmButton;
 
     [Header("Results Panel UI")]
     [SerializeField] private TextMeshProUGUI resultsTitleText;
-    [SerializeField] private Button updateDisplaysButton;  // triggers EOC monitor updates
+    [SerializeField] private Button updateDisplaysButton;  
     [SerializeField] private Button closeButton;
-    // 'Answers' image is purely static, so we don't need a reference if it's not changing.
 
     [Header("Minigame Settings")]
     [SerializeField] private int maxSelections = 3; 
-    [Tooltip("Names of the Buttons that are correct answers")]
     [SerializeField] private string[] correctAnswers = {
         "Situation/Event Map",
         "Weather Forecast Board",
         "Issues and Action Tracker"
     };
 
-    [Header("EOC Monitors")]
-    [SerializeField] private Image eocMonitor1;
-    [SerializeField] private Image eocMonitor2;
-
-    [Header("EOC Monitor Sprites")]
-    [SerializeField] private Sprite allCorrectSprite;
-    [SerializeField] private Sprite partialCorrectSprite;
-    [SerializeField] private Sprite noCorrectSprite;
-
-    // Track which buttons are selected
-    private bool[] isSelected;  
-    // Store how many were correct
-    private int correctCount = 0;
-
-    // Colors for selected vs. unselected buttons (example)
     [Header("Selection Colors")]
     [SerializeField] private Color normalColor = Color.white;
     [SerializeField] private Color selectedColor = Color.green;
 
+    // Tracking button selections
+    private bool[] isSelected;
+    private int correctCount = 0;
+
     private void Awake()
     {
-        // Initialize the array to match the number of display buttons
+        // Prepare the isSelected array to match the number of display buttons
         isSelected = new bool[displayButtons.Length];
-
-        // Make sure the results panel is hidden at the start
-        if (panelResults != null) panelResults.SetActive(false);
-
-        // Set up button click listeners
+        
         for (int i = 0; i < displayButtons.Length; i++)
         {
-            int index = i;  // capture i in a local variable for the lambda
+            int index = i; 
             displayButtons[i].onClick.AddListener(() => OnDisplayButtonClicked(index));
         }
 
-        // Confirm, Update, Close button listeners
-        if (confirmButton != null)
-            confirmButton.onClick.AddListener(OnConfirmSelection);
-
-        if (updateDisplaysButton != null)
-            updateDisplaysButton.onClick.AddListener(OnUpdateDisplaysClicked);
-
-        if (closeButton != null)
-            closeButton.onClick.AddListener(OnCloseResults);
+        // Hook up Confirm, Update, and Close
+        if (confirmButton != null) confirmButton.onClick.AddListener(OnConfirmSelection);
+        if (updateDisplaysButton != null) updateDisplaysButton.onClick.AddListener(OnUpdateDisplaysClicked);
+        if (closeButton != null) closeButton.onClick.AddListener(OnCloseLaptop);
     }
 
     private void Start()
     {
-        UpdateSelectionsCount();
-        // Ensure buttons have the correct initial color (unselected)
+        // Hide the entire laptop UI at startup
+        if (laptopScreenPanel != null) laptopScreenPanel.SetActive(false);
+
+        // Optionally ensure panels are in their initial states
+        if (panelResults != null) panelResults.SetActive(false);
+        if (panelSelectDisplays != null) panelSelectDisplays.SetActive(true);
+
+        // Initialize button colors and selection count text
         for (int i = 0; i < displayButtons.Length; i++)
         {
             SetButtonColor(i, normalColor);
+        }
+        UpdateSelectionsCount();
+    }
+
+    /// <summary>
+    /// Public method to show the laptop UI.
+    /// Call this from a Dialogue System trigger (SendMessage or UnityEvent).
+    /// </summary>
+    public void ShowLaptopUI()
+    {
+        if (laptopScreenPanel != null)
+        {
+            laptopScreenPanel.SetActive(true);
         }
     }
 
     /// <summary>
     /// Called when a display button is clicked.
-    /// Toggles the selected state for that button index.
+    /// Toggles selection state and enforces max selection limit.
     /// </summary>
     private void OnDisplayButtonClicked(int index)
     {
@@ -95,13 +95,13 @@ public class LaptopUIController : MonoBehaviour
 
         if (currentlySelected)
         {
-            // If already selected, unselect
+            // Unselect
             isSelected[index] = false;
             SetButtonColor(index, normalColor);
         }
         else
         {
-            // If not selected, check if we can select it
+            // If not selected, check limit
             if (CountSelected() < maxSelections)
             {
                 isSelected[index] = true;
@@ -109,7 +109,6 @@ public class LaptopUIController : MonoBehaviour
             }
             else
             {
-                // Optionally give feedback: beep, flash, or do nothing
                 Debug.Log("Cannot select more than " + maxSelections);
             }
         }
@@ -118,107 +117,73 @@ public class LaptopUIController : MonoBehaviour
     }
 
     /// <summary>
-    /// Updates the "Selected X/3 displays" text.
+    /// Updates the "Selected X/3" text.
     /// </summary>
     private void UpdateSelectionsCount()
     {
-        int selectedCount = CountSelected();
-        selectionCountText.text = $"Selected {selectedCount}/{maxSelections} displays";
+        selectionCountText.text = $"Selected {CountSelected()}/{maxSelections} displays";
     }
 
-    /// <summary>
-    /// Returns how many buttons are currently selected.
-    /// </summary>
     private int CountSelected()
     {
         return isSelected.Count(s => s);
     }
 
-    /// <summary>
-    /// Changes the button's image color to indicate selection or not.
-    /// </summary>
     private void SetButtonColor(int index, Color color)
     {
-        Image btnImage = displayButtons[index].GetComponent<Image>();
-        if (btnImage != null)
+        var buttonImage = displayButtons[index].GetComponent<Image>();
+        if (buttonImage != null)
         {
-            btnImage.color = color;
+            buttonImage.color = color;
         }
     }
 
     /// <summary>
-    /// Called when user clicks the ConfirmButton.
-    /// Counts how many selected are correct, shows results panel.
+    /// Called when ConfirmButton is clicked.
     /// </summary>
     private void OnConfirmSelection()
     {
-        // 1. Gather the names of the selected buttons
-        List<string> selectedNames = new List<string>();
+        // Determine how many are correct
+        correctCount = 0;
+
         for (int i = 0; i < displayButtons.Length; i++)
         {
             if (isSelected[i])
             {
-                // Use the button's GameObject name to compare with correctAnswers
-                selectedNames.Add(displayButtons[i].gameObject.name);
+                string buttonName = displayButtons[i].gameObject.name;
+                if (correctAnswers.Contains(buttonName))
+                {
+                    correctCount++;
+                }
             }
         }
 
-        // 2. Determine how many are correct
-        correctCount = 0;
-        foreach (var name in selectedNames)
-        {
-            if (correctAnswers.Contains(name))
-            {
-                correctCount++;
-            }
-        }
-
-        // 3. Update the results panel text
+        // Show results
         if (resultsTitleText != null)
         {
             resultsTitleText.text = $"You got {correctCount}/{maxSelections} correct!";
         }
 
-        // 4. Switch panels
-        panelSelectDisplays.SetActive(false);
-        panelResults.SetActive(true);
+        if (panelSelectDisplays != null) panelSelectDisplays.SetActive(false);
+        if (panelResults != null) panelResults.SetActive(true);
     }
 
     /// <summary>
-    /// Called when the user clicks "UpdateDisplaysButton" on the results panel.
-    /// Updates the EOC monitors in the scene with certain sprites.
+    /// Called when "UpdateDisplaysButton" is clicked (if you want to update external monitors, etc.)
     /// </summary>
     private void OnUpdateDisplaysClicked()
     {
-        if (correctCount == maxSelections)
-        {
-            // All correct
-            if (eocMonitor1 != null) eocMonitor1.sprite = allCorrectSprite;
-            if (eocMonitor2 != null) eocMonitor2.sprite = allCorrectSprite;
-        }
-        else if (correctCount > 0)
-        {
-            // Some correct
-            if (eocMonitor1 != null) eocMonitor1.sprite = partialCorrectSprite;
-            if (eocMonitor2 != null) eocMonitor2.sprite = partialCorrectSprite;
-        }
-        else
-        {
-            // None correct
-            if (eocMonitor1 != null) eocMonitor1.sprite = noCorrectSprite;
-            if (eocMonitor2 != null) eocMonitor2.sprite = noCorrectSprite;
-        }
-
-        // (Optional) If using Dialogue System or quest logic:
-        // PixelCrushers.DialogueSystem.Lua.Run("QuestLog.SetQuestState('UpdateDisplays','success')");
+        Debug.Log("UpdateDisplaysButton clicked. Implement update EOC monitors).");
     }
 
     /// <summary>
-    /// Closes the laptop UI.
+    /// Closes the laptop UI entirely.
     /// </summary>
-    private void OnCloseResults()
+    private void OnCloseLaptop()
     {
-        // Hide the entire laptop screen panel
-        this.gameObject.SetActive(false);
+        if (laptopScreenPanel != null)
+        {
+            laptopScreenPanel.SetActive(false);
+        }
     }
 }

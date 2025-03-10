@@ -239,7 +239,8 @@ namespace PixelCrushers.DialogueSystem
             elements.nameText.text = usable.GetName();
             elements.useMessageText.text = GetUseMessage();
             Tools.SetGameObjectActive(elements.reticleInRange, IsUsableInRange());
-            Tools.SetGameObjectActive(elements.reticleOutOfRange, !IsUsableInRange());
+            // Tools.SetGameObjectActive(elements.reticleOutOfRange, !elements.reticleInRange.IsActive());
+            
             if (CanTriggerAnimations() && !string.IsNullOrEmpty(elements.animationTransitions.showTrigger))
             {
                 elements.animator.ResetTrigger(elements.animationTransitions.hideTrigger);
@@ -281,6 +282,8 @@ namespace PixelCrushers.DialogueSystem
             {
                 UpdateDisplay(IsUsableInRange());
             }
+            
+            Tools.SetGameObjectActive(elements.reticleOutOfRange, !elements.reticleInRange.IsActive());
         }
 
         protected void OnSelectorEnabled()
@@ -347,7 +350,7 @@ namespace PixelCrushers.DialogueSystem
         {
             if (elements == null) return;
             Tools.SetGameObjectActive(elements.reticleInRange, inRange);
-            Tools.SetGameObjectActive(elements.reticleOutOfRange, !inRange);
+            // Tools.SetGameObjectActive(elements.reticleOutOfRange, !inRange);
         }
 
         private bool CanTriggerAnimations()

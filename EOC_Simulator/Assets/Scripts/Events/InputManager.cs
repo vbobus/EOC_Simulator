@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 namespace Events
 {
@@ -36,6 +37,11 @@ namespace Events
 
         [SerializeField] private InputActionReference commonExitAction;
         
+        
+        
+        [Header("WebGL Click to play after UI")]        
+        [SerializeField] private GameObject clickToPlayCanvas;
+
         /// <summary>
         /// Can be used for normal WASD movement, or WS for forward and back, and AD for rotation.
         /// <para>Can also use the arrow keys</para>
@@ -73,9 +79,9 @@ namespace Events
         private void Start()
         {
             // Temp solution
-            SwitchToPlayerMap();
+            // SwitchToPlayerMap();
             SwitchToUIMap();
-            SwitchToPlayerMap();
+            // SwitchToPlayerMap();
             
             inputActions.FindActionMap("Common").Enable();
         }
@@ -166,12 +172,14 @@ namespace Events
         {
             SwitchToUIMap();
             _inDialogue = true;
+            clickToPlayCanvas.SetActive(false);
         }
         
         public void SwitchToPlayerMapInDialogue()
         {
             _inDialogue = false;
-            SwitchToPlayerMap();
+            // SwitchToPlayerMap();
+            clickToPlayCanvas.SetActive(true);
         }
 
         private bool _inDialogue = false;
@@ -194,6 +202,13 @@ namespace Events
         public void SwitchToPlayerMap()
         {
             if (_inDialogue) return;
+         
+            InFocusPlayerMap();
+            // clickToPlayCanvas.SetActive(true);
+        }
+
+        public void InFocusPlayerMap()
+        {
             // Disable the UI action map
             inputActions.FindActionMap("UI").Disable();
 

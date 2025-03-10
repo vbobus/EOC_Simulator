@@ -3,6 +3,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -96,6 +97,9 @@ namespace PixelCrushers.DialogueSystem
                 this.entryID = entryID;
             }
         }
+        
+        [Header("Custom Changes")]
+        public TMP_Text actorNameText;
 
         protected List<DialogueEntryRecord> records = new List<DialogueEntryRecord>();
 
@@ -162,8 +166,10 @@ namespace PixelCrushers.DialogueSystem
 
             Tools.SetGameObjectActive(npcPreDelaySettings.preDelayIcon, false);
             Tools.SetGameObjectActive(pcPreDelaySettings.preDelayIcon, false);
+            
         }
-
+        
+        // Update based on actor name, get convesernt as the text
         public override void Close()
         {
             StopAllCoroutines();
@@ -172,11 +178,16 @@ namespace PixelCrushers.DialogueSystem
             shouldShowContinueButton = false;
         }
 
+        
         public override void ShowSubtitle(Subtitle subtitle)
         {
             if (subtitle.dialogueEntry.id == 0) return; // Don't need to show START entry.
             if (string.IsNullOrEmpty(subtitle.formattedText.text)) return;
             var preDelay = subtitle.speakerInfo.IsNPC ? npcPreDelaySettings.GetDelayDuration(subtitle) : pcPreDelaySettings.GetDelayDuration(subtitle);
+
+            DialogueActor actor = GetDialogueActor(subtitle);
+            if (actor && actorNameText) actorNameText.text = actor.GetActorName(); 
+            
             if (Mathf.Approximately(0, preDelay))
             {
                 AddMessage(subtitle);
@@ -234,6 +245,7 @@ namespace PixelCrushers.DialogueSystem
             }
             dialogueActor = DialogueActor.GetDialogueActorComponent(subtitle.speakerInfo.transform);
             dialogueActorCache[subtitle.speakerInfo.transform] = dialogueActor;
+            
             return dialogueActor;
         }
 

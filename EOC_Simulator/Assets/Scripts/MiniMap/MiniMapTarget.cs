@@ -14,7 +14,6 @@ public class MiniMapTarget : MonoBehaviour
     [SerializeField] private float mapScale = 30f; // MiniMap 缩放系数    Need to make this happen in code, since its dependent on another variable in the Camera
     [SerializeField] private bool clampToEdge = true; // 是否固定在 MiniMap 边缘
 
-    private bool hasInteracted = false;
     private Image _icon;
     void Awake()
     {
@@ -24,8 +23,9 @@ public class MiniMapTarget : MonoBehaviour
 
     public void Show(bool show)
     {
+        if (_icon == null) return;
         _icon.enabled = show;
-        Debug.Log($"Show icon {show}");
+        // Debug.Log($"Show icon {show}");
     }
     
     void Update()
@@ -56,13 +56,7 @@ public class MiniMapTarget : MonoBehaviour
             }
         }
 
-        // **更新 Target Icon 的 UI 位置**
         iconTransform.anchoredPosition = miniMapPos;
     }
     
-    // 外部调用，当任务完成后隐藏图标和文字
-    public void MarkAsInteracted()
-    {
-        hasInteracted = true;
-    }
 }

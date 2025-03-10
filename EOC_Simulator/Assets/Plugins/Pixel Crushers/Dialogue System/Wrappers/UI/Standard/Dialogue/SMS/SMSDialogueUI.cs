@@ -1,5 +1,6 @@
 ﻿// Copyright (c) Pixel Crushers. All rights reserved.
 
+using TMPro;
 using UnityEngine;
 
 namespace PixelCrushers.DialogueSystem.Wrappers
@@ -12,6 +13,9 @@ namespace PixelCrushers.DialogueSystem.Wrappers
     [AddComponentMenu("Pixel Crushers/Dialogue System/UI/Standard UI/Dialogue/SMS/SMS Dialogue UI")]
     public class SMSDialogueUI : PixelCrushers.DialogueSystem.SMSDialogueUI
     {
+        // public TMP_Text actorNameText;
+
+
     }
 
 }

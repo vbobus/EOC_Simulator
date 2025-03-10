@@ -62,9 +62,10 @@ namespace Character
         
         protected void SetDestination(Vector3 destination) => AstarAI.destination = destination;
         
-        protected void CheckAstarMovement()
+        protected virtual void CheckAstarMovement()
         {
             if (AstarAI == null) return;
+            
             // Get the remaining path from the A* AI component
             _waypoints.Clear();
             AstarAI.GetRemainingPath(_waypoints, out _);

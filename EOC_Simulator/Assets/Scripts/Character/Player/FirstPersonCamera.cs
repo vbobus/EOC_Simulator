@@ -3,6 +3,7 @@ using System.Collections;
 using Events;
 using Unity.Cinemachine;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 
 namespace Character.Player
@@ -28,21 +29,32 @@ namespace Character.Player
         {
             playerCamera = GetComponent<CinemachineCamera>();
             InputManager.Instance.OnSwitchedActionMap += SwitchedActionMap;
+            InputManager.Instance.OnPointerDelta += OnUpdateDelta;
+        }
+
+        private Vector2 _delta;
+        
+        private void OnUpdateDelta(Vector2 arg0)
+        {
+            _delta = arg0;
         }
 
         void Start()
         {
-            ResetCamera();
+            SwitchedActionMap(InputManager.Instance.ActionMap);
         }
+        
+        private ActionMap _currentActionMap;
         
         private void SwitchedActionMap(ActionMap currentActionMap)
         {
-            Debug.Log($"Switched to {currentActionMap}");
+            // Debug.Log($"Switched to {currentActionMap}");
+            _currentActionMap = currentActionMap;
+            
             if (currentActionMap == ActionMap.Player)
             {
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
-                // StartCoroutine(ConfineCursor());
             }
             else
             {
@@ -53,18 +65,29 @@ namespace Character.Player
             ResetCamera();
         }
 
-        private IEnumerator ConfineCursor()
+        
+        // TO DO : Change to on event focuses in the game. Then check
+        // private void Update()
+        // {
+        //     if (_currentActionMap != ActionMap.Player) return;
+        //     Cursor.lockState = CursorLockMode.Locked;
+        //     Cursor.visible = false;
+        // }
+
+        private void LateUpdate()
         {
-            yield return new WaitForEndOfFrame(); // Wait for Unity to update
-            Cursor.lockState = CursorLockMode.Confined;
+            RotateCamera(_delta);
         }
+        
         
         public void RotateCamera(Vector2 delta, bool rotatePlayerTransform = true)
         {
-            // Don't rotate the camera, since it will make the frame data
-            if (InputManager.Instance.ActionMap != ActionMap.Player) return;
+            if (!Application.isFocused || InputManager.Instance.ActionMap != ActionMap.Player || Cursor.lockState != CursorLockMode.Locked || !IsMouseInsideScreen())
+            {
+                ResetCamera();
+                return;
+            }
             
-            // Scale the delta by sensitivity and frame time
             Vector2 rawFrameVelocity = Vector2.Scale(delta, Vector2.one * (sensitivity * Time.deltaTime));
 
             // Smooth the frame velocity
@@ -87,6 +110,13 @@ namespace Character.Player
         public void ResetCamera()
         {
             _frameVelocity = Vector2.zero;
+        }
+        
+        private bool IsMouseInsideScreen()
+        {
+            Vector3 mousePos = Input.mousePosition;
+            return mousePos.x >= 0 && mousePos.x <= Screen.width &&
+                   mousePos.y >= 0 && mousePos.y <= Screen.height;
         }
     }
 }

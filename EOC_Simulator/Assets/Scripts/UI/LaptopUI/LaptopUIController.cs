@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using TMPro;
 using System.Collections.Generic;
 using System.Linq;
+using Events;  
 
 public class LaptopUIController : MonoBehaviour
 {
@@ -43,7 +44,8 @@ public class LaptopUIController : MonoBehaviour
     {
         // Prepare the isSelected array to match the number of display buttons
         isSelected = new bool[displayButtons.Length];
-        
+
+        // Hook up button clicks for the 6 display buttons
         for (int i = 0; i < displayButtons.Length; i++)
         {
             int index = i; 
@@ -61,7 +63,7 @@ public class LaptopUIController : MonoBehaviour
         // Hide the entire laptop UI at startup
         if (laptopScreenPanel != null) laptopScreenPanel.SetActive(false);
 
-        // Optionally ensure panels are in their initial states
+        // Set initial state for panels
         if (panelResults != null) panelResults.SetActive(false);
         if (panelSelectDisplays != null) panelSelectDisplays.SetActive(true);
 
@@ -75,13 +77,15 @@ public class LaptopUIController : MonoBehaviour
 
     /// <summary>
     /// Public method to show the laptop UI.
-    /// Call this from a Dialogue System trigger (SendMessage or UnityEvent).
+    /// Call this from a Dialogue System trigger once the quest condition is met.
     /// </summary>
     public void ShowLaptopUI()
     {
         if (laptopScreenPanel != null)
         {
             laptopScreenPanel.SetActive(true);
+            // Switch Input Action Map to UI
+            InputManager.Instance.SwitchToUIMapInDialogue();
         }
     }
 
@@ -173,7 +177,7 @@ public class LaptopUIController : MonoBehaviour
     /// </summary>
     private void OnUpdateDisplaysClicked()
     {
-        Debug.Log("UpdateDisplaysButton clicked. Implement update EOC monitors).");
+        Debug.Log("UpdateDisplaysButton clicked. Implement update EOC monitors.");
     }
 
     /// <summary>
@@ -184,6 +188,7 @@ public class LaptopUIController : MonoBehaviour
         if (laptopScreenPanel != null)
         {
             laptopScreenPanel.SetActive(false);
+            InputManager.Instance.SwitchToPlayerMapInDialogue();
         }
     }
 }
